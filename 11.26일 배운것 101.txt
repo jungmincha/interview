@@ -1,0 +1,215 @@
+1.결합방향과 우선순위에 대하여 설명하시오.
+
+결합방향은 연산기호들의 결합 방향(왼쪽, 오른쪽)을 뜻하는 것이다. 
+ex) = , += , *= 결합방향 오른쪽에서 왼쪽
+ex) + - / * % & || 결합방향 왼쪽에서 오른쪽
+
+우선순위는 연산을 할때 한데 있는 기호들 사이에서 먼저 연산 해야할 것들을 순위를 정하는 것
+ex) + 와 = 둘중에서는 +가 우선순위가 높기 때문에 +를 먼저 계산해주어야 한다. =은 우선순위가 꼴찌이다.  
+
+
+
+2.1 초과 100 미만인가? 를 코딩을 하게 되면?
+
+	
+
+	int num = 11;
+	boolean = result ;
+ 	result = ((num>1) && (num1<100)) ;
+	system.out.println(result) ;
+
+
+3.2의 배수 또는 3의 배수? 를 코딩을 하게 되면?
+        int num = 23;
+	boolean = result ;
+        result = ((num % 2)==0) || ((num %3)==0);
+        system.out.println(result) ;
+
+
+
+4. && 와  || 설명하시오.
+
+일단 둘다 관계 연산자이며 데이터 타입은 boolean이다. true와 false를 구분해준다.
+&&는 and 의 의미이다. 만약 a&&b 라는 식이라면 a와 b 둘다 true 여야 true로 나올수 있다. 하나라도 false가 나오면 false 이다.
+||는 or의 의미이다. 만약 a||b 라는 식이라면 a와 b 둘 중 하나만 true 이면 true로 나올 수 있다. 
+false가 나오는 방법은 a와b 둘다 false 인 방법밖에 없다.
+
+
+5. 아래의 프린트 결과를 예측해 보고, 코딩후 결과를 확인하시오
+class SCE {
+    public static void main(String[] args) {
+        int num1 = 0; 
+        int num2 = 0;
+        boolean result;
+        
+        result = ((num1 += 10) < 0) && ((num2 += 10) > 0);
+        System.out.println("result = " + result);
+        System.out.println("num1 = " + num1);
+        System.out.println("num2 = " + num2 + '\n');
+		
+        result = ((num1 += 10) > 0) || ((num2 += 10) > 0);
+        System.out.println("result = " + result);
+        System.out.println("num1 = " + num1);
+        System.out.println("num2 = " + num2);
+    }
+}
+
+// &&는 두개의 값이 true가 나와야 true를 출력한다.
+ // 그러나 앞의 값에서 false가 나왔기 때문에 num1은 10의 값을 받았지만 그 이후의 값은 false가 뜬 후라서 연산이 종료되었다. 그러므로 num2는 0이다.
+// ||는 두개의 값 중 한가지만 true 가 나오면 true로 출력한다. false로 출력하는 경우는 두 개의 값이 모두 false인 경우!
+// 앞의 값에서 true가 나와서 true로 종료가 되었다. num1의 값만 받아 20이 되었고 num2는 그대로 0이 되며 종료된다. 
+
+result = false
+num1 = 10
+num2 = 0
+result = true
+num1 = 20
+num2 = 0
+
+
+
+6.아래가 에러가 나는 이유를 설명하고, 수정하시오
+short num1
+short num = -num 
+
+num1은 short 데이터로 선언이 되었다.
+short num 의 데이터 방식 역시 short다. 그러나 -num는 -라는 연산이 들어가있기 때문에 정수(int)로 받는다. 그러므로 (short)-num이렇게 붙여주어야 한다.
+
+
+7.전위증가 연산자와 후위증가 연산자의 차이는?
+
+전위증가 : 출력 되기 이전에 이미 n에 값 하나가 증가 된다
+
+int n = 5 ;
+syso(++n)
+syso(++n)
+syso(n)
+
+6, 7, 7 이 나온다.
+
+후위증가 : 출력 된 후부터 추가 되기 때문에 마지막에 아무것도 붙지 않아도 하나가 증가되며 끝이난다.
+syso(n++) 
+syso(n++
+syso(n)
+
+5, 6, 7 이 나온다
+
+8.아래의 비트연산자 4가지를 설명하시오.
+-&,^,|,~
+
+
+-& : 비트 단위로 AND연산을 한다
+
+^  : 비트 단위로 XOR연산을 한다
+
+|  : 비트 단위로 OR연산을 한다.
+
+~  : 피연산자의 모든 비트를 반전시켜서 얻은 결과를 반환하며 관계 연산자의 ! 과 같은 역할이다.
+
+
+
+
+
+
+9.아래의 쉬프트 연산자에 대하여 설명하시오.
+
+<< , >>
+
+<< 피연산자의 비트 열을 왼쪽으로 이동시킨다. 그리고 이동에 따른 빈 공간은 0으로 채운다.(왼쪽으로의 시프트는 값의 2배 증가)
+>> 피연산자의 비트 열을 오른쪽으로 이동시킨다. 빈공간은 음수의 경우 1, 양수의 경우 0으로 채운다. (값을 2로 나눈 결과로 이어짐)
+
+
+byte num ;
+num = 2 ; // 00000010
+syso((byte)(num << 1) + " ");  //연산이 이루어지기 때문에 byte로 명시적 형변환을 시켜줘야 실행된다.
+결과는 2에서 2를 곱한 4
+이진법은 00000100(왼쪽으로 비트열이 이동함)
+
+num = 2 ; // 00000010
+syso((byte)(num>>1) + " "); 
+결과는 2에서 2를 나눈 1
+이진법은 00000001(오른쪽으로 비트열이 이동함)
+
+
+
+10.전위연산자와 후위연산자에 대하여 설명하시오.
+
+
+
+11.아래의 출력값을 예측하시오.
+class AssignSteResult {
+    public static void main(String[] args) {
+        int num1 = 10, num2 = 20, num3 = 30;
+        num1 = num2 = num3;
+
+        /*
+          = 연산자는 결합 방향이 오른쪽에서 왼쪽으로 진행된다. 
+          따라서 위의 문장은 다음과 같다. 
+          num1 = (num2 = num3);        
+        */
+        
+        System.out.println(num1);	
+        System.out.println(num2);
+        System.out.println(num3);
+    }
+}
+
+30
+30
+30
+
+12.아래의 출력값을 예측하시오.
+class SCE {
+    public static void main(String[] args) {
+        int num1 = 0; 
+        int num2 = 0;
+        boolean result;
+
+        num1 += 10;
+        num2 += 10;        
+        result = (num1 < 0) && (num2 > 0);
+
+        System.out.println("result = " + result);
+        System.out.println("num1 = " + num1);
+        System.out.println("num2 = " + num2 + '\n');
+		
+        num1 += 10;
+        num2 += 10;        
+        result = (num1 > 0) || (num2 > 0);
+
+        System.out.println("result = " + result);
+        System.out.println("num1 = " + num1);
+        System.out.println("num2 = " + num2);
+    }
+}
+
+result = false
+num1 = 10
+num2 = 10
+result = true
+num1 = 20
+num2 = 20
+
+//5번과 헷갈릴 수 있다. 이미 관계연산자 이전에 num+=10 num2 +=10이라고 초기화 해줬기 때문에 
+ 고스란히 10과 20의 결과를 출력할수 있다.
+
+
+
+
+13.아래의 출력값을 예측하시오.
+class AddNum {
+    public static void main(String[] args) {
+        int result = 3 + 6;
+        System.out.println("3 + 6 = " + result);
+        
+        result += 9;
+        System.out.println("3 + 6 + 9 = " + result);
+        
+        result += 12;
+        System.out.println("3 + 6 + 9 + 12 = " + result);
+    }
+}
+
+
+9  18  30
+
