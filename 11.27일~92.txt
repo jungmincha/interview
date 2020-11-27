@@ -1,0 +1,205 @@
+1.조건문의 3가지 종류를 나열하고 설명하시오.
+if 	: if문은 조건문이며 true and false 일 경우 true 일때만 실행된다. 또한 if에 속한 문장이 하나일 경우 중괄호를 생략하기도 하지만
+           써주는 것이 구분하기가 좋다.
+else    :else 또한 조건문 중의 하나이다. if와 함께 쓰이며 if가 true 일때 실행된다면 else는 false일때 실행된다. true or false 이므로 ()에는
+         아무것도 쓰지 않아도 된다. if의 반대값에 반응하기 때문이다. 
+else if : else if 구문은 else 구문에 if를 또 쓰는 것과 마찬가지 의미인데 간편하게 줄인 기능이다. if와 else 사이에 얼마든지 추가 가능하며
+          조건문을 더욱 다채롭게 꾸며주는 데에 용이하다.
+
+
+
+2.아래의 프로그램을 짜시오.
+ - 국어:80 수학:80 영어:60        	
+   점과 평균을 출력하고, 평균에 따른 수우미양가를 출력하시오
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int kor = 80;
+		int math = 90;
+		int eng = 100;
+		
+		int avg = 0;
+		int sum ;
+		
+		sum=(kor+math+eng);
+		avg=sum/3;
+		System.out.println("총점 : "+sum);
+		System.out.println("평균 : "+avg);
+		
+		 switch(avg/10) {
+		 case 10 : System.out.println("수 입니다"); break ;
+		 case 9 : System.out.println("우 입니다"); break ;
+		 case 8 : System.out.println("미 입니다"); break ;
+		 case 7 : System.out.println("양 입니다"); break ;
+		 default : System.out.println("가 입니다"); break ;
+		 }
+		
+		}
+	}
+
+
+
+ - int num = 33 할당후 해당 숫자 짝수면 짝수 입니다 출력. 홀수면 홀수 출력
+
+public static void main(String[] args) {
+			int num = 33;
+			if(num % 2 ==0) {
+				System.out.println("짝수");
+			}else {
+				System.out.println("홀수");
+			}
+}
+}
+ - int num = 66 할당후, 2의 배수 이고 3의 배수이면, 해당 수를 출력하고, 아니면  2의 배수 이고 3의 배수 가 아닙니다 출력.
+
+public static void main(String[] args) {
+			int num = 66 ;
+			if(num %2==0 && num %3==0) {
+				System.out.println(num);
+			}else {
+				System.out.println("2의 배수이고 3의 배수가 아닙니다.");
+			}
+			
+}
+}
+
+ -80, 33 ,55 = 최대값을 출력하시오.
+
+public static void main(String[] args) {
+			int num1 = 80;
+			int num2 = 33;
+			int num3 = 55;
+
+			int max = num1;
+			
+			if(num2>max) {
+				max = num2;
+			}if(num3>max) {
+				max = num3;
+			}
+				
+				System.out.println(max);
+			
+}
+}
+
+
+3.아래를 삼항연산자를 사용하여 프로그래밍 하시오.
+-80, 33 ,55 = 최대값을 출력하시오.
+
+
+4.switch 문에서 '걸어서 하늘까지' 를 설명하시오.
+
+걸리면 브레이크까지 즉  스위치가 걸린 곳 부터 브레이크까지 출력하는 것을 뜻한다
+
+5.아래를 프로그래밍 하시오.
+- int num = -10 을 할당후 해당 정수에 대한 절대값을 출력하는 프로그램을 작성하시오.
+
+
+6.반복문에서 while 문과 do while 문의 차이는?
+
+두 가지 다 반복문이지만 한가지 큰 차이점이 있다. do while문은 do 안에 들어가는 문장을 무조건 한번은 실행해야 한다.
+그러나 while은 조건에 따라 문장을 실행하지 않을 수 도 있다.
+
+
+
+7.for 문에서 for 문이 실행되는 순서를 설명하시오.
+
+
+[1]for int=0 ;             최초에는 1, 2, 3, 4 이렇게 진행된다. (i의 값이 0으로 초기화 시켰을때!)
+[2]i < 10 ;                그리고 나서는 2,3,4 반복한다(i<10 의 값이 만족되었을때)
+[3]sysout("hello");        i = 10 일때는 루프를 탈출한다.
+[4]i++  
+
+
+8. 9단을 출력하는 프로그램을 만드시오.(while 문 사용할것)
+
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num1 = 9 ;
+		System.out.println("====="+num1+"단"+"=====");
+		
+		int num2 = 1 ;
+		while(num2<=9) {
+			System.out.println(num1+"*"+num2+"="+num1*num2);
+			num2++;
+		}
+			
+	}
+}
+
+
+9.1부터 100까지의 합을 구하시오. = 5050
+
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int sum = 0;
+		for(int i = 1 ; i <=100 ; i++) {
+			sum = sum + i ;
+			System.out.println(sum);
+		}
+			
+	}
+}
+
+
+10.1부터 100까지의 홀수들의 합을 구하시오. =2500
+
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int sum = 0;
+		for(int i = 1 ; i <=100 ; i++) {
+			if(i %2 ==1) {
+			sum = sum + i ;
+			System.out.println(sum);
+		}
+			
+	}
+}
+}
+
+
+11.반복문에서의 break 와 continue 를 설명하시오.
+
+break는 while 문을 탈출하는 것이다. 예를들어 5의 배수이자 7의 배수인 것들을 쭉 나열하는 반복문에서 break를 사용하게 되면
+첫번째 결과인 35의 값을얻고 break가 작동해 while 문을 빠져나가는 시스템이다.
+
+continue while 문을 탈출하는 것이지만 조금 성격이 다르다 예를들어 1부터 100까지의 수중에서 5와 7의 배수를 찾을 때까지 continue를 걸어주고
+값을 다 찾으면 while 문을 탈출하는 시스템이다. 즉 값은 35와 70이 나오고 그 뒤로 연산은 종료된다. 
+
+12. 아래를 프로그래밍 하시오.
+  - 1과 1000 사이의 숫자중 3의 배수 이자 5의 배수인 첫번재 수는? = 15
+
+public static void main(String[] args) {
+		for(int i = 1 ; i <=1000 ; i++) {
+			if((i %3==0) && (i %5==0)) {
+				System.out.println(i);
+			}
+		}
+}
+}
+
+- 1과 1000 사이의 숫자중 2의 배수 이자 3의 배수인 수는 모두 몇개인가?
+
+public static void main(String[] args) {
+		int count = 0;
+		int num = 0;
+		while((num++) <=1000) {
+			if(((num %2)!=0) || ((num %3)!=0)) 
+				continue ;
+				count++;
+			}
+			System.out.println("2의 배수 이자 3의 배수인 수는 모두 몇개인가 : " +count);
+		}
+}
+
+
+13.화폐매수 구하기?
+=126500 의 금액을 한국화폐으로 바꾸었을 때 각각 몇 개의 화폐가 필요한지 계산해서 출력하라.
+예) int 126500;
+   오만원 : 2장	
+   만원:    2장
+   오천원짜리 :1장
+   천원짜리: 1
+   오백원짜리 1개
+   백원짜리 0개
