@@ -1,0 +1,288 @@
+1.아래가 의도하지 않은 결과를 나타내는 이유를 설명하시오.
+char ch = '가';
+
+System.out.println(ch + '\n')
+
+
+왜냐하면 출력할때 int형식으로 연산되어서 유니코드로 출력이 되기 때문이다. 
+
+
+2.변수의 scope 는?
+
+같은 영역 내에서 동일이름의 변수 선언 불가하다.
+
+public static voif main(String[] args){
+
+int num1 = 11;
+
+if(ste) {
+
+int num1 = 22 ;
+
+메인 메소드에서 이미 int num1 을 선언해 주었기 때문에 동일한 범위 안에 있는 if 안의 int num1은 유효하지 않는다.
+
+
+3.지역변수?
+
+지역변수란 {...} 여기 안에서만 유효한 지역적인 변수를뜻한다. 
+속한 영역을 벗어나면 지역변수는 소멸하게 된다.
+
+
+4.펙토리얼을 구하는 재귀 함수를 만드시오.
+
+public class ReculFactorial {
+
+	public static void main(String[] args) {
+
+		System.out.println("3 factorial : " + factorial(3));
+		System.out.println("12 factorial : " + factorial(12));
+	}
+
+	public static int factorial(int n) {
+
+		if (n == 1) {
+			return 1;
+
+		} else {
+			return n * factorial(n - 1);
+		}
+	}
+}
+
+
+5.클래스의 구성요소는 무엇인가?
+
+클래스는 두가지가 있다. 1. 코딩상의 클래스 class.java      (클래스명.java)
+                        2. circle.class jvm 머신이 알아듣게 만드는 컴파일 된 클래스( 클래스명.class)
+
+
+6.원의 넓이는 구하는 프로그램을 아래와 같이 작성하시오.
+-원클래스를 만들것
+-메인 메소드를 가진 다른 클래스에서 원 객체를 생성할것
+
+================================================메인========================================================
+
+public class Circlemain {
+
+	public static void main(String[] args) {
+
+		Circle circle;
+		circle = new Circle();
+		circle.setradius(10);
+		double area = circle.getArea();
+
+		System.out.println("원의 넓이 : " + area);
+
+	}
+
+}
+
+================================================클래스========================================================
+
+public class Circle {
+
+	double radius ;
+	
+	public double getradius() {
+		return radius ;
+	}
+	
+	public void setradius(double radius) {
+		this.radius = radius ;
+	}
+	
+	public double getArea() {
+		return radius * radius * Math.PI ;
+	}
+}
+
+
+
+
+
+
+
+
+
+7.객체란 무엇인가?
+
+객체는 클래스라는 틀을 통해 만들어낸 실체다.
+
+
+8. 아래의 클래스에 대하여, 메모리 그림을 그리시오.
+
+
+Rectangle rec = new Rectangle();
+ 
+public class Rectangle {
+	int height;
+	int width;
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public int getArea() {
+		return width * height;
+	}
+	
+}
+
+
+9.클래스와 객체의 차이는 무엇인가?
+
+클래스는 객체를 만들어 내기 위한 설계도라고 생각하면된다.(연관되어 있는 변수와 메서드의 집합)
+
+객체는 클래스에 선언된 모양 그대로 구현된 실체(소프트웨어 세계에 구현할 대상)
+
+
+
+
+10.아래의 프로그램을 작성하시오.
+-1 부터 num 까지 합을 구하는 class 를 작성하도록 하시오.
+
+================================================메인========================================================
+
+public static void main(String[] args) {
+
+		ExerClass big;
+		big = new ExerClass();
+		big.classic(5);
+
+	}
+
+}
+
+
+================================================클래스========================================================
+
+public static void classic(int num) {
+		int sum = 0;
+		for (int i = -1; i <= num; i++) {
+			sum = sum + i;
+			System.out.println(sum);
+		}
+
+	}
+}
+
+
+11.아래의 클래스를 작성하시오.
+StraPrint strPrint = new StarPrint();
+
+strPrint.printTriangle(3); 
+System.out.println();
+strPrint.printReverseTriangle(3); 
+===============================
+*
+**
+***
+
+***
+**
+*
+
+================================================메인========================================================
+
+public class Star {
+
+	public static void main(String[] args) {
+
+		StarPrint strPrint = new StarPrint();
+		strPrint.printTriangle(3);
+		System.out.println();
+		strPrint.printReverseTriangle(3);
+
+	}
+
+}
+
+================================================클래스========================================================
+
+public class StarPrint {
+
+	public static void printTriangle(int num1) {
+		for (int i = 1; i <= num1; i++) {
+			for (int j = 1; j <= i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+
+	}
+
+	public static void printReverseTriangle(int num1) {
+		for (int i = 1; i <= num1; i++) {
+			for (int j = 3; j >= i; j--) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
+
+
+
+
+
+
+
+12.아래의 프로그래밍을 작성하시오.
+
+Gugudan gugudan = new Gugudan();
+gugudan.printGugu(10);  //1단부터 10단까지 출력
+gugudan.printGugu(20);  //1단부터 20단까지 출력
+
+
+================================================메인========================================================
+
+public class Gugudanmain {
+
+	public static void main(String[] args) {
+
+		Gugudan gugudan = new Gugudan();
+		gugudan.calcul(10);
+	}
+}
+
+
+================================================클래스========================================================
+
+public class Gugudan {
+
+	public void calcul(int num) {
+		
+		for (int i = 1; i <= num; i++) {
+			for (int j = 1; j <= num; j++) {
+				
+				System.out.println(i + "*" + j + "=" + i * j);
+
+			}
+
+		}
+	}
+}
+
+
+
+
+
+13. 아래의 BankAccount 객체에 대하여 그림을 그리시오.
+   BankAccount ref1 = new BankAccount();
+   BankAccount ref2 = ref1;
+
+
+
+ 
