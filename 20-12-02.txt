@@ -1,7 +1,25 @@
 ﻿1.생성자란 무엇인가?
-2.디폴트 생성자란 무엇인가?
+ 
+ -메소드를 초기화 해주는 것이다.
+ 
+2.디폴트 생성자란 무엇인가? 
+- 자동적으로 컴파일러에 의해 생성되는 생성자
+
 3.생성자의 용도에 대하여 설명하시오.
+
+생성자는 연산에 대한 용도가 아니기 때문에 return을 제한한다.
+
+생성자는 값들에 대한 초기화 용도이다.
+
 4.null 에 대하여 설명하시오.
+
+null 은 0과 다른 의미로 아무런 데이터가 없다는 뜻이다. 
+
+어떤 변수가 값을 가지고 있지 않는다는 의미이다.
+
+BankAccount ref = new BankAccount() ;
+.....
+ref = null ; ref 가 참조하는 인스턴스와 관계를 끊음
 
 
 5.금일 프로그래밍 했던 문제
@@ -22,6 +40,42 @@ LG에서 만든 2017년형 32인치 TV
 		Grade me = new Grade(math, science, english);
 		System.out.println("평균은 " + me.average());
 ============================================
+
+================================================================메인==============================================================================
+
+public class TV_main {
+
+	public static void main(String[] args) {
+
+		TV myTV = new TV("LG", 2017, 32); // LG에서 만든 2017년 32인치
+
+		myTV.show();
+
+	}
+
+}
+================================================================클래스==============================================================================
+
+public class TV {
+
+	String brand;
+	int year;
+	int inch;
+
+	TV(String brand, int year, int inch) {
+		
+		this.brand = brand;
+		this.year = year;
+		this.inch = inch;
+	}
+
+	public void show() {
+		System.out.println(brand + "에서 만든 " + year + "년 형 " + inch + "인치");
+	}
+}
+
+
+
 노래 한 곡을 나타내는 Song 클래스를 작성하라. Song은 다음 필드로 구성된다.
 
 - 노래의 제목을 나타내는 title
@@ -34,6 +88,43 @@ LG에서 만든 2017년형 32인치 TV
 - 노래 정보를 출력하는 show() 메소드
 - main() 메소드에서는 1978년, 스웨덴 국적의 ABBA가 부른 "Dancing Queen"을
 song 객체로 생성하고 show()를 이용하여 노래의 정보를 다음과 같이 출력하라.
+
+================================================================메인==============================================================================
+public class Songmain {
+
+	public static void main(String[] args) {
+		
+
+		Song mysong = new Song("dancing queen", "스웨덴", 1978, "ABBA");
+		mysong.show();
+
+	}
+
+}
+================================================================클래스==============================================================================
+
+public class Song {
+
+	String title;
+	String country;
+	int year;
+	String artist;
+
+	Song(String title, String country, int year, String artist) {
+		this.title = title;
+		this.country = country;
+		this.year = year;
+		this.artist = artist;
+	}
+
+	public void show() {
+		System.out.println(year + "년 " + country + " 국적의 " + artist + "가 부른 " + title);
+	}
+}
+
+
+
+
 
 ===============================================
 아래와 같이 성적을 연속적으로 입력 받고 평균을 내는  프로그램을 작성하시오.
@@ -72,11 +163,111 @@ y
 오백원 : 0개
 백원 : 0개
 계속 하시겠습니까
+================================================================메인==============================================================================
+public static void main(String[] args) {
+			
+		
+		while (true) {
+
+			 Scanner sc = new Scanner(System.in);
+
+			int num;
+			System.out.println("돈을 입력하세요.");
+
+			num = sc.nextInt();
+
+			Money myMoney = new Money(num);
+
+			System.out.println(myMoney.getMoney());
+
+			System.out.println("계속 입력하시겠습니까?(y or n)");
+
+			char yesorno = sc.next().charAt(0);
+
+			if (yesorno == 'y') { 
+				continue;
+			} 
+			else if(yesorno == 'n'){
+				System.out.println("프로그램 종료합니다");
+				break;				
+			}			
+			sc.close();
+		}
+		 	
+	}
+}
+
+================================================================클래스==============================================================================
+
+public class Money {
+
+	int num;
+
+	public Money(int num) {
+		this.num = num;
+
+	}
+
+	public double getMoney() {
+
+		int m500 = 0;
+		int m100 = 0;
+		int m50 = 0;
+		int m10 = 0;
+		int m5 = 0;
+		int m1 = 0;
+		int m05 = 0;
+		int m01 = 0;
+		int temp = 0;
+
+		m500 = num / 50000;
+		temp = num - (m500 * 50000);
+
+		m100 = temp / 10000;
+		temp = temp - (m100 * 10000);
+
+		m50 = temp / 5000;
+		temp = temp - (m50 * 5000);
+
+		m10 = temp / 1000;
+		temp = temp - (m10 * 1000);
+
+		m5 = temp / 500;
+		temp = temp - (m5 * 500);
+
+		m1 = temp / 100;
+		temp = temp - (m1 * 100);
+
+		m05 = temp / 50;
+		temp = temp - (m05 * 50);
+
+		m01 = temp / 10;
+
+		System.out.println("50,000원: " + m500 + "장");
+		System.out.println("10,000원: " + m100 + "장");
+		System.out.println(" 5,000원: " + m50 + "장");
+		System.out.println(" 1,000원: " + m10 + "장");
+		System.out.println("   500원: " + m5 + "개");
+		System.out.println("   100원: " + m1 + "개");
+		System.out.println("   50원: " + m05 + "개");
+		System.out.println("   10원: " + m01 + "개");
+
+		return num;
+	}
+}
+
+
+
+
+
+
+
+
 
 7.자바의 명명 규칙에 대하여 설명하시오.
--클래스
--메소드와 변수
--상수
--camel case 
--snake case
+-클래스 :  앞글자가 대문자가 와야한다. Class , Study, String ...
+-메소드와 변수 :  앞문자가 소문자가 와야한다. add, get ... 
+-상수 : 전부 대문자가 와야한다 final int FROZEN
+-camel case : 글자와 글자가 합칠때 첫글짜는 대문자로 결합된다. Camel Case
+-snake case : 둘 이상의 단어에 띄어쓰기를 해줄 때 쓴다. FROZEN_GIRL
 
