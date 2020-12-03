@@ -1,24 +1,195 @@
 ﻿1.set classpath 에 대하여 설명하시오.
  
+ 자바 가상머신의 클래스 탐색 경로이다. 클래스를 찾기 위한 경로이며
+ 자바 가상머신이 프로그램을 실행 할 때 클래스 파일을 찾게 되는 기준이다.
+ 
+ 
+ 
 2.절대경로와 상대경로에 대하여 설명하시오.
+
+절대경로란 루트 디렉토리를 시작으로 지정한 경로이다
+
+상대경로란 현재 디렉토리를 기준으로 지정한 경로이다.
 
 3. . 과 .. 의 차이는?
  - 상대 경로에서 .은 현재위치를 나타내고 ../ 상위 위치를 나타낸다.
+ 
+ 잘 모르겠습니다.
 
-4.package의 용도는?
+4.package의 용도는? 
+
+클래스들의 공간적, 접근적 충돌을 해결을 하기 위해 패키지 선언을 한다. 
 
 
 5.package 의 기본적인 명명법(이름짓는법)은?
 
+패키지의 이름은 모두 소문자로 짓는다.
+인터넷 도메인 이름의 역순으로 이름을 구성한다.
+또는 이름 끝에 클래스를 정의한 개인 또는 팀의 이름을 추가하기도 한다.
 
 6.정보은닉에 대하여 설명하시오.
 
+객체지향언어(oos)를 쓰는 이유 중의 한가지이다. 
+1. 정보 은익(hidden information)
+2. 상속 inheritance
+3.(다용성) polymultism (자바의 70프로)
+4. 캡슐화 
+등이 있다.
+
+정보은닉을 해야 하는 이유는 잘못된 값을 입력해도
+
+컴파일 오류가 발생하지 않는 것을 미리 예방하기 위해서다. 
+
+일반 인스턴스 앞에는 반드시 private 을 써주어야 한다. private을 쓰는 의미는
+
+클래스 내부에서만 접근을 허용하겠다는 의미이다. 즉 클래스 외부에서 private 데이터에 접근하는 순간
+
+컴파일 에러가 발생한다.
+
+
+
 7.접근제한자 4가지 종류에 대하여 설명하시오.
+
+pulic 어디서든 접근이 가능하다.
+
+protected 클래스 내부, 동일 패키지, 상속받은 클래스까지 접근 가능하다. 
+
+default 클래스 내부, 동일 패키지로 묶인 클래스 내에서만 접근 가능하다.
+
+private 클래스 내부에서만 접근 가능하다.
+
 
 
 9.class 에서 붙일수 있는 접근 제한자 2개를 설명하고, 해당 접근제한자의 사용 목적은?
 
+
+public 은 클래스의 인스턴스 생성을 어디서든 가능하게 해준다.
+
+default 은 동일 패키지로 묶인 클래스 내에서만 생성을 허락한다.
+========================================================================================
+package ZOO ;
+
+class Duck {
+
+}
+
+public class Cat {
+ public void makeCat(){
+  Duck quack = new  Duck();
+   }
+  }
+  
+  package animal ;
+
+public class Dog {
+   public void makeCat(){
+   zoo.Cat yaong = new zoo.Cat();
+   
+  -정상 작동-
+
+}
+
+public void makeDuck(){
+  public void makeDuck(){
+   zoo.duck quak = new.zoo.Duck();
+   
+       -에러-
+========================================================================================
 10.가위, 바위, 보 게임 작성하시오.
+
+============================================================메인==========================================================================================
+
+public class MainGame {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+			Scanner sc = null ;
+			while(true) {
+			
+			sc = new Scanner(System.in);
+
+			int user;
+
+			System.out.println("가위[1] 바위[2] 보[3] 중 한가지를 선택하세요.");
+			user = sc.nextInt();
+			
+			TEST myTest = new TEST(user);
+			
+			myTest.getResult();
+			
+			
+			
+		}
+	}
+}
+============================================================클래스==========================================================================================
+
+public class TEST {
+
+	private int user;
+
+	public TEST(int user) {
+
+		this.user = user;
+
+	}
+
+	public void getResult() {
+
+		if (user == 1) {
+			System.out.println("유저 : 가위");
+		} else if (user == 2) {
+			System.out.println("유저 : 바위");
+		} else if (user == 3) {
+			System.out.println("유저 : 보");
+		} else {
+			System.out.println("오류입니다");
+			
+		return ;
+			
+		}
+
+		System.out.println();
+
+		int com = (int) (Math.random() * 3) + 1;
+
+		if (com == 1) {
+			System.out.println("컴퓨터 : 가위");
+		} else if (com == 2) {
+			System.out.println("컴퓨터 : 바위");
+		} else if (com == 3) {
+			System.out.println("컴퓨터 : 보");
+		} else {
+			System.out.println("오류입니다.");
+
+		}
+
+		System.out.println();
+
+		if ((user == 1) && (com == 2)) {
+			System.out.println("유저가 졌습니다.");
+		} else if ((user == 1) && (com == 3)) {
+			System.out.println("유저가 이겼습니다.");
+		} else if ((user == 2) && (com == 1)) {
+			System.out.println("유저가 이겼습니다.");
+		} else if (user == 2 && com == 3) {
+			System.out.println("유저가 졌습니다.");
+		} else if (user == 3 && com == 1) {
+			System.out.println("유저가 졌습니다.");
+		} else if (user == 3 && com == 2) {
+			System.out.println("유저가 이겼습니다.");
+		} else {
+			System.out.println("비겼습니다.");
+		}
+
+		System.out.println();
+
+	}
+}
+
+
+
 
 
 11.아래와 같이 계산기 프로그램을 작성하시오.
@@ -30,4 +201,77 @@
 10 - 7 = 3
 계속하시겠습니까?
 
+============================================================메인==========================================================================================
+
+
+import java.util.Scanner;
+
+public class MainCal {
+
+	public static void main(String[] args) {
+
+		Scanner sc = null;
+
+		while (true) {
+
+			sc = new Scanner(System.in);
+			System.out.println("숫자를 입력하세요.");
+
+			int num1 = sc.nextInt();
+			char c = sc.next().charAt(0);
+			int num2 = sc.nextInt();
+
+			Calcul myCal = new Calcul();
+			myCal.setCal(num1, c, num2);
+			myCal.getCal();
+			
+			System.out.println("계속 하시겠습니까? y or n");
+
+			char yesorno = sc.next().charAt(0);
+			if (yesorno == 'y') {
+				continue;
+			} else if (yesorno == 'n') {
+
+				System.out.println("프로그램을 종료합니다.");
+
+				break;
+
+			}
+			sc.close();
+
+		}
+
+	}
+}
+
+============================================================클래스==========================================================================================
+
+public class Calcul {
+
+	private int num1 , num2 , result ;
+	private char c;
+	
+	public void setCal(int num1, char c, int num2) {
+		
+		this.num1 = num1;
+		this.c = c;
+		this.num2 = num2;
+		
+	}
+	public void getCal() {
+		
+		if (c == '+') {
+			result = num1 + num2;
+		} else if (c == '-') {
+			result = num1 - num2;
+		} else if (c == '*') {
+			result = num1 * num2;
+		} else if (c == '/') {
+			result = num1 / num2;
+			
+		}
+		System.out.println(result);
+	}
+
+}
 
