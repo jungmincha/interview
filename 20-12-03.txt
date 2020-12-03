@@ -275,3 +275,56 @@ public class Calcul {
 
 }
 
+
+스캐너 및  복습
+
+재고조사 프로그램을 짜보자
+
+
+============================================================메인==========================================================================================
+import java.util.Scanner;
+
+public class MainBox {
+
+	public static void main(String[] args) {
+		int num ;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("주문 할 갯수를 입력하세요.");
+		
+		num = sc.nextInt();
+		
+		Box myBox = new Box("삼성" , num , 10000);
+		myBox.getBox();
+	}
+
+}
+
+============================================================클래스==========================================================================================
+
+public class Box {
+
+	String goods;
+	int num;
+	int balance;
+
+	public Box(String goods, int num, int balance) {
+
+		this.goods = goods;
+		this.num = num;
+		this.balance = balance;
+
+	}
+
+	public void getBox() {
+
+		balance = balance - num;
+
+		System.out.println("품목 : " + goods);
+		System.out.println("주문 : " + num + "EA ");
+		System.out.println("재고 : " + balance);
+	}
+
+}
+
+
