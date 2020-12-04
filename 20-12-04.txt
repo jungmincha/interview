@@ -1,16 +1,135 @@
 ﻿1.아래의 접근제한자에 대하여 설명하시오.
--private
--protected
--default
--public
+ 
+ 인스턴스 멤버 대상 접근 수준으로 나눈다면
+ 
+-private : 클래스 내부만 (인스턴스 변수 앞에서는 private 을 써주어야 한다. 외부로 부터 입력 받는 잘못된 값에 컴파일 되지 않으려면)
+-default : 클래스 내부와 동일 패키지만 
+-protected : 클래스 내부와 동일 패키지와 상속받은 지역만
+-public : 전부
+
+
 2.지역변수에 접근제한자를 붙이지 않는 이유는?
-3.캡슐화에 대하여 설명하시오.
+
+3.캡슐화에 대하여 설명하시오. 
+
+캡슐화의 핵심은 함수에 대한 내용을 잘 몰라도 메인에 있는 내용으로
+
+한눈에 알아 볼 수 있게 프로그래밍 하는 것이다(프로그램 잘 짜는 방법)
+
+
+
+
 4.랜덤 숫자 맞추기 게임을 짜시오.
+
+===================================================================메인===================================================================================
+
+import java.util.Scanner;
+
+public class Up_Down_project {
+
+	public static void main(String[] args) {
+
+		while (true) {
+
+			int num1;
+
+			UpDown myUP = new UpDown();
+
+			Scanner sc = new Scanner(System.in);
+
+			num1 = sc.nextInt();
+
+			myUP.setNum1(num1);
+
+			myUP.show();
+
+		}
+
+	}
+}
+
+=================================================================클래스=====================================================================================
+
+public class UpDown {
+
+	private int num1;
+	private static int count = 0;
+	private int com = 50 ; 
+			//(int) (Math.random() * 100) + 1;
+
+	UpDown() {
+		getCount();
+	}
+
+	void getCount() {
+
+		count++;                                     //문제가 있다. 랜덤을 넣어줄 때 랜덤값이 고정되지 않고 계속 변화하여 제대로된 값을 구할 수 없다. 수정 
+
+	}
+
+	public int getNum1() {
+
+		return num1;
+	}
+
+	public void setNum1(int num1) {
+
+		this.num1 = num1;
+
+	}
+	
+	public void show() {
+
+		if (com > num1) {
+			System.out.println("up");
+			
+			
+		} else if (com < num1) {
+			System.out.println("down");
+			
+		} else {
+			System.out.println("답은" + num1 + "입니다");
+			System.out.println("축하합니다");
+			System.out.println(UpDown.count + "번 만에 성공");
+
+		}
+
+	}
+}
+
+
+
+
+
+
 5.static 변수의 다른 용어 3가지를 말해 보시오.
+
+클래스 변수 , 정적 변수 , 공유 변수
+
 6.자바의 메모리 영역을 3가지로 나누고, 해당 영역에 들어가는 정보를 말하여 보시오.
-7.static 변수의 접근 방법은?
+
+
+7.static 변수의 접근 방법은? 
+
+인스턴스 변수 , 클래스 변수를 통해 접근한다.
+
+class Game(){
+static num = 1 ;
+}
+public static void main(String[] args){
+
+Game myGame = new Game();
+
+//myGame.num(); 인스턴스 변수
+//Game.num(); 클래스 변수
+
+}
+
 8.클래스 변수의 활용의 예를 드시오.
+
 9.스태틱 함수에 인스턴스 변수가 올수 없는 이유는?
+
+
 
 10.아래의 프로그램을 작성 하시오.
 
