@@ -127,12 +127,12 @@ public class AnaGame {
 			case 'i':
 			case 'o':
 			case 'u':
-				num1++;
+				num1++; //모음
 				break;
 
 			default:
 				if ('a' <= str.charAt(i) && str.charAt(i) <= 'z') {
-					num2++;
+					num2++; //
 				}
 			}
 		}
@@ -150,8 +150,135 @@ public class AnaGame {
 
 9. 사용자로부터 키를 입력받아서 표준 체중을 계산한 후에 사용자의 체중과 비교하여 저체중인지, 표준인지, 과체중인지를 판단하는 프로그램을 작성하라. 표준 체중 계산식은 다음을 사용하라.
 표준체중 = ( 키 - 100 ) * 0.9
+=========================================================================메인==============================================================================
+public class KeyMain {
+
+	public static void main(String[] args) {
+
+		double num1 ;
+		double mykarada;
+		String str;
+
+		Key myKey = new Key();
+		myKey.setNum1(174);
+		myKey.setKara(75);
+		myKey.setStr("안성국");
+		myKey.showNum1();
+
+	}
+
+}
+
+=========================================================================클래스==============================================================================
+
+
+public class Key {
+
+	private double num1;
+	private double mykarada;
+	private String str ;
+
+	public String getStr() {
+		return str;
+	}
+
+	public void setStr(String str) {
+		this.str = str;
+	}
+
+	Key() {
+
+	}
+
+	public double getNum1() {
+		return num1;
+	}
+
+	public void setNum1(double num1) {
+		this.num1 = num1;
+	}
+
+	public double getKara() {
+		return mykarada;
+	}
+
+	public void setKara(double mykarada) {
+		this.mykarada = mykarada;
+	}
+
+	public void showNum1() {
+		
+		System.out.println("이름 : " + str);
+		System.out.println("키 : " + num1);
+		System.out.println("몸무게 : " + mykarada);
+		num1 = (num1 - 100) * 0.9;
+
+		System.out.println("표준 체중 : " + num1);
+
+		if (mykarada > num1) {
+			System.out.println("과체중입니다");
+		} else if (mykarada < num1) {
+			System.out.println("저체중입니다");
+		} else {
+			System.out.println("정상입니다");
+		}
+
+	}
+
+}
+
 
 10. 2와 100 사이에 있는 모든 소수(prime number)를 찾는 프로그램을 작성하라. 주어진 정수 k를 2부터 k-1까지의 숫자로 나누어서 나머지가 0인 것이 하나라도 있으면 소수가 아니다.
+
+
+=================================================================메인=========================================================================================
+public class Noboru {
+
+	public static void main(String[] args) {
+	
+ Syosyu mySyo = new Syosyu();
+		 mySyo.setNum1(100);
+		 mySyo.syuShow();
+}
+}
+
+================================================================클래스=========================================================================================
+
+public class Syosyu {
+
+	private int num1;
+			int count ;
+			
+	public int getNum1() {
+		return num1;
+	}
+
+	public void setNum1(int num1) {
+		this.num1 = num1;
+		this.count = count ;
+	}
+
+	public void syuShow() {  //소수란?  1과 자기 자신 빼고는 아무 숫자도 나눠지지 않는 수 9나 21 같은 숫자는 얼핏보면 홀수라서 소수 같지만 3으로 나눌 수 있는 3의 배수 숫자이다.
+
+		for (int i = 2; i <= num1; i++) {
+			boolean isPrime = true;
+
+			for (int j = 2; j < i; j++) {
+				if (i % j == 0) {
+					isPrime = false;
+				}
+			}
+			if (isPrime) {
+				count++;
+				System.out.println(i + " ");
+			}
+
+		}
+		
+		System.out.println("개수 : " + count);
+
+	}
+}
 
 11.사용자에게 받은 문자열을 역순으로 화면에 출력하는 프로그램을 작성하시오.
 입력:abcde
