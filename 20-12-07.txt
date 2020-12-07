@@ -30,6 +30,10 @@ c언어에서는 함수 오버로딩이 불가능했지만 자바에서는 가�
 
 4.this 함수에 대하여 설명하시오.
 
+생성자 안에서의 this: 다른 생성자를 불러와서 대신 쓰게 되어 중복된 코드를 줄요준다. 
+
+this. 인 경우 : 멤버변수의 접근을 나타내는 this는 인스턴스 변수로 초기화된다.
+
 
 5.this란 무엇인가?
 
@@ -61,9 +65,14 @@ String str2 = "Simple String";
 =====출력 결과======
 
 str1과 str2는 동일 인스턴스 참조simple String
+String str1 = "simple String";
+String str2 = str ; (str1 의 값을 참조)
 //이 결과가 나오는 이유는 new를 선언하지 않고 다이렉트로 메모리에 들어갔기 때문이다. 
  문자열 상수 안에 똑같은 내용이 있으면 자동으로 인스턴스 풀에 문자열을 집어 넣는다. 두개 이상 똑같으면 한개만 올린다.(메모리 절약)
+ 
 //String 을 string으로 바꾸면 문자열이 달라졌기 때문에 "다른" 이라고 출력된다.
+
+값을 바꾸지 못하기 때문에 str2 는 str1을 참조할 뿐이다. (데이터 변경x)
 
 
 str3과 str4는 다른 인스턴스 참조simple String    
@@ -74,7 +83,11 @@ str3과 str4는 다른 인스턴스 참조simple String
 
 String 인스턴스는 immutable 인스턴스다.
 
+데이터 값의 변환을 허용하지 않는다. 즉 한번 생성된 문자열을 변경 할 수 없다.
+
 생성되는 인스턴스를 최소화한다. 
+
+
 
 
 
@@ -284,5 +297,19 @@ public class Syosyu {
 입력:abcde
 출력:edcba
 
+public class HOMEWORK {
+
+	public static void main(String[] args) {
+	
+			
+			StringBuilder str = new StringBuilder("abced");
+			
+			System.out.println(str.reverse());
+			
+	
+	}
+	
+	
+}
 
 
