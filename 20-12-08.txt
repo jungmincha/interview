@@ -213,6 +213,43 @@ public class Name {
 출력: 파일이름은:Java 이며 확장자는 avi 입니다.
 
 
+=============================================================================메인=====================================================================================
+public class HelloMain {
+
+	public static void main(String[] args) {
+		
+		HelloJava myHello = new HelloJava();
+		myHello.Show();
+
+	}
+
+}
+==========================================================================클래스======================================================================================
+
+private String str;
+
+	public HelloJava() {
+		this.str = str;
+	}
+
+	public void Show() {
+
+		Scanner sc = new Scanner(System.in);
+
+		
+			
+			str = sc.nextLine();
+			String[]s1 = str.split("\\.");
+			System.out.println("파일 이름 : " + s1[0]);
+			System.out.println("확장자 이름 : " + s1[1]);
+
+		}
+	}
+
+
+
+
+
 문제12. Scanner 클래스를 이용해서 한 줄 읽고, 공백으로 분리된 "단어"가 몇 개 들어 있는지 확인해보자.
 
    "그만"을 입력할 때까지 반복하는 프로그램이다.힌트(split 함수를 이용해 볼것)
