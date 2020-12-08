@@ -1,19 +1,200 @@
 ﻿1.String 클래스에서 concat 메서드를 설명하시오.
+ 
+String str1 = "coffee"; 
+		String str2 = "bread";
+		String str3 = str1.concat(str2);
+		System.out.println(str3);
+		String str4 = "fresh".concat(str3);
+		System.out.println(str4);
+ 
+ String 의 참조변수인 str과 str2의 사이를 붙여준다. 
+ 
 2.str.substring(2, 4); substring 사용법에 대하여 설명하시오.
+
+a b c d e f g h 
+0 1 2 3 4 5 6 7 
+
+2~4 의 값을 반환해서 출력하라는 뜻이다. 답은 cd
+
 3.st1.compareTo(st2);compareTo 사용법에 대하여 설명하시오.
+
+st1 과 st2 을 compare 한다. 비교하는 방법은 str1 을 str2 를 대입해서 비교한다. 
+두 문자열이 같으면 0 , 사전 앞에 위치하는 문자는 알파벳 순이며 대문자가 소문자보다 더 앞이며 0 보다 작다는 표시로 나타낸다.
+그 반대는 0 보다 크다는 표시로 나타낸다.  
+
+
 4.String.valueOf 에 대하여 설명하시오.
+
+기본자료형의 값을 문자열로 바꿔준다.
+
+double e = 2.718281 ;
+		String se = String.valueOf(e);
+				          //static 처리가 되어서 모든 것들을 문자열로 치환해준다.
+		System.out.println(se);
+
+
+
 5. 아래의 연산과정에서 호출되는 함수(원리)를 써서 표현해 보세요.
+
 String str = "age: " + 17;
 
+
+
+
 6.StringBuilder 와 String 의 차이는?
+
+String 은 불변적인 성격이어서 계속 해서 메모리 방을 선언 해 주어야 한다. 그래서 메모리를 많이 차지한다.
+하지만 StringBuilder는 한 주소로 가지고 계속 쓰기 때문에 빠르다. StringBuffer 와는 거의 같지만 한가지 큰 차이점이 있다.
+StringBuffer 는 쓰레드에 적용하기 용이하다.
+
 7.String 을 이용하여 프로그래밍 하시오.
 입력 : 990925-1012999
 출력 : 990925 1012999
+=================================================================메인================================================================================================
+public class StringMain {
+
+	public static void main(String[] args) {
+		
+			StringExr myString = new StringExr() ;
+			myString.print();
+	}
+
+}
+
+=================================================================클래스===============================================================================================
+
+import java.util.Scanner;
+
+public class StringExr {
+
+	private String str;
+
+	public String getStr() {
+		return str;
+	}
+
+	public void setStr(String str) {
+
+		this.str = str;
+	}
+
+	public void input() {
+
+		System.out.println("주민등록 번호를 입력하세요.");
+
+		Scanner sc = new Scanner(System.in);
+
+		str = sc.next();
+
+		sc.close();
+
+	}
+
+	public void output() {
+
+		if (str == null) {
+			System.out.println("단어 입력이 안되었습니다.");
+			return;
+		}
+
+		System.out.println(str);
+
+	}
+
+	public void print() {
+		input();
+		output();
+
+	}
+
+}
+
+
+
+
+
+
+
 8.아래의 메모리 그림을 그리시오.
 int[] ar1 = new int[5];
+
+
 9.아래를 프로그래밍 하시오.(단 클래스로 구성할것)
 입력:lee sunkyo
 출력:first name: lee second name:sunkyo
+
+============================================================메인=================================================================================================
+public class NameMain {
+
+	public static void main(String[] args) {
+		
+		Name myName = new Name();
+		myName.print();
+
+	}
+
+}
+============================================================클래스================================================================================================
+import java.util.Scanner;
+
+public class Name {
+
+	private String str;
+	private String str2;
+
+	public String getStr() {
+		return str;
+	}
+
+	public void setStr(String str) {
+		this.str = str;
+
+	}
+
+	public String getStr2() {
+		return str2;
+	}
+
+	public void setStr2(String str2) {
+		this.str2 = str2;
+
+	}
+
+	public void input() {
+		System.out.println("please input your name.");
+		System.out.println("(you must to input a space bar between first name and second name.)");
+
+		Scanner sc = new Scanner(System.in);
+
+		str = sc.next();
+		str2 = sc.next();
+
+		sc.close();
+	}
+
+	public void output() {
+
+		if (str == null) {
+			System.out.println("please cheak your system.");
+			return;
+		}
+		if (str2 == null) {
+			System.out.println("please cheak your system.");
+			return;
+		}
+		System.out.println("input : " + str + str2);
+		System.out.println();
+		System.out.println("first name : " + str);
+		System.out.println("second name : " + str2);
+	}
+
+	public void print() {
+		input();
+		output();
+	}
+}
+
+
 10.아래를 프로그래밍 하시오.
 
 입력 : 홍 길동 
@@ -30,6 +211,8 @@ int[] ar1 = new int[5];
 
 입력: Java.avi 
 출력: 파일이름은:Java 이며 확장자는 avi 입니다.
+
+
 문제12. Scanner 클래스를 이용해서 한 줄 읽고, 공백으로 분리된 "단어"가 몇 개 들어 있는지 확인해보자.
 
    "그만"을 입력할 때까지 반복하는 프로그램이다.힌트(split 함수를 이용해 볼것)
