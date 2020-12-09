@@ -3,6 +3,103 @@
 3.public static void main(String[] args) 에서 String[] args 의 사용법과 용도는?
 4.enhenced for 문에 대하여 설명하시오.
 5.로또 프로그램을 작성하시오.
+========================================================================메인==================================================================================
+public class LottoMain {
+
+	public static void main(String[] args) {
+		
+		Lotto myLot = new Lotto();
+		myLot.getResult();
+	}
+
+}
+==================================================================클래스=======================================================================================
+import java.util.Scanner;
+
+public class Lotto {
+
+	private int[] num1 = new int[6];
+	private int[] meLotto = new int[num1.length];
+
+	public void getResult() {
+		youngRich();
+		ranGame();
+		print();
+		myLottoPrint();
+		ranGame();
+		LottoRes();
+	}
+
+	Lotto() {
+		this.num1 = num1;
+	}
+
+	public void youngRich() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("여섯자리 숫자를 입력하세요.");
+		for (int i = 0; i < meLotto.length; i++) {
+			meLotto[i] = sc.nextInt();
+		}
+		sc.close();
+	}
+	public void ranGame() {
+		for (int i = 0; i < num1.length; i++) {
+			num1[i] = (int) (Math.random() * 45) + 1;
+			for (int j = 0; j < i; j++) {
+
+				if (num1[i] == num1[j]) {
+					i--;
+					break;
+				}
+			}
+		}
+	}
+
+	public void print() {
+		System.out.println("컴퓨터 번호");
+		for (int i = 0; i < num1.length; i++) {
+			System.out.print(num1[i] + "\t");
+		}
+	}
+
+	public void myLottoPrint() {
+		System.out.println("나의 번호");
+		for (int i = 0; i < meLotto.length; i++) {
+			System.out.print(meLotto[i] + "\t");
+		}
+	}
+
+	public void LottoRes() {
+		int count = 0;
+		for (int i = 0; i < num1.length; i++) {
+			if (num1[i] == meLotto[i]) {
+				count++;
+			}
+		}
+
+		switch (count) {
+		case 6:
+			System.out.println("6개 모두 정답 ! 1등입니다.");
+		case 5:
+			System.out.println("5개  정답 ! 2등입니다.");
+		case 4:
+			System.out.println("4개  정답 ! 3등입니다.");
+		case 3:
+			System.out.println("3개  정답 ");
+		case 2:
+			System.out.println("2개  정답 ");
+		default:
+			System.out.println("1개 정답 ");
+		}
+	}
+}
+
+
+
+
+
+
+
 6.아래의 프로그램을 참고 하여 Box class 를 짜시오.
 
 	public static void main(String[] args) {
@@ -19,6 +116,41 @@
 		}
 
 	}
+	
+=============================================클래스===========================================================================================
+public class Box {
+
+	private int boxnum ; //101
+	private String conts ; //coffee
+		 
+	Box(int boxnum , String conts){
+		this.boxnum = boxnum ;
+		this.conts = conts ;
+	}
+		public int getBoxNum() {
+			return boxnum ;
+		
+	}
+		public void setBoxNum(int boxnum) {
+			this.boxnum = boxnum ;
+		
+}
+		public String getConts() {
+			return conts ;
+		}
+		
+		public void setConts() {
+			this.conts = conts;
+		}
+		
+		public String toString() {
+			return conts ;
+		}
+
+ 
+		
+	}
+
 
 7.양의 정수 10개를 랜덤생성하여, 배열에 저장하고, 배열에 있는 정수 중에서 3의 배수만 출력해보자.
 
@@ -82,6 +214,71 @@ public class Array1 {
 9.아래의 프로그램을 짜시오.
 -5개의 숫자를 랜덤으로 받아 배열로 저장
 -5개의 숫자를 내림차순으로 정렬하여 출력
+
+===============================================================================메인==================================================================================
+
+public class BackMain {
+
+	public static void main(String[] args) {
+			
+		BackNum myBack = new BackNum();
+		myBack.totalOutput();
+	}
+
+}
+===========================================================================클래스=====================================================================================
+
+public class BackNum {
+
+	private int[] num1 = new int[5];
+	private int temp = 0;
+
+	public void input() {
+		for (int i = 0; i < num1.length; i++) {
+			num1[i] = (int) (Math.random() * 10) + 1;
+
+			
+			System.out.print(num1[i] + " ");
+		}
+
+		System.out.println();
+	}
+
+	public void showNum() {
+		for (int i = 0; i < num1.length; i++) {
+			for (int j = i + 1; j < num1.length; j++) {
+				if (num1[i] < num1[j]) {
+					temp = num1[i];
+					num1[i] = num1[j];
+					num1[j] = temp;
+				}
+
+			}
+		}
+
+	}
+
+	public void run() {
+		System.out.println("내심차순");
+		
+		for (int i = 0; i < num1.length; i++) {
+			System.out.print(num1[i] + " ");
+		}
+		System.out.println();
+	}
+
+	public void totalOutput() {
+		input();
+		showNum();
+		run();
+	}
+}
+
+
+
+
+
+
 
 
 10. char 배열을 생성하여, 알파벳 A~Z까지 대입 후, 출력해보자. 알파벳은 26개.
