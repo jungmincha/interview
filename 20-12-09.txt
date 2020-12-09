@@ -102,51 +102,23 @@ int[] unit = {50000, 10000, 1000, 500, 100, 50, 10, 1}; // 환산할 돈의 종�
 10 원 짜리 : 2개 
 1 원 짜리 : 3개 
 
-public static void main(String[] args) {
+public class Money {
 
-		int num = 65123 ;
-		int temp = 0 ;
-		int[] unit = {50000, 10000, 1000, 500, 100, 50, 10, 1};
-		
-		for(int i = 0 ; i < unit.length ; i++) {	
+	public static void main(String[] args) {
+
+		int num = 65123;
+		int temp = 0;
+		int[] unit = { 50000, 10000, 1000, 500, 100, 50, 10, 1 };
+
+		for (int i = 0; i < unit.length; i++) {
+
+			System.out.println(unit[i] + "원" + num / unit[i] + "장");
+			num %= unit[i];
+
 		}
-		unit[0] = num / 50000;
-		temp = num - (unit[0] * 50000);
-
-		unit[1] = temp / 10000;
-		temp = temp - (unit[1] * 10000);
-
-		unit[2] = temp / 1000;
-		temp = temp - (unit[2] * 1000);
-
-		unit[3] = temp / 500;
-		temp = temp - (unit[3] * 500);
-
-		unit[4] = temp / 100;
-		temp = temp - (unit[4] * 100);
-
-		unit[5] = temp / 50;
-		temp = temp - (unit[5] * 50);
-
-		unit[6] = temp / 10;
-		temp = temp - (unit[6] * 10);
-
-		unit[7] = temp / 1;
-		
-		System.out.println("50,000원: " + unit[0] + "장");
-		System.out.println("10,000원: " + unit[1] + "장");
-		System.out.println(" 1,000원: " + unit[2] + "장");
-		System.out.println("   500원: " + unit[3] + "장");
-		System.out.println("   100원: " + unit[4] + "개");
-		System.out.println("    50원: " + unit[5] + "개");
-		System.out.println("    10원: " + unit[6] + "개");
-		System.out.println("     1원: " + unit[7] + "개");
-		
 
 	}
-
 }
-
 
 
 12.정수를 10개 저장하는 배열을 만들고 1에서 10까지 범위의 정수를 랜덤하게 생성하여 배열에 저장하라. 그리고 배열에 든 숫자들과 평균을 출력하라.(필수)
@@ -205,8 +177,6 @@ public class Twocharown {
 
 	}
 }
-
-
 
 
 14.아래를 메모리 구조로 표현하시오.
