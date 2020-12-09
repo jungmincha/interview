@@ -76,6 +76,31 @@ int[] unit = {50000, 10000, 1000, 500, 100, 50, 10, 1}; // 환산할 돈의 종�
 랜덤한 정수들 : 3 6 3 6 1 3 8 9 6 9 
 평균은 5.4
 
+public class Arryexer1 {
+
+	public static void main(String[] args) {
+		
+		int sum = 0;
+		double avg = 0.0;
+		int[] num1 = new int[10];
+
+		for (int i = 0; i < num1.length; i++) {
+
+			num1[i] = (int) (Math.random() * 10) + 1;
+			System.out.println(num1[i]);
+			sum = sum + num1[i];
+			avg = (double) sum / 10;
+
+		}
+
+		System.out.println("합계 : " + sum);
+		System.out.println("평균 : " + avg);
+	}
+
+}
+
+
+
 13.4 x 4의 2차원 배열을 만들고 이곳에 1에서 10까지 범위의 정수를 랜덤하게 생성하여 정수 16개를 배열에 저장하고, 2차원 배열을 화면에 출력하라.(필수)
 
 8 6 1 1 
