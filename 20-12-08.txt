@@ -9,6 +9,8 @@ String str1 = "coffee";
  
  String 의 참조변수인 str과 str2의 사이를 붙여준다. 
  
+ 
+ 
 2.str.substring(2, 4); substring 사용법에 대하여 설명하시오.
 
 a b c d e f g h 
@@ -38,6 +40,14 @@ double e = 2.718281 ;
 
 String str = "age: " + 17;
 
+문자열이 아닌 것들은 concat() 함수를 바로 사용할 수 없어서, 먼저 문자열로 바꿔준 후  concat()함수를 적용해서 문자열 끼리 연산을 시켜 준다.
+
+tring str = "age" + 17;
+
+
+1) 정수 17을 문자열로 변환 : String.valueOf(17) -> "17"
+2) 문자열 "age"와 문자열 "17" 결합 : String str = "age: ".concat("17")
+3) Srring str = "age17"
 
 
 
@@ -259,5 +269,55 @@ private String str;
 입력 : 자바 수업은 2층 C클래스 
 출력 : 단어의 개수는 4
 입력 : 그만 > 출력 : 프로그램 종료
+===========================================================================메인===========================================================================
+public class SplitMain {
+
+	public static void main(String[] args) {
+			
+		SplitExe myExe = new SplitExe() ;
+		myExe.ShowSplit();
+		
+
+	}
+
+}
+===========================================================================클래스===========================================================================
+import java.util.Scanner;
+
+public class SplitExe {
+
+	private String str;
+	
+	public String getStr() {
+		return str;
+	}
+
+	public void setStr(String str) {
+		this.str = str;
+	}
+
+	public void ShowSplit() {
+
+		
+
+		while (true) {
+			Scanner sc = new Scanner(System.in);
+			str = sc.nextLine();
+
+			switch (str) {
+			case "그만":
+				System.out.println("프로그램을 종료합니다.");
+				
+				return;
+				
+			default:
+
+				String[] word = str.split(" ");
+				System.out.println("단어의 개수는 : " + word.length);
+
+			}
+		}
+	}
+}
 
 
