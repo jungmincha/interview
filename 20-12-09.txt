@@ -2,9 +2,9 @@
  
  기본 자료형 배열과 인스턴스 배열이 있다.
  
- 기본 자료형 = int [] ar = new int[10];
+ 기본 자료형 = int [] ar = new int[10]; 기본 자료형은 0으로 
  
- 인스턴스 배열(참조변수 배열) = String []ar = new String[10];
+ 인스턴스 배열(참조변수 배열) = String []ar = new String[10]; 인스턴스의 값은 null로 초기화된다.
  
 2.arraycopy 함수의 사용 방법은?
 
@@ -18,14 +18,19 @@ System.arraycopy(ar1 , 0 , ar2 , 3, 4)
 
 System이라는 클래스에 붙는 인스턴스이며 매개변수가 5개나 있다. 
 
-배열 ar1을 ar2로 부분 복사 해준다. 
-먼저 0으로 전부 복사 해준다. 그리고 3번째부터 ar의 7 숫자를 4개 복사해준다.
+배열 ar1에 대한 0번 서부터 그리고 ar2 3에서부터 숫자 7을 4개를 복사해준다. 
+
 
 
 3.public static void main(String[] args) 에서 String[] args 의 사용법과 용도는?
 
+프로그램 실행시 매개변수를 보내서 실행할수 있다는 것이다.
+
+
 
 4.enhenced for 문에 대하여 설명하시오.
+
+배열은 for문과 무조건 같이 쓰게 되어있다.
 
 강화된 for 문이라는 뜻이며 배열을 사용할 때 쓰는 for 문을 좀 더 쉽게 쓰기 위해 자바에서 고안해준 형식이다.
 
@@ -58,7 +63,6 @@ public class Lotto {
 		ranGame();
 		print();
 		myLottoPrint();
-		ranGame();
 		LottoRes();
 	}
 
@@ -291,7 +295,7 @@ public class BackNum {
 	}
 
 	public void run() {
-		System.out.println("내심차순");
+		System.out.println("내림차순");
 		
 		for (int i = 0; i < num1.length; i++) {
 			System.out.print(num1[i] + " ");
@@ -386,26 +390,61 @@ public class Arryexer1 {
 7 3 6 9 
 4 5 3 7 
 9 6 3 1 
-
 public class Twocharown {
 
 	public static void main(String[] args) {
-		
-		int[][] arr = new int[4][4];
+
+		TwoArr two = new TwoArr();
+			two.output();
+	}
+}
+=========================================================클래스==================================================================
+
+public class TwoArr {
+
+	final int ROWS = 4;
+	final int COLS = 4;
+
+	int[][] arr;
+
+	TwoArr() {
+		arr = new int[ROWS][COLS]; //실무에서 많이 쓰는 코드
+	}
+
+	public void check() {
+		for (int i = 0; i < arr.length; i++) {
+
+			for (int j = 0; j < arr[i].length; j++) {
+
+				arr[i][j] = (int) (Math.random() * 10) + 1;
+
+			}
+
+		}
+	}
+
+	public void result() {
 
 		for (int i = 0; i < arr.length; i++) {
 
 			for (int j = 0; j < arr[i].length; j++) {
-				
-				arr[i][j] = (int) (Math.random() * 10) + 1;
-				
+
 				System.out.print(arr[i][j] + "\t");
 			}
 			System.out.println();
 		}
 
 	}
+	
+	public void output() {
+		check();
+		result();	
+	}
 }
+
+
+
+
 
 
 14.아래를 메모리 구조로 표현하시오.
