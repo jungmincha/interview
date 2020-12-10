@@ -294,34 +294,30 @@ class Point3D extends Point {
 
 
 =====================================================================메인================================================================================
-public class MovieMAIN {
 
+public class MovieMAIN {
 	public static void main(String[] args) {
 
 		Movie myMovie = new Movie();
-		myMovie.result();
+
+		myMovie.outPut();
 
 	}
-
 }
-
 =================================================================클래스====================================================================================
 
 class Movie {
 
-	private final int ROWS = 10;
-	private final int COLS = 10;
-
-	private int[] seat1;
-	private int[] seat2;
+	int[] seat1 = new int[10];
+	int[] seat2 = new int[10];
+	int button;
 
 	public Movie() {
-
-		this.seat1 = new int[ROWS];
-		this.seat2 = new int[COLS];
+		this.seat1 = seat1;
+		this.seat2 = seat2;
 	}
 
-	private void input() {
+	public void seatArr() {
 
 		for (int i = 0; i < seat1.length; i++) {
 			seat1[i] = i;
@@ -333,54 +329,49 @@ class Movie {
 
 	}
 
-	private void seatPrint() {
-
-		for (int i = 0; i < seat1.length; i++) {
-
-			System.out.print(seat1[i] + " ");
-
-		}
-
-		System.out.println();
-
-		for (int i = 0; i < seat2.length; i++) {
-
-			System.out.print(seat2[i] + " ");
-		}
-		System.out.println();
-	}
-
-	private void tiketPrint() {
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("좌석을 선택하세요.");
-
-		int button = sc.nextInt();
-
+	public void seatInput() {
 		System.out.println("-------------------");
 		for (int i = 0; i < seat1.length; i++) {
 
 			System.out.print(seat1[i] + " ");
 		}
-
 		System.out.println();
-		System.out.println("--------------------");
-
+		System.out.println("-------------------");
 		for (int i = 0; i < seat2.length; i++) {
 
-			if (button == seat1[i]) {
-				seat2[i] = 1;
-			}
 			System.out.print(seat2[i] + " ");
 
 		}
 	}
 
-	public void result() {
+	public void tiketing() {
+		System.out.println();
+		System.out.println("어느 곳을 예약 하시겠나요?");
+		
+		Scanner sc = new Scanner(System.in);
+		button = sc.nextInt();
+		System.out.println("-------------------");
+		for (int i = 0; i < seat1.length; i++) {
 
-		input();
-		seatPrint();
-		tiketPrint();
+			System.out.print(seat1[i] + " ");
 
+			if (seat1[i] == button)
+				seat2[i] = 1;
+		}
+		System.out.println();
+		System.out.println("-------------------");
+		for (int i = 0; i < seat2.length; i++) {
+
+			System.out.print(seat2[i] + " ");
+				
+		}
+		System.out.println();
+		System.out.println(button + "번 자리입니다.");
+	}
+
+	public void outPut() {
+		seatArr();
+		seatInput();
+		tiketing();
 	}
 }
