@@ -158,6 +158,38 @@ System.out.println(obj);
 =================
 출력: 넓이는 100 입니다.
 
+public class Circle {
+
+	private double r;
+	final double PI = Math.PI ;
+	
+	Circle(double r) {
+		this.r = r ;
+	}
+	
+	public double getCircle() {
+		return r*r*PI;
+	}
+
+	public String toString() {
+		return "넓이는" + getCircle() + "입니다.";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 13. 아래의 메모리를 그리시오.
