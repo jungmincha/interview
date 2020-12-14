@@ -178,3 +178,207 @@ class Regular extends Employee {
 	}
 
 }
+
+
+
+장바구니 프로그래밍 해보기
+
+
+
+
+======================================================================메인========================================================================================
+
+public class OverridingExer {
+
+		
+		public static void main(String[] args) {
+			
+		
+			Buyer b = new Buyer();
+			b.buy(new Tv());
+			b.buy(new Computer());
+			b.buy(new Tv());
+			b.buy(new Audio());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.summary();
+		
+
+	}
+}
+
+
+class Product{ //부모 클래스
+	int price ; 
+	Product(int price){
+		this.price = price ;
+	}
+}
+
+class Tv extends Product{
+	Tv(){
+		super(100);
+	}
+	public String toString() {
+		return "Tv";
+	}
+}
+
+class Computer extends Product{
+	Computer(){
+		super(200);
+	}
+	public String toString() {
+		return "Computer";
+	}
+}
+
+class Audio extends Product{
+	Audio(){
+		super(300);
+	}
+	public String toString() {
+		return "Audior";
+	}
+}
+
+
+======================================================================클래스============================================================================================
+
+public class Buyer {
+
+	int money = 10000;
+
+	Product[] cart = new Product[3];
+	int i = 0;// 배열에서 하나하나씩 증가시키는 역할
+
+	void buy(Product p) {
+		if (money < p.price) { // 가진 돈 부족
+			System.out.println("잔액비 부족하여" + p + "를 할 수 없습니다");
+			return;
+		}
+
+		// 2.가진 돈 충분
+		money = money - p.price;
+
+		// 장바구니에 물건을 담는다.
+
+		add(p);
+	}
+
+	void add(Product p) { // 장바구니 담는 함수
+		// 1. i의 값이 장바구니의 크기보다 같거나 크면
+		if (i >= cart.length) {
+			// 기존의 장바구니보다 2배 더 큰 배열 생성
+			Product[] temp = new Product[cart.length * 2];
+			// 기존에 있는 내용을 복사
+			System.arraycopy(cart, 0, temp, 0, cart.length);
+
+			cart = temp;
+		}
+
+		cart[i++] = p; // cart[i] i++
+	}
+
+	void summary() {
+		String itemList = "";
+		int sum = 0;
+
+		for (int i = 0; i < cart.length; i++) {
+			if (cart[i] == null)
+				break;
+
+			itemList = itemList + cart[i] + ",";
+			sum = sum + cart[i].price;
+		}
+		System.out.println("구입한 물건 : " + itemList);
+		System.out.println("사용한 금액 : " + sum);
+		System.out.println("남은 금액 : " + money);
+	}
+
+}
+
+
+
+다형성으로 친구의 이름과 번호와 주소를 표현하기 
+
+============================================================메인========================================================================================
+public class FriendMain {
+	
+	public static void main(String [] args) {
+		Friend[] frns = new Friend[10]; //프렌드 타입으로 다 묶어버렸다. 
+		int cnt = 0 ;
+		
+		frns[cnt++] = new UnivFriend("lee" , "computer" , "010-333-555" );
+		frns[cnt++] = new UnivFriend("seo" , "electronics" , "010-2323-2255");
+		frns[cnt++] = new UnivFriend("yoon" , "r&d 1" , "010-1234-5355");
+		frns[cnt++] = new UnivFriend("park" , "r&d 2" , "010-9383-5657");
+		frns[cnt++] = new UnivFriend("cha" , "software" , "010-2003-6745");
+		
+		for(int i = 0 ; i < cnt ; i++) {
+			frns[i].showInfo(); //오버라이딩 메소드 출력
+			System.out.println();
+
+ }
+ }
+}
+
+=======================================================================클래스=================================================================================
+
+class Friend { // 다형성 적용
+
+	protected String name;
+
+	protected String phone;
+
+	public Friend(String na, String ph) {
+
+		name = na;
+		phone = ph;
+
+	}
+
+	public void showInfo() {
+		System.out.println("이름 : " + name);
+		System.out.println("전화 : " + phone);
+	}
+
+}
+
+	class ComFriend extends Friend {
+	private String department;
+
+	public ComFriend(String na, String de, String ph) {
+
+		super(na, ph);
+		department = de;
+	}
+
+	public void showInfo() {
+		super.showInfo();
+		System.out.println("부서 : " + department);
+	}
+
+}
+ 	
+class UnivFriend extends Friend {
+	private String major;
+
+	public UnivFriend(String na, String ma, String ph) {
+		super(na, ph);
+		major = ma;
+	} 
+
+	public void showInfo() {
+		
+		super.showInfo();
+		System.out.println("전공 : " + major);
+	}
+
+}
+
+
+	
+
