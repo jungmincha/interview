@@ -1,4 +1,21 @@
 ﻿1.Object 클래스에 대하여 설명하시오.
+ 
+ 컴파일러가 우리 모르게 하는 것이 두가지 있다.
+ 
+ 하나는 생성자 호출을 지정하지 않을 때 나타나는 디폴트 생성자이다.
+ 
+ 또다른 하나는 Object 클래스 이다.
+ 
+Object 클래스는 폴리멀티즘이 적용 된다. 상속하는 클래스가 없다면 컴파일러에 의해 자동적으로
+java.lang.object 클래스를 상속하게 코드가 구성되어있다.
+object 데이터 멤버와 함수가 있다. (함수 11개) 그중에 쓰레드에 관련된 함수는 5개이다.
+
+폴리멀티즘이 자바의 70프로라면 인터페이스는 20프로이다.
+
+ 
+ 
+ 
+ 
 2.아래와 같이 출력되는 이유를 하시오.
 
 class A {
@@ -20,10 +37,32 @@ public class TestMain {
 ===============
 이것은 A 클래스 입니다.
 
+상속하는 클래스가 없다면 자동적으로 Object 클래스를 상속한다.
+그래서 a에 대한 결과값이 반환되었다.
+
+
+
 3. class 이름 및 함수 에서 final 의 의미는?
+
+클래스 앞에 final이 붙으면 이 클래스는 다른 클래스가 상속 할 수 없다는 뜻이다.
+
+함수 앞에 final이 붙으면 이 함수를 다른 클래스에서 오버라이딩 할 수 없다는 뜻히다.
+
 4.연습문제 7-22 번을 푸시오.
 5.연습문제 7-23 번을 푸시오.
+
 6. interface 와 class 의 차이는
+
+일단 interface 란 일종의 상속이며 자바에서는 interface를 통한 폴리멀티즘 구현을 중시한다.
+
+class와의 차이는 구현부분이 없다는 것이다.
+인터페이스 상수 + 함수선언(중가로가 없음. 구현 부분이 없다. body가 없는 상태)
+
+
+
+
+
+
 7. 다음을 프로그램 하시오.[필수]
 interface Printable { // MS가 정의하고 제공한 인터페이스
    public void print(String doc);
@@ -50,15 +89,77 @@ This is a report about ...
 From LG printer
 This is a report about ...
 ==================================
+
+=======================================================================클래스==============================================================================
+
+interface Printable {
+	public void print(String doc);
+
+}
+
+class SprinterDriver implements Printable {
+	public void print(String doc) { // 폴리멀티즘 적용해서 함수 오버라이딩 하는 중
+		System.out.println("from samsung printer");
+		System.out.println(doc);
+	}
+
+}
+
+class LprinterDriver implements Printable {
+	public void print(String doc) {
+		System.out.println("from LG printer");
+		System.out.println(doc);
+	}
+
+}
+
+
+
+
+
+
+
+
 8.@Override 에 대하여 설명하시오.
+
+상위 클래스의 메소드를 오버라이딩 하는 것이 목적이라는 것을 선언한다.
+오버라이딩 하는 형태가 아니면 컴파일러가 오류 메세지를 보낸다.
+
 9.interface 에 대하여 설명하시오.
+
+상속을 좀더 용이하기 위해 자바에서 지원하는 키워드이며 구현 부분이 없는 함수를 포함한다.
+
+구현 부분이 없는 것에 대해서abstract  public을 붙혀야 하지만 생략해도 컴파일러가 
+넣어준다.  abstract은 무조건 public이 와야한다.
+객체생성 불가하다. A a = new A(); 안된다.
+
+참조변수 선언은 가능하다. new는 안되고 선언은 가능하다.
+Printable p ; 4바이트 메모리 방 잡는것은 가능하다.
+
+ 
+interface는 자바만의 독특한 문법이다(c나 c++은 없다)
+
 10.interface에 올수 있는 두가지는?
+public 과 default 
+
 11.abstract 키워드에 대하여 설명하시오.
+
+abstract = 자손이 구현한다. implements 는 interface에 대한 자손의 구현키워드다.
+
+ implements는 자바의 다중상속을 구현하는 것을 지원한다. 둘 이상의
+인터페이스 구현 가능! 그리고 상속과 인터페이스의 구현 동시에 가능! 
+
+
+
+
 12. 아래의 출력 결과가 아래와 같이 나오도록 프로그래밍 하시오.
 Object obj = new Circle(10);
 System.out.println(obj);
 =================
 출력: 넓이는 100 입니다.
+
+
+
 13. 아래의 메모리를 그리시오.
 class MobilePhone {
     protected String number;
