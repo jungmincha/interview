@@ -8,21 +8,44 @@
  
 2.다형성이란 무엇인가?
 
+많은 형을 가질 수 있다.
+
 객체 지향 프로그램(oop)의 핵심 개념 중 하나이다.
+
+부모클래스는 자식 클래스(without 형 변환) 인 것이 핵심이다.
+
+A a = new A();  //폴리 멀티즘(다형성) 
+		B a = new B();	//부모 = 자식(without 형변환) 그 역은 안된다. 모든 자바의 70%는 폴리멀티즘이 적용됨
+					    //A ab = new B(); 
+						// 부모타입이 메모리에 올라와 있기 때문에 자식 타입은 허용 가능
+		
+		A ab = new B(); // 타입이 부모 타입으로 미리 메모리에 잡혀 있기 떄문에 자식 타입으로는 올 수 없다. 
+
+		B ab = new A();
+
 
 
 3.아래가 되지 않는 이유에 대하여 메모리 그림으로
 설명하시오.MobilePhone(부모) SmartPhone(자식)
 SmartPhone s = new MobilePhone();
 
-부모 클래스인 모바일폰이 먼저 메모리에 올라가기 때문에 참조 할 수 없다. 당연히 불가능하다.
+부모 클래스인 모바일폰 타입이 먼저 메모리에 올라가기 때문에 스마트폰 타입 참조 할 수 없다. 당연히 불가능하다.
 
 
 4.메소드 오버라이딩 이란?
 
 다형성의 핵심중 하나이다.부모 자식의 함수의 리턴 타입, 함수이름, 파라미터가 모두 똑같고 구현 내용만 달리하는 것이다.
 
+오버라이딩은 상속관계가 동반되어야한다
+함수 오버라이딩이란?
+상속관계에서 함수의 리턴타입 함수이름 파라미터 다 똑같이 정의하고
+구현 내용만 달리한다.
 
+오버라이딩은 자식꺼 자식꺼로 구현 내용을 덮어 쓴다. 
+
+인스턴스 변수는 오버라이딩 되지 않는다!
+
+부모것을 호출해도 자식것이 호출 되는 것이다.
 
 
 5.갬블링 게임을 만들어보자. 두 사람이 게임을 진행한다. 이들의 이름을 키보드로 입력 받으며 각 사람은 Person 클래스로 작성하라.
@@ -79,23 +102,25 @@ SmartPhone s = new MobilePhone();
 
 =================================================================메인==============================================================================
 	public class EmployeeMain {
-	
-		public static void main(String[] args) {
-	
-			Employee emplo = new Employee("홍길동", 28, "목포", "소프트웨어");
-			emplo.printInfo();
-	
-		}
-	
+
+	public static void main(String[] args) {
+		Employee emplo = new Employee("홍길동", 28, "목포", "소프트웨어");
+		emplo.printInfo();
+		
+		System.out.println();
+		Employee employ = new Regular("홍길동", 28, "목포", "소프트웨어" , 300);
+		employ.printInfo();
+
 	}
 
+}
 ================================================================클래스=============================================================================
 public class Employee {
 
 	private int  age;
 	private String name , address , position;
 	
-	private int pay;
+	protected int salary;
 	
 
 	public Employee(String name , int age , String address , String position) {
@@ -110,8 +135,11 @@ public class Employee {
 	public void printInfo() {
 		
 		System.out.println("나이 : " + age + "/ 이름 : " + name + "/ 주소 : " + address + "/ 부서 : " + position);
+ }
+	
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
-
 }
 
 
@@ -130,17 +158,23 @@ public class Employee {
 
 =================================================================클래스================================================================================
 
-lass Regular extends Employee {
+class Regular extends Employee {
 
-	public Regular(String name, int age, String address, String position, int pay) {
+	 Regular(String name, int age, String address, String position, int salary) {
 		super(name, age, address, position);
-		this.pay = pay;
+		setSalary(salary);
 	}
+	 
+	 public void setSalary(int salary) {
+		 
+		 this.salary = salary;
+		 
+	 }
 
 	public void printInfo() {
-		System.out.println("정규직" + pay);
+		super.printInfo();
+		System.out.println("정규직" + super.salary);
 
 	}
 
 }
-
