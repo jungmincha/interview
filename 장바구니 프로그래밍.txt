@@ -1,0 +1,117 @@
+=====================================================메인==========================================================================
+
+public class OverridingExer {
+
+		
+		public static void main(String[] args) {
+			
+		
+			Buyer b = new Buyer();
+			b.buy(new Tv());
+			b.buy(new Computer());
+			b.buy(new Tv());
+			b.buy(new Audio());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.buy(new Computer());
+			b.summary();
+		
+
+	}
+}
+
+
+class Product{ //부모 클래스
+	int price ; 
+	Product(int price){
+		this.price = price ;
+	}
+}
+
+class Tv extends Product{
+	Tv(){
+		super(100);
+	}
+	public String toString() {
+		return "Tv";
+	}
+}
+
+class Computer extends Product{
+	Computer(){
+		super(200);
+	}
+	public String toString() {
+		return "Computer";
+	}
+}
+
+class Audio extends Product{
+	Audio(){
+		super(300);
+	}
+	public String toString() {
+		return "Audio";
+	}
+}
+
+
+
+
+public class Buyer {
+
+	int money = 2000;
+
+	Product[] cart = new Product[3]; //장바구니
+	int i = 0;// 배열에서 하나하나씩 증가시키는 역할
+
+	void buy(Product p) {
+		if (money < p.price) { // 가진 돈 부족
+			System.out.println("잔액이 부족하여" + p + "를 살 수 없습니다");
+			return;
+		}
+
+		// 2.가진 돈 충분
+		money = money - p.price;
+
+		// 장바구니에 물건을 담는다.
+
+		add(p);
+	}
+
+	void add(Product p) { // 장바구니 담는 함수
+		// 1. i의 값이 장바구니의 크기보다 같거나 크면
+		if (i >= cart.length) {
+			// 기존의 장바구니보다 2배 더 큰 배열 생성
+			Product[] temp = new Product[cart.length * 2];
+			// 기존에 있는 내용을 복사
+			System.arraycopy(cart, 0, temp, 0, cart.length);
+
+			cart = temp;
+		}
+
+		cart[i++] = p; // cart[i] i++
+	}
+
+	void summary() {
+		String itemList = "";
+		int sum = 0;
+
+		for (int i = 0; i < cart.length; i++) {
+			if (cart[i] == null)
+				break;
+
+			itemList = itemList + cart[i] + ",";
+			sum = sum + cart[i].price;
+		}
+		System.out.println("구입한 물건 : " + itemList);
+		System.out.println("사용한 금액 : " + sum);
+		System.out.println("남은 금액 : " + money);
+	}
+
+}
+
+
+
+	
