@@ -1,0 +1,126 @@
+	public static void main(String[] args) {
+		/*
+
+		 * int[]score = new int[5] ;
+		 * 
+		 * int k = 1;
+		 * 
+		 * score[0] = 50; score[1] = 60; score[k+1] = 70; score[3] = 80; score[4] = 90;
+		 * 
+		 * int temp = score[k+2] +score[4];
+		 * 
+		 * for(int i = 0 ; i < score.length ; i++) { System.out.println("배열 값" +
+		 * score[i]); }//"score[%d] : %d%n", i, score[i] System.out.println(temp);
+		 * 
+		 * System.out.println(score[7]);
+		 * 
+		 */
+		/*
+		 * int [] score = new int[5];
+		 * 
+		 * for(int i = 0;i<score.length ; i++) { score[i] = i * 10 +50 ;
+		 * 
+		 * System.out.println(score[i]);
+		 * 
+		 * } } }
+		
+
+
+
+		
+		 * int[] arr = new int[5]; // 배열의 복사 방법
+		 * 
+		 * for(int i = 0 ; i < arr.length ; i++) { arr[i] = i + 1; }
+		 * 
+		 * for (int i = 0; i < arr.length; i++) { System.out.println(arr[i]); }
+		 * 
+		 * int[] temp = new int[arr.length * 2];
+		 * 
+		 * System.out.println(); for (int i = 0; i < arr.length; i++) { temp[i] =
+		 * arr[i]; arr = temp; } for(int i = 0 ; i < arr.length ; i++) { arr[i]= i + 1;
+		 * System.out.println(arr[i]); }
+		 * 
+		 * } }
+		 */ /*
+
+
+
+
+			 * double sum = 0 ; //총점과 평균구하기 double avg = 0;
+			 * 
+			 * double[] eng = {100 , 73, 88, 52, 91};
+			 * 
+			 * for(int i = 0 ; i < eng.length ; i++) { sum = sum + eng[i]; avg =
+			 * (double)sum/eng.length; }
+			 * 
+			 * System.out.println("총점 : " + sum); System.out.println("평균 : " + avg);
+			 */
+
+
+
+
+
+		/*
+		 * int temp = 0; //오름 차순
+		 * 
+		 * int[] eng = { 100, 73, 88, 52, 91 };
+		 * 
+		 * for (int i = 0; i < eng.length; i++) {
+		 * 
+		 * for (int j = i + 1; j < eng.length; j++) {
+		 * 
+		 * if (eng[i] < eng[j]) { //내림차순은 부등호만 바꾸면 된다.
+		 * 
+		 * temp = eng[i]; //버블소트 eng[i] = eng[j]; eng[j] = temp;
+		 * 
+		 * }
+		 * 
+		 * } System.out.print(eng[i] + " ");
+		 * 
+		 * }
+		 */
+		
+
+
+			최대값 최소값 구하기
+
+		 * int[] eng = { 100, 150, 88, 52, 91 }; int max = eng[0] ; int min = eng[0] ;
+		 * //배열의 첫번째 값으로 max와 min을 초기화해주었다.
+		 * 
+		 * for (int i = 1; i < eng.length; i++) {
+		 * 
+		 * if(eng[i] > max) { max = eng[i]; }else if(eng[i] < min) { min = eng[i]; }
+		 * 
+		 * 
+		 * 
+		 * } System.out.println(max); System.out.println(min);
+		 * 
+		 * } }
+		 */
+
+
+
+		랜덤 숫자 구현 후 각 숫자 세기
+
+
+		int[] numArr = new int[10]; // 화면상에 표현 할 랜덤의 숫자
+		int[] counter = new int[10]; // 숫자를 셀 도구
+
+		for (int i = 1; i < numArr.length; i++) {
+			numArr[i] = (int) (Math.random() * 10) + 1;
+			System.out.print(numArr[i]);
+		}
+		System.out.println();
+
+		for (int i = 0; i < numArr.length; i++) {
+
+			counter[numArr[i]]++; // numarr의 숫자 세주기
+		}
+		for (int i = 0; i < numArr.length; i++) {
+
+			System.out.println(i + "의 개수 : " + counter[i]);
+
+		}
+
+	}
+}
