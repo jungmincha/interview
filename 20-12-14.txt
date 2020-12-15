@@ -1,5 +1,7 @@
 ﻿1.Object 클래스에 대하여 설명하시오.
  
+ Object는 최고 조상이다. 상속을 아무것도 안하게 되면 자동적으로 만들어 준다.
+ 
  컴파일러가 우리 모르게 하는 것이 두가지 있다.
  
  하나는 생성자 호출을 지정하지 않을 때 나타나는 디폴트 생성자이다.
@@ -9,6 +11,8 @@
 Object 클래스는 폴리멀티즘이 적용 된다. 상속하는 클래스가 없다면 컴파일러에 의해 자동적으로
 java.lang.object 클래스를 상속하게 코드가 구성되어있다.
 object 데이터 멤버와 함수가 있다. (함수 11개) 그중에 쓰레드에 관련된 함수는 5개이다.
+
+지금 배우는 것은 Stirng toString , equalse , hashcode
 
 폴리멀티즘이 자바의 70프로라면 인터페이스는 20프로이다.
 
@@ -37,9 +41,11 @@ public class TestMain {
 ===============
 이것은 A 클래스 입니다.
 
-상속하는 클래스가 없다면 자동적으로 Object 클래스를 상속한다.
-그래서 a에 대한 결과값이 반환되었다.
 
+
+상속하는 클래스가 없다면 class A는 자동적으로 Object 클래스를 상속한다.
+Object 클래스에는 문자열을 반환하는 toString 함수가 있다. 하지만 class A에는 toString 함수가 없어
+주소값이 대신 출력이 되었다.
 
 
 3. class 이름 및 함수 에서 final 의 의미는?
@@ -125,9 +131,12 @@ class LprinterDriver implements Printable {
 상위 클래스의 메소드를 오버라이딩 하는 것이 목적이라는 것을 선언한다.
 오버라이딩 하는 형태가 아니면 컴파일러가 오류 메세지를 보낸다.
 
+
 9.interface 에 대하여 설명하시오.
 
 상속을 좀더 용이하기 위해 자바에서 지원하는 키워드이며 구현 부분이 없는 함수를 포함한다.
+
+둘 이상의 다중 인터페이스 구현 가능하다.
 
 구현 부분이 없는 것에 대해서abstract  public을 붙혀야 하지만 생략해도 컴파일러가 
 넣어준다.  abstract은 무조건 public이 와야한다.
@@ -140,7 +149,20 @@ Printable p ; 4바이트 메모리 방 잡는것은 가능하다.
 interface는 자바만의 독특한 문법이다(c나 c++은 없다)
 
 10.interface에 올수 있는 두가지는?
-public 과 default 
+상수와 추상메소드이다.
+
+interface Printable {
+	publicvoid print(String doc); // 추상 메소드
+}
+
+interface Printable {
+	publicstatic final int PAPER_WIDTH = 70;  //상수
+	publicstatic final int PAPER_HEIGHT = 120;
+	publicvoid print(String doc);
+}
+
+
+
 
 11.abstract 키워드에 대하여 설명하시오.
 
@@ -181,17 +203,6 @@ public class Circle {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 13. 아래의 메모리를 그리시오.
 class MobilePhone {
     protected String number;
@@ -218,5 +229,5 @@ class SmartPhone extends MobilePhone {
 =======================================
 	MobilePhone phone = new SmartPhone("010-555-777", "Nougat");
     	phone.answer();    	
-    	SmartPhone s = (SmartPhone)phone;    	
+    	SmartPhone s = (SmartPhone)phone; //부모 클래스의 phone 을 자식 클래스의 (SmartPhone 으로 형변환 해주어야 한다)   	
     	s.playApp();
