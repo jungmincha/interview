@@ -239,4 +239,48 @@ void setValue(int a, int b, char ch) {
 
 
 13.연습문제 7-22 번을 푸시오.
+
+class CircleCircle extends Shape {
+
+	double r = 0;
+
+	CircleCircle(double r) {
+
+		this.r = r;
+
+	}
+
+	double calcArea() {
+		return r * r * 3.14;
+	}
+
+}
+
+class Rectangle extends Shape {
+
+	double width = 0;
+	double height = 0;
+
+	Rectangle(double width, double height) {
+		this.width = width;
+		this.height = height;
+	}
+
+	double calcArea() {
+		return width * height;
+	}
+
+	void isSquare() {
+
+		if (width == height) {
+			System.out.println("정사각형입니다.");
+		} else {
+			System.out.println("정사각형이 아닙니다.");
+		}
+
+	}
+}
+
+
+
 14.연습문제 7-23 번을 푸시오.
