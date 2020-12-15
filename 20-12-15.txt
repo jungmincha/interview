@@ -4,10 +4,108 @@
 4.에러와 예외의 차이는?
 5.unchecked 와 cheked 예외의 차이는?
 6.예외처리 UML를 그리시오.
+
+
 7.사칙연산 계산기를 아래의 조건으로 짜시오.
 -interface 를 활용할것
 -예외처리 메커니즘을 적용할것.
-8.다음 Stack 인터페이스를 상속받아 실수를 저장하는 StringStack 클래스를 구현하라.(구현할수 있도록 할것)
+
+
+=======================================================================메인===============================================================================================
+public class MainCalcul {
+
+public static void main(String [] args) {
+		
+		Calculator myCal = new Calcul1();//다형성 적용 
+									  //
+		 ((Calcul1) myCal).output(); //아들 클래스인 Calcul1로 형변환해줌
+		
+		
+		
+	}
+}
+=====================================================================클래스================================================================================================
+
+import java.util.Scanner;
+
+/*7.사칙연산 계산기를 아래의 조건으로 짜시오.
+-interface 를 활용할것
+-예외처리 메커니즘을 적용할것.
+
+ */
+
+interface Calculator { //인터페이스, 함수에 중가로가 없다..
+
+	public void plus();
+
+	public void minors();
+
+	public void mul();
+
+	public void divid();
+
+}
+
+class Calcul1 implements Calculator { //인터페이스를 상속받는 아들클래스
+
+	Scanner sc = new Scanner(System.in);
+
+	private int x = sc.nextInt();
+	private char ch = sc.next().charAt(0);
+	private int y = sc.nextInt();
+
+	public void plus() {
+
+		System.out.println(x + " + " + y + " = " + (x + y));
+
+	}
+
+	public void minors() {
+
+		System.out.println(x + " - " + y + " = " + (x - y));
+	}
+
+	public void mul() {
+
+		System.out.println(x + " * " + y + " = " + (x * y));
+	}
+
+	public void divid() {
+
+		System.out.println(x + " / " + y + " = " + (x / y));
+	}
+
+	public void output() {
+		try {
+			switch (ch) { //계산기
+
+			case '+':
+				plus();
+				break;
+			case '-':
+				minors();
+				break;
+			case '*':
+				mul();
+				break;
+			case '/':
+				divid();
+				break;
+			}
+		} catch (Exception e) {
+			//예외 처리
+			e.printStackTrace();
+
+		}
+	}
+
+}
+
+
+
+8.다음 Stack 인터페이스를 상속받아 실수를 저장하는 StringStack 클래스를 구현하라.(구현할수 있도록 할것) 
+
+//스택은 밑이 안뚫린 양동이 , 배열을 이용, 스택정도는 외워라
 
 interface Stack {
    int length(); // 현재 스택에 저장된 개수 리턴
@@ -32,10 +130,113 @@ interface Stack {
 - int 타입의 a, b 필드: 2개의 피연산자
 - void setValue(int a, int b): 피연산자 값을 객체 내에 저장한다.
 - int calculate(): 클래스의 목적에 맞는 연산을 실행하고 결과를 리턴한다.
-곰곰 생각해보니, Add, Sub, Mul, Div 클래스에 공통된 필드와 메소드가 존재하므로 새로운 추상 클래스 Calc를 작성하고 Calc를 상속받아 만들면 되겠다고 생각했다. 그리고 main() 메소드에서 다음 실행 사례와 같이 2개의 정수와 연산자를 입력받은 후, Add, Sub, Mul, Div 중에서 이 연산을 처리할 수 있는 객체를 생성하고 setValue() 와 calculate()를 호출하여 그 결과 값을 화면에 출력하면 된다고 생각하였다. 철수처럼 프로그램을 작성하라.
+곰곰 생각해보니, Add, Sub, Mul, Div 클래스에 공통된 필드와 메소드가 존재하므로 새로운 추상 클래스 Calc를 작성하고 Calc를 상속받아 만들면 되겠다고 생각했다.
+그리고 main() 메소드에서 다음 실행 사례와 같이 2개의 정수와 연산자를 입력받은 후, Add, Sub, Mul, Div 중에서 이 연산을 처리할 수 있는 객체를 생성하고 
+setValue() 와 calculate()를 호출하여 그 결과 값을 화면에 출력하면 된다고 생각하였다. 철수처럼 프로그램을 작성하라.
+
+
+
+
 
 두 정수와 연산자를 입력하시오 >> 5 7 +
 12
+
+
+=====================================================================메인========================================================================================
+public class AbsCalMain {
+
+	public static void main(String[] args) {
+		
+		Calc myCal = new AbsCalcul();
+		myCal.calculate();
+
+	}
+
+}
+
+====================================================================클래스==========================================================================================
+import java.util.Scanner;
+
+	abstract class Calc {
+
+	protected int a = 0;
+	protected int b = 0;
+	protected char ch = 'a';
+
+	public abstract void Add();
+
+	public abstract void Sub();
+
+	public abstract void Mul();
+
+	public abstract void Div();
+
+	protected void calculate() {
+
+		System.out.println("두 정수를 입력하세요.");
+		Scanner sc = new Scanner(System.in);
+
+		a = sc.nextInt();
+		b = sc.nextInt();
+		ch = sc.next().charAt(0);
+
+		if (ch == '+') {
+			Add();
+		} else if (ch == '-') {
+			Sub();
+		} else if (ch == '*') {
+			Mul();
+		} else if (ch == '/') {
+			Div();
+		}
+	}
+
+}
+
+class AbsCalcul extends Calc {
+
+void setValue(int a, int b, char ch) {
+
+		this.a = a;
+		this.b = b;
+		this.ch = ch;
+
+	}
+
+	public void Add() {
+
+		System.out.println(a + "+" + b + "=" + (a + b));
+
+	}
+
+	public void Sub() {
+
+		System.out.println(a + "-" + b + "=" + (a - b));
+
+	}
+
+	public void Mul() {
+
+		System.out.println(a + "*" + b + "=" + (a * b));
+
+	}
+
+	public void Div() {
+
+		System.out.println(a + "/" + b + "=" + (a / b));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 13.연습문제 7-22 번을 푸시오.
 14.연습문제 7-23 번을 푸시오.
