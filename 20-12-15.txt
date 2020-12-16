@@ -1,7 +1,54 @@
 ﻿1.Maker 인터페이스에 대하여 설명하시오.
+ 
+클래스를 분류할 때 사용한다.
+ 
+ 마커 인터페이스의 역할은? 마킹을 하면서 종류를 나누는 역할
+
+upper Lower 로 클래스의 종류를 나누어서 군집을 나눔
+ 
+ 
 2.추상클래스에 대하여 설명하시오.
-3.추상클래스와 인터페이스의 차이는?
-4.에러와 예외의 차이는?
+
+추상메서드를 가지고 있는 것이 추상클래스이다.
+(body)가 없다는 뜻이다. 일반 메서드 함수 선언 가능
+
+
+
+3.추상클래스와 인터페이스의 차이는
+
+추상클래스는 extends로 상속
+다중상속 불가, 추상 메소드외에 인스턴스 변수와 인스턴스 함수도 올 수 있다.
+4바이트 메모리 잡는 것은 가능
+객체 생성 불가
+
+인터페이스는 implements로 구현
+
+
+
+4.에러와 예외의 차이는? 
+
+에러는 시스템에 비정상적인 상황이 생겼을 때 발생한다.(코딩상의 에러x) 
+
+예를들면 메모리가 꽉차거나 하드가 잘못되었을때(os가 담당하므로 
+
+자바가 어떻게 해 줄 수 없다.)
+
+
+예외는 개발자의 로직에서 발생한 오류 실행중간에 발생하는 "정상적이지 않은 상황"이다.
+
+예외 처리는 JVM이 해준다. 에러에 대한 객체를 표시를 해주며 프로그램이 죽는다.
+
+try catch 하는 이유 = 안죽을라고...jvm으로 하여금 예외처리 된다.
+
+죽이지 말고 해당 에러에 대한 객체를 내 입력 어플리케이션으로 넘겨라 라는 뜻이다.
+
+jvm에서 catch로 에러를 받는다. 에러가 생길만한 곳에다가 try를 묶는다. 객체가 에러가
+
+ 생기게 되면 catch에다가 에러가 생길만한 구문을 넣어준다. 그러면 jvm이 절대 죽이지 못한다
+
+
+
+
 5.unchecked 와 cheked 예외의 차이는?
 6.예외처리 UML를 그리시오.
 
@@ -94,16 +141,17 @@ class Calcul1 implements Calculator { //인터페이스를 상속받는 아들�
 			}
 		} catch (Exception e) {
 			//예외 처리
-			e.printStackTrace();
+			//e.printStackTrace();
 
 		}
+		system.out.println("오류가 났습니다.")
 	}
 
 }
 
 
 
-8.다음 Stack 인터페이스를 상속받아 실수를 저장하는 StringStack 클래스를 구현하라.(구현할수 있도록 할것) 
+8.다음 Stack 인터페이스를 상속받아 실수를 저장하는 StringStack 클래스를 구현하라.(구현할수 있도록 할것) 직접 짜야한다.
 
 //스택은 밑이 안뚫린 양동이 , 배열을 이용, 스택정도는 외워라
 
@@ -124,6 +172,10 @@ interface Stack {
 문자열 입력 >> 그만
 스택에 저장된 모든 문자열 팝 : smile sunny hello 
 
+
+
+
+
 9.
 철수 학생은 다음 3개의 필드와 메소드를 가진 4개의 클래스 Add, Sub, Mul, Div를 작성하려고 한다
 
@@ -141,94 +193,120 @@ setValue() 와 calculate()를 호출하여 그 결과 값을 화면에 출력하
 두 정수와 연산자를 입력하시오 >> 5 7 +
 12
 
-
-=====================================================================메인========================================================================================
-public class AbsCalMain {
-
-	public static void main(String[] args) {
-		
-		Calc myCal = new AbsCalcul();
-		myCal.calculate();
-
-	}
-
-}
-
-====================================================================클래스==========================================================================================
 import java.util.Scanner;
 
-	abstract class Calc {
+abstract class Calc {
+	
+	protected int num1;
+	protected int num2;
 
-	protected int a = 0;
-	protected int b = 0;
-	protected char ch = 'a';
+	public void setValue(int num1, int num2) {
+		this.num1 = num1;
+		this.num2 = num2;
 
-	public abstract void Add();
+	}
 
-	public abstract void Sub();
+	abstract int calculate();
+}
 
-	public abstract void Mul();
+class Add extends Calc{
 
-	public abstract void Div();
+	@Override
+	public int calculate() {//오버라이딩 num1 / num2를 가지고 있는 상태
+		
+		return num1 + num2;
+	}
 
-	protected void calculate() {
+ }
 
-		System.out.println("두 정수를 입력하세요.");
+class Sub extends Calc{
+
+	@Override
+	public int calculate() {//오버라이딩 num1 / num2를 가지고 있는 상태
+		
+		return num1 - num2;
+	}
+
+ }
+class Mul extends Calc{
+
+	@Override
+	public int calculate() {//오버라이딩 num1 / num2를 가지고 있는 상태
+		
+		return num1 * num2;
+	}
+
+ }
+
+class Div extends Calc{
+
+	@Override
+	public int calculate() {//오버라이딩 num1 / num2를 가지고 있는 상태
+		
+		return num1 / num2;
+	}
+
+ }
+
+
+
+
+public class CalMain {
+
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		int result = 0 ;
+		System.out.print("두 정수를 입력하세요.");
+		
+		try { //예외처리 해주는 센스!
+			
+		
+		int num1 = sc.nextInt();
+		int num2 = sc.nextInt();
+		char op = sc.next().charAt(0);
+		
+		Calc cal = null;
+		
+		switch(op) {
 
-		a = sc.nextInt();
-		b = sc.nextInt();
-		ch = sc.next().charAt(0);
-
-		if (ch == '+') {
-			Add();
-		} else if (ch == '-') {
-			Sub();
-		} else if (ch == '*') {
-			Mul();
-		} else if (ch == '/') {
-			Div();
+		case '+' :
+			cal = new Add();
+			break;
+		case '-' :
+			cal = new Sub();
+			break;
+		case '*' :
+			cal = new Mul();
+			break;
+		case '/' :
+			cal = new Div();
+			break;
+			
+			default:
+				System.out.println("잘못된 연산입니다.");
 		}
+		
+		cal.setValue(num1, num2);
+		
+		System.out.println(cal.calculate());
+		
+		}catch(Exception e) {
+			System.out.println("비정상 종료입니다.");
+			e.printStackTrace();
+		}
+		
+		
+		sc.close();
+		
+		
+		
+		
+		
+		
+
 	}
 
 }
-
-class AbsCalcul extends Calc {
-
-void setValue(int a, int b, char ch) {
-
-		this.a = a;
-		this.b = b;
-		this.ch = ch;
-
-	}
-
-	public void Add() {
-
-		System.out.println(a + "+" + b + "=" + (a + b));
-
-	}
-
-	public void Sub() {
-
-		System.out.println(a + "-" + b + "=" + (a - b));
-
-	}
-
-	public void Mul() {
-
-		System.out.println(a + "*" + b + "=" + (a * b));
-
-	}
-
-	public void Div() {
-
-		System.out.println(a + "/" + b + "=" + (a / b));
-	}
-}
-
-
-
 
 
 
