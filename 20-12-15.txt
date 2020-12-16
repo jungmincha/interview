@@ -172,6 +172,111 @@ interface Stack {
 문자열 입력 >> 그만
 스택에 저장된 모든 문자열 팝 : smile sunny hello 
 
+==================================================================클래스==================================================================================
+
+import java.util.Scanner;
+
+interface Stack {
+
+	int length(); // 현재 스택에 저장된 개수 리턴
+
+	int capacity(); // 스택의 전체 저장 가능한 개수 리턴
+
+	String pop(); // 스택의 톱(top)에 실수 저장
+
+	boolean push(String val); // 스택의 톱(top)에 저장된 실수 리턴
+
+}
+
+class StringStack implements Stack { //Stack의 상속 받는 클래스
+
+	private String stack[]; //문자열 배열
+	private int top;
+
+	StringStack(int length) {//StringStack의 생성자 초기화
+
+		stack = new String[length];
+		top = -1; //스택이 텅 비어있다는 것을 나타내주었다.
+
+	}
+
+	@Override
+	public int length() {//Stack 인터페이스 내의 함수들을 오버라이딩 해줬다.
+
+		return stack.length;
+	}
+
+	@Override
+	public int capacity() {
+
+		return 0;
+	}
+
+	@Override
+	public String pop() {
+
+		if (top == -1)
+			return "스택이 비어있습니다";
+
+		return stack[top--];
+
+	}
+
+	@Override
+	public boolean push(String val) {
+
+		if (top == stack.length-1)//top이 -1로 시작했기 때문에!
+			return false;
+
+		stack[++top] = val;
+		
+
+		return true;
+
+	}
+
+}
+====================================================================================================================================================
+public class StackApp {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("홈 스택 저장 공간의 크기 입력");
+		int num = sc.nextInt();
+		StringStack Stack = new StringStack(num);
+
+		while (true) {
+			System.out.println("문자열 입력 >>");
+			String word = sc.next();
+
+			if (word.equals("그만")) {
+				break;
+			}
+			if (!Stack.push(word)) {
+				System.out.println("스택이 꽉차서 푸시 불가");
+				break;
+			}
+		}
+
+		System.out.println("스택에 저장된 모든 문자열 팝 : ");
+		int len = Stack.length();
+		for (int i = 0; i < len; i++) {
+			String s = Stack.pop();
+			System.out.print(s + " ");
+		}
+		sc.close();
+
+	}
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -192,7 +297,7 @@ setValue() 와 calculate()를 호출하여 그 결과 값을 화면에 출력하
 
 두 정수와 연산자를 입력하시오 >> 5 7 +
 12
-
+==================================================================클래스==================================================================================
 import java.util.Scanner;
 
 abstract class Calc {
@@ -249,7 +354,7 @@ class Div extends Calc{
  }
 
 
-
+=================================================================메인===================================================================================
 
 public class CalMain {
 
