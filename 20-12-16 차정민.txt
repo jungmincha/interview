@@ -1,7 +1,8 @@
 ﻿1.throws 에 대하여 설명하시오.
 
 
-잘 모르겠습니다.
+try와 catch에서 던지고 던져진 오류 값을 받아내어 예외처리를 해주는 것이다. 
+throws 는 함수 옆에다 써준다. throws절 선언을 통해 예외의 처리를 해준다.
 
 2.아래가 컴파일 에러가 나는 이유에 대하여 설명하시오.
 try {
@@ -19,8 +20,12 @@ Exception은 예외 클래스의 조상클래스이며 가장 위에 올라가 �
 
 3.try with resource 에 대하여 설명하시오.
 
+잘 모르겠습니다.
 
 7.equals 함수에 대하여 설명하시오.
+
+Object 라는 최고의 조상 클래스의 11개의 함수 중 한가지이다. 
+비교 할 때 쓰인다. 
 
 
 5. 과일, 사과, 배, 포도를 표현한 클래스를 만들고 이들 간의 관계를 고려하여 하나의 클래스를 추상 클래스로 만들어 메소드 print()를 구현하고 
@@ -42,62 +47,52 @@ f.print();
 나는 배이다.
 
 
-
-
-
 abstract class Fruit {
-	
-	
-	abstract String print() ;
-		
-	
 
- }
+	abstract void print();
 
-class Grape extends Fruit{
-
-	@Override
-	String print() {
-		
-		return "나는 포도이다";
-	}
-}
-class Apple extends Fruit{
-
-	@Override
-	String print() {
-		
-		return "나는 사과이다";
-	}
-}
-class Pear extends Fruit{
-
-	@Override
-	String print() {
-		
-		return "나는 배이다";
-	}
-}	
-
-class MainFruits{
-	
-	public static void main(String [] args) {
-		
-		Fruit fAry[] = {new Grape(), new Apple(), new Pear()};
-
-		for(Fruit f : fAry)
-
-		f.print();
-		
-		
-		
-	}
-	
-	
-	
 }
 
+class Grape extends Fruit {
 
+	@Override
+	void print() {
+
+		System.out.println("나는 포도이다.");
+	}
+}
+
+class Apple extends Fruit {
+
+	@Override
+	void print() {
+
+		System.out.println("나는 사과이다.");
+	}
+}
+
+class Pear extends Fruit {
+
+	@Override
+	void print() {
+
+		System.out.println("나는 배 이다");
+	}
+}
+
+class MainFruits {
+
+	public static void main(String[] args) {
+
+		Fruit fAry[] = { new Grape(), new Apple(), new Pear() };
+
+		for (Fruit f : fAry)
+
+			f.print();
+
+	}
+
+}
 
 
 
@@ -241,7 +236,33 @@ public static void main(String[] args) {
    Shape donut = new Circle(10); // 반지름이 10인 원 객체
    donut.redraw();
    System.out.println("면적은 "+ donut.getArea());
+ 
+   
+   
+
+
+class Circle implements Shape {
+
+	double r = 0;
+
+	Circle(double r) {
+		this.r = r;
+	}
+
+	public void draw() {
+
+		System.out.println("반지름이" + r + "인 원입니다.");
+	}
+
+	@Override
+	public double getArea() {
+
+		return r * r * PI;
+	}
 }
+
+
+
 
 8.
 다음 main() 메소드와 실행 결과를 참고하여, 문제 7의 Shape 인터페이스를 구현한 클래스 Oval, Rect를 추가 작성하고 전체 프로그램을 완성하라.
