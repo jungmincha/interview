@@ -1,6 +1,9 @@
 ﻿1.String 클래스 에서 문자열 비교시 equal을 쓰는 이유는?
 2.shall copy, deep copy 의 차이는?
 3.금일 배운 Rectangle의 shall copy 와 deep copy 일때의 그림을 그리시오.(중요)
+
+
+
 4.다음 main()이 실행되면 아래 예시와 같이 출력되도록 MyPoint 클래스를 작성하라.
 
 public static void main(String [] args) {
@@ -14,7 +17,53 @@ public static void main(String [] args) {
 Point(3,50)
 다른점
 
-5.중심을 나타내는 정수 x, y와 반지름 radius 필드를 가지는 Circle 클래스를 작성하고자 한다. 생성자는 3개의 인자(x, y, raidus)를 받아 해당 필드를 초기화하고, equals() 메소드는 두 개의 Circle 객체의 중심이 같으면 같은 것으로 판별하도록 한다.
+
+
+public class MyPoint {
+
+	private int num1;
+	private int num2;
+
+	
+
+	MyPoint(int num1, int num2 ) {
+		this.num1 = num1;
+		this.num2 = num2;
+		
+
+	}
+
+	public boolean equals(Object obj) {
+
+		if ((this.num1  == ((MyPoint) obj).num2)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	
+	public static void main(String[] args) {
+		MyPoint p = new MyPoint(3 , 50);
+		MyPoint q = new MyPoint(4 , 50);
+		System.out.println(p);
+		if (p.equals(q))
+			System.out.println("같은 점");
+		else
+			System.out.println("다른 점");
+	}
+
+}
+
+
+
+
+
+
+
+
+5.중심을 나타내는 정수 x, y와 반지름 radius 필드를 가지는 Circle 클래스를 작성하고자 한다. 생성자는 3개의 인자(x, y, raidus)를 받아 해당 필드를 초기화하고, 
+equals() 메소드는 두 개의 Circle 객체의 중심이 같으면 같은 것으로 판별하도록 한다.
 
 public static void main(String[] args) {
 	Circle a = new Circle(2, 3, 5); // 중심 (2, 3)에 반지름 5인 원
@@ -48,6 +97,10 @@ I Love you
 [Hint] Scanner.nextLine()을 이용하면 빈칸을 포함하여 한 번에 한 줄을 읽을 수 있다.
 7.래퍼 클래스란 무엇인가?
 8.auto unboxing 이란?
+
+
+
+
 9. 다음 조건을 만족하는 클래스 Person을 구현하여 테스트하는 프로그램을 작성하시오.(필수)
 
 - 클래스 Person은 이름을 저장하는 필드 구성
@@ -59,6 +112,32 @@ I Love you
 Person p1 = new Person("홍길동");
 System.out.println(p1.equals(new Person("홍길동")));
 System.out.println(p1.equals(new Person("최명태")));
+
+===============================================================클래스=============================================================================
+public class Person { // 현재 지금 Object를 상속 받는 상태이다.
+
+	private String name;
+
+	public Person(String name) {
+		this.name = name;
+	}
+
+	public boolean equals(Object obj) {  // 모든 클래스는 Object를 상속 받는다. Object 클래스로부터 equals 메서드를 오버라이딩 해주었다.  
+
+		if (this.name == ((Person) obj).name) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+
+ 결과값 : true
+ 	 false
+
+
+
 
 10. 다음 조건을 만족하는 클래스 String의 객체 이용 프로그램을 작성하여 메소드 equals()와 연산자 ==의 차이를 비교 설명하시오.(필수) 
 
@@ -73,6 +152,20 @@ System.out.println(s1 == s2);
 System.out.println(s1.equals(s2));
 System.out.println(s2 == s3);
 System.out.println(s2.equals(s3));
+
+
+결과 값 false
+  	true
+	true
+	true
+
+비교 연산자인 경우는 주소값이 같냐 다르냐에 따라서 참거짓이 나뉜다. 소스코드 내 비교대상인 두개의 문자열은 "java"로 글자는 같지만
+주소값이 다르기 때문에 다르다는 결과가 도출된다.
+
+반면 equals 는 String 클래스의 메서드이다. 인스턴스 안에 있는 내용 비교를 하는 형태로 equals 메소드를 오버라이딩 하고 있다. 그래서 주소값에 상관 없이 내용만 같으면 
+같다는 결과가 도출된다.
+
+
 
 11. 다음 조건을 만족하도록 오늘의 정보를 출력하는 프로그램을 작성하시오.
 
