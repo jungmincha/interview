@@ -1,5 +1,27 @@
 ﻿1.String 클래스 에서 문자열 비교시 equal을 쓰는 이유는?
+ 
+ 같은 기능을 하는 연산자 "==" 는 주소값이 다르면 값이 같아도 다르다고 표시를 해준다.
+ 
+ 하지만 equal은 내용비교를 토대로 참 거짓을 반환 해 준다.
+ 
+ 
+ 
 2.shall copy, deep copy 의 차이는?
+
+shall copy는 얕은 복사이다. 주소값을 복사해주기 때문에 결과 값도 똑같이 복사되어 출력된다. 
+
+
+									     	      
+
+
+
+deep copy는 깊은 복사이다. 기존의 것을 복사해서 새로 객체를 생성하기 때문에 결과 값은 예전과 같은 값으로 출력된다.
+
+
+
+
+
+
 3.금일 배운 Rectangle의 shall copy 와 deep copy 일때의 그림을 그리시오.(중요)
 
 
@@ -24,28 +46,25 @@ public class MyPoint {
 	private int num1;
 	private int num2;
 
-	
-
-	MyPoint(int num1, int num2 ) {
+	MyPoint(int num1, int num2) {
 		this.num1 = num1;
 		this.num2 = num2;
-		
 
 	}
 
-	public boolean equals(Object obj) {
+	public String toString() {
 
-		if ((this.num1  == ((MyPoint) obj).num2)) {
-			return true;
-		} else {
-			return false;
-		}
+		return "point(" + num1 + "." + num2 + ")";
 
 	}
 	
+	
+	
+	
+
 	public static void main(String[] args) {
-		MyPoint p = new MyPoint(3 , 50);
-		MyPoint q = new MyPoint(4 , 50);
+		MyPoint p = new MyPoint(3, 50);
+		MyPoint q = new MyPoint(4, 50);
 		System.out.println(p);
 		if (p.equals(q))
 			System.out.println("같은 점");
@@ -80,6 +99,58 @@ public static void main(String[] args) {
 원 b : Circle(2,3)반지름30
 같은 원
 
+
+
+public class Circle {
+	
+	int x = 0;
+	int y = 0;
+	int radius = 0;
+
+	Circle(int x, int y, int radius) {
+
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+
+	}
+
+	public String toString() {
+
+		return "Circle(" + x + "," + y + ")반지름" + radius;
+
+	}
+
+	public boolean equals(Object obj) {
+
+		if (this.x == ((Circle) obj).x && this.y == ((Circle) obj).y)
+
+			return true; // "Circle(" + x + "," + y + ")반지름" + radius ;
+
+		else
+			return false;
+
+	}
+
+	public static void main(String[] args) {
+
+		Circle a = new Circle(2, 3, 5); // 중심 (2, 3)에 반지름 5인 원
+		Circle b = new Circle(2, 3, 30); // 중심 (2, 3)에 반지름 30인 원
+		System.out.println("원 a : " + a);
+		System.out.println("원 b : " + b);
+		if (a.equals(b))
+			System.out.println("같은 원");
+		else
+			System.out.println("서로 다른 원");
+	}
+
+}
+
+
+
+
+
+
 6.문자열을 입력받아 한 글자씩 회전시켜 모두 출력하는 프로그램을 작성하라.(클래스로 작성할 필요없이 메인에서 직접 할것)
 
 문자열을 입력하세요. 빈칸이나 있어도 되고 영어 한글 모두 됩니다.
@@ -95,6 +166,9 @@ ouI Love y
 uI Love yo
 I Love you
 [Hint] Scanner.nextLine()을 이용하면 빈칸을 포함하여 한 번에 한 줄을 읽을 수 있다.
+
+
+
 7.래퍼 클래스란 무엇인가?
 8.auto unboxing 이란?
 
