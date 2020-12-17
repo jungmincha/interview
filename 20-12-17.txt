@@ -1,0 +1,93 @@
+﻿1.String 클래스 에서 문자열 비교시 equal을 쓰는 이유는?
+2.shall copy, deep copy 의 차이는?
+3.금일 배운 Rectangle의 shall copy 와 deep copy 일때의 그림을 그리시오.(중요)
+4.다음 main()이 실행되면 아래 예시와 같이 출력되도록 MyPoint 클래스를 작성하라.
+
+public static void main(String [] args) {
+	MyPoint p = new MyPoint(3, 50);
+	MyPoint q = new MyPoint(4, 50);
+	System.out.println(p);
+	if(p.equals(q)) System.out.println("같은 점");
+	else System.out.println("다른 점");			
+}
+
+Point(3,50)
+다른점
+
+5.중심을 나타내는 정수 x, y와 반지름 radius 필드를 가지는 Circle 클래스를 작성하고자 한다. 생성자는 3개의 인자(x, y, raidus)를 받아 해당 필드를 초기화하고, equals() 메소드는 두 개의 Circle 객체의 중심이 같으면 같은 것으로 판별하도록 한다.
+
+public static void main(String[] args) {
+	Circle a = new Circle(2, 3, 5); // 중심 (2, 3)에 반지름 5인 원
+	Circle b = new Circle(2, 3, 30); // 중심 (2, 3)에 반지름 30인 원
+	System.out.println("원 a : " + a);
+	System.out.println("원 b : " + b);
+	if(a.equals(b))
+		System.out.println("같은 원");
+	else 
+		System.out.println("서로 다른 원");
+}
+
+원 a : Circle(2,3)반지름5
+원 b : Circle(2,3)반지름30
+같은 원
+
+6.문자열을 입력받아 한 글자씩 회전시켜 모두 출력하는 프로그램을 작성하라.(클래스로 작성할 필요없이 메인에서 직접 할것)
+
+문자열을 입력하세요. 빈칸이나 있어도 되고 영어 한글 모두 됩니다.
+I Love you
+ Love youI
+Love youI 
+ove youI L
+ve youI Lo
+e youI Lov
+ youI Love
+youI Love 
+ouI Love y
+uI Love yo
+I Love you
+[Hint] Scanner.nextLine()을 이용하면 빈칸을 포함하여 한 번에 한 줄을 읽을 수 있다.
+7.래퍼 클래스란 무엇인가?
+8.auto unboxing 이란?
+9. 다음 조건을 만족하는 클래스 Person을 구현하여 테스트하는 프로그램을 작성하시오.(필수)
+
+- 클래스 Person은 이름을 저장하는 필드 구성
+
+- 클래스 Person은 상위 클래스 Object의 메소드 equals()를 오버라이딩하여 이름이 같으면 true를 반환하는 메소드 구현
+
+- 다음과 같은 소스로 클래스 Person을 점검
+
+Person p1 = new Person("홍길동");
+System.out.println(p1.equals(new Person("홍길동")));
+System.out.println(p1.equals(new Person("최명태")));
+
+10. 다음 조건을 만족하는 클래스 String의 객체 이용 프로그램을 작성하여 메소드 equals()와 연산자 ==의 차이를 비교 설명하시오.(필수) 
+
+- 메소드 equals()와 비교 연산자 ==의 차이를 다음 소스로 점검
+
+String s1 = new String("java");
+String s2 = new String("java");
+String s3 = s2;
+
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+System.out.println(s2 == s3);
+System.out.println(s2.equals(s3));
+
+11. 다음 조건을 만족하도록 오늘의 정보를 출력하는 프로그램을 작성하시오.
+
+- 클래스 Calendar의 객체의 다음 메소드를 사용하며
+
+ * get(Calendar.DAY_OF_WEEK_IN_MONTH) : 달에서 요일의 횟수 반환
+ * get(Calendar.DAY_OF_WEEK) : 요일을 반환, 1이 일요일
+ * get(Calendar.WEEK_OF_MONTH) : 월의 주 횟수를 반환
+ * get(Calendar.DAY_OF_YEAR) : 해의 날짜를 반환
+ * get(Calendar.WEEK_OF_YEAR) : 해의 주 횟수를 반환
+
+- 다음과 같이 출력되도록 한다.
+
+오늘은 2012년 6월 17일 일요일입니다.
+이 달의 3번째 일요일입니다.
+이 달의 4번째 주입니다.
+이 해의 169일입니다.
+이 해의 25번째 주입니다. 
