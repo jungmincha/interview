@@ -3,7 +3,11 @@
 
 
 2.아래의 결과 값은 false 출력이 된다.true 가 되도록 INum을짜시오.
-   
+
+false 가 나오는 이유는 오버라이딩을 해주지 않았기 때문에 주소값이 다르다고 인식을 해 false를 출력하게 된다.
+
+문제 해결 방법은 최상위 클래스 Object 와 INum의 클래스를 같게 형변환(캐스팅) 해주는 것이다. 그러기 위해서는 오버라이딩을 해주어야 한다.
+   =====================================================================메인=========================================================================
       INum[] ar1 = new INum[3];
       INum[] ar2 = new INum[3];
       ar1[0] = new INum(1); ar2[0] = new INum(1);
@@ -11,7 +15,27 @@
       ar1[2] = new INum(3); ar2[2] = new INum(3);
       System.out.println(Arrays.equals(ar1, ar2));
 
-:
+
+====================================================================클래스==============================================================================
+
+public class INum {
+
+	
+	private int num ;
+	public INum(int num) {
+		this.num = num;
+	}
+	
+
+	public boolean equals(Object obj) { //주소값이 같도록 오버라이딩 해준다. 오버라이딩 해주지 않으면 주소값이 다르다고 인식을 해서 false를 호출한
+		if(this.num == ((INum)obj).num) {
+			return true ;
+		}else {
+			return false ;
+		}
+	}
+
+
 
 
 3.아래에서 정렬이 이름순으로 되게끔 하시오.Person 객체를 만드시오.
@@ -24,6 +48,37 @@ class ArrayObjSearch {
         ar[2] = new Person("Soo", 37);
 
         Arrays.sort(ar);
+=======================================================================클래스========================================================================================
+
+public class Person2 implements Comparable {
+
+	private String name;
+	private int age;
+
+	public Person2(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	public int compareTo(Object o) { // 상위 Object 클래스에서의 compareTo를 오버라이딩해서 Person 클래스에서 구현한다.!
+		Person2 p = (Person2) o;
+		return this.name.charAt(0) - p.name.charAt(0); // 음수이면 오름차순 양수이면 내림차순
+													//문자열의 오름차순 내림차순은 charAt()를 사용한다!!
+	}
+
+	public String toString() {
+		return name + ": " + age;
+	}
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
  
 4.위의 문제에서 사람의 이름 글자수가 많은순으로 정렬을 되게
 끔 person 객체를 만드시오.
@@ -43,6 +98,9 @@ class ArrayObjSearch {
 황기태의 결과 8, 이재문의 결과 13, 승자는 황기태
 
 6.지넥릭이란?
+
+
+
 7. 아래를 프로그래밍 하시오.
 Rectangle r1 = new Rectangle(5,6);
 Rectangle r2 = new Rectangle(7,9);
@@ -52,6 +110,12 @@ Rectangle r3 = Rectangle.compareRect(r1,r2);
 System.out.println(r3.getHeight() + " : " + r3.getWidth()  + "입니다.");
 =============================
 출력 : 9 : 7 입니다.
+
+
+
+
+
+
 8. 아래를 프로그래밍 하시오.
  - Rectangle 배열 4개를 만든후 스캐너 객체로 가로와 세로를 입력하여 4개의 객체를 배열에 할당한다 
 -  getSortingRec 사각형 배열을 내림차순 정렬한다.
