@@ -1,5 +1,8 @@
 ﻿1.BigInteger 클래스에 대하여 설명하시오.
 :
+매우 큰 정수를 표현하기 위해서 사용하는 자바에서 제공하는 클래스이다.
+
+
 
 
 2.아래의 결과 값은 false 출력이 된다.true 가 되도록 INum을짜시오.
@@ -62,8 +65,8 @@ public class Person2 implements Comparable {
 
 	public int compareTo(Object o) { // 상위 Object 클래스에서의 compareTo를 오버라이딩해서 Person 클래스에서 구현한다.!
 		Person2 p = (Person2) o;
-		return this.name.charAt(0) - p.name.charAt(0); // 음수이면 오름차순 양수이면 내림차순
-													//문자열의 오름차순 내림차순은 charAt()를 사용한다!!
+		return this.name.charAt(0) - p.name.charAt(0); // 정수일 때 음수이면 오름차순 양수이면 내림차순
+													//문자열의 abcd순의 오름차순 내림차순은 charAt()를 사용한다!!
 	}
 
 	public String toString() {
@@ -82,6 +85,57 @@ public class Person2 implements Comparable {
  
 4.위의 문제에서 사람의 이름 글자수가 많은순으로 정렬을 되게
 끔 person 객체를 만드시오.
+=================================================================메인===============================================================================================
+public class ArrayObjSearch {
+
+	public static void main(String[] args) {
+		Person2[] ar = new Person2[3];
+
+		ar[0] = new Person2("Le", 29);
+		ar[1] = new Person2("G", 15);     //글자수 일정하지 않음
+		ar[2] = new Person2("Soort", 37);
+
+		Arrays.sort(ar);
+
+		for (Person2 p : ar) {
+			System.out.println(p);
+		}
+
+	}
+
+}
+
+==================================================================클래스============================================================================================
+
+public class Person2 implements Comparable {
+
+	private String name;
+	private int age;
+
+	Person2(String name, int age) {
+
+		this.name = name;
+		this.age = age;
+
+	}
+
+	public int compareTo(Object obj) {
+
+		Person2 p = (Person2) obj;
+		return p.name.length() - this.name.length(); // 문자열의 길이를 비교하는 것이라 length를 사용한다.
+	}
+
+	public String toString() {
+		return name + ":" + age;
+	}
+
+}
+출력값
+Soort:37
+Le:29
+G:15
+
+
 
   
 5.경과시간을 맞추는 게임을 작성하라. 다음 예시를 참고하면, <Enter> 키를 입력하면 현재 초 시간을 보여주고 여기서 10초에 더 근접하도록 다음 <Enter> 키를 입력한 사람이 이기는 게임이다.
@@ -98,6 +152,15 @@ public class Person2 implements Comparable {
 황기태의 결과 8, 이재문의 결과 13, 승자는 황기태
 
 6.지넥릭이란?
+
+지넥릭의 사전적 의미는
+데이터 형식에 의존하지 않고, 하나의 값이 여러 다른 데이터 타입들을 가질 수 있는 기술에 중점을 두어 재사용성을 높일 수 있는 프로그래밍 방식이다.
+
+ 제네릭을 쓰지 않는 코드에서 발견되는 문제점은 프로그래머의 실수가 컴파일 상에서 발견되지 않을 때이다. 실행 과정에서조차 발견 안될 수도 있다. 이것을 예방하기 위해 제네릭을 사용한다.
+ 
+ 인스턴스 생성시 결정 되는 자료형의 정보를 주로 T로 정의한다.
+ 
+ 또한 제네릭을 사용하면 Object 클래스의 함수를 사용할 때 형변환을 해주지 않아도 되서 깔끔하다.
 
 
 
