@@ -1,0 +1,63 @@
+﻿1.BigInteger 클래스에 대하여 설명하시오.
+:
+
+
+2.아래의 결과 값은 false 출력이 된다.true 가 되도록 INum을짜시오.
+   
+      INum[] ar1 = new INum[3];
+      INum[] ar2 = new INum[3];
+      ar1[0] = new INum(1); ar2[0] = new INum(1);
+      ar1[1] = new INum(2); ar2[1] = new INum(2);
+      ar1[2] = new INum(3); ar2[2] = new INum(3);
+      System.out.println(Arrays.equals(ar1, ar2));
+
+:
+
+
+3.아래에서 정렬이 이름순으로 되게끔 하시오.Person 객체를 만드시오.
+class ArrayObjSearch {
+    public static void main(String[] args) {
+        Person[] ar = new Person[3];
+
+        ar[0] = new Person("Lee", 29);
+        ar[1] = new Person("Goo", 15);
+        ar[2] = new Person("Soo", 37);
+
+        Arrays.sort(ar);
+ 
+4.위의 문제에서 사람의 이름 글자수가 많은순으로 정렬을 되게
+끔 person 객체를 만드시오.
+
+  
+5.경과시간을 맞추는 게임을 작성하라. 다음 예시를 참고하면, <Enter> 키를 입력하면 현재 초 시간을 보여주고 여기서 10초에 더 근접하도록 다음 <Enter> 키를 입력한 사람이 이기는 게임이다.
+
+10초에 가까운 사람이 이기는 게임입니다.
+황기태 시작 키  >>
+	현재 초 시간 = 42
+10초 예상 후 키  >>
+	현재 초 시간 = 50
+이재문 시작 키  >>
+	현재 초 시간 = 51
+10초 예상 후 키  >>
+	현재 초 시간 = 4
+황기태의 결과 8, 이재문의 결과 13, 승자는 황기태
+
+6.지넥릭이란?
+7. 아래를 프로그래밍 하시오.
+Rectangle r1 = new Rectangle(5,6);
+Rectangle r2 = new Rectangle(7,9);
+
+Rectangle r3 = Rectangle.compareRect(r1,r2);
+
+System.out.println(r3.getHeight() + " : " + r3.getWidth()  + "입니다.");
+=============================
+출력 : 9 : 7 입니다.
+8. 아래를 프로그래밍 하시오.
+ - Rectangle 배열 4개를 만든후 스캐너 객체로 가로와 세로를 입력하여 4개의 객체를 배열에 할당한다 
+-  getSortingRec 사각형 배열을 내림차순 정렬한다.
+-정렬이 제대로 되었는지 배열에 저장된 객체의 getArea()함수를 순서대로 호출한다.
+
+Rectangle[] rec = new Rectangle[3];
+........
+Rectangle[] recSorting = Rectangle.getSortingRec(rec) 
+......
