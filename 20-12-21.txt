@@ -106,6 +106,46 @@ Orange & 33
 
 :
 
+
+class ArrayExercise<L> {
+
+	private L ob;
+
+	public void set(L o) {
+
+		ob = o;
+	}
+
+	public L get() {
+		return ob;
+
+	}
+
+	public static <L> void swapBox(Box<L> box1, Box<L> box2) {
+
+		Box<L> tmp = new Box<L>();
+		tmp.set(box1.get());
+		box1.set(box2.get());
+		box2.set(tmp.get());
+
+	}
+
+	public static void main(String[] args) {
+
+		Box<Integer> box1 = new Box<>();
+		box1.set(99);
+
+		Box<Integer> box2 = new Box<>();
+
+		System.out.println(box1.get() + " & " + box2.get());
+		swapBox(box1, box2);
+		System.out.println(box1.get() + " & " + box2.get());
+
+	}
+
+}
+
+
 4.지네릭 메소드에 대하여 설명하시오.
 
 : 클래스 전부가 아닌 메소드 하나에 대해서만 제네릭을 정의하는 것이다. 지역성을 가진다.
@@ -156,6 +196,66 @@ Poly
 
 :
 
+
+class GenericExercise<T> {
+
+	private T ob;
+
+	public void set(T o) {
+
+		ob = o;
+
+	}
+
+	public T get() {
+		return ob;
+	}
+
+	public static <T> boolean compBox(Box<T> a, T b) {
+		T check = a.get();
+		return check.equals(b);
+
+	}
+
+	public static void main(String[] args) {
+
+		Box<Integer> box1 = new Box<>();
+		box1.set(24);
+
+		Box<String> box2 = new Box<>();
+		box2.set("Poly");
+
+		if (compBox(box1, 25))
+			System.out.println("상자 안에 25 저장");
+
+		if (compBox(box2, "Moly"))
+			System.out.println("상자 안에 Moly 저장");
+
+		System.out.println(box1.get());
+		System.out.println(box2.get());
+
+	}
+
+}
+
+
+
+
+
+
+
 9.콜렉션 프레임워크란?
 :
+자료 구조 및 알고리즘을 구현해놓은 클래스가 한데 모인 일종의 라이브러리다. 제네릭 기반으로 구현되어있다.
+구현하는 인터페이스의 특성에 따라 사용방법과 특성이 정해진다.
 
+collection<E> - set<E> - List<E> - Queue<E>   || Map<K , V>
+
+List<E> 인터페이스를 구현하는 대표적인 컬렉션 클래스 둘이다.
+
+ArrayList<E> 배열 기반 자료 구조, 배열을 이용하여 자료를 저장한다. 저장된 인스턴스의 참조가 빠르다. 저장공간을 늘리는 과정에서 시간이 비교적 많이 소모된다.
+
+LinkedList<E> 리스트 기반 자료 구조, 리스트를 구성하여 자료를 저장한다. 참조과정이 배열보다 복잡해서 느릴 수 있다. 저장공간을 늘이는 과정이 단순하다. 저장된 인스턴스의 삭제 과정이 단순하다.
+
+
+인스턴스의 저장 순서 유지 , 동일 인스턴스의 중복 저장을 허용한다.
