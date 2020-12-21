@@ -1,5 +1,18 @@
 ﻿1.제네릭 클래스의 타입 인자 제한하는 방법과 효과는?
-:
+
+class Box <T>{
+}
+
+===============
+class Box<T extends Number>
+이런 식으로 작성해 준다.
+
+T로 전달되는 인자는 Number 클래스를 상속한다.
+
+Number 클래스 내의 함수를 사용 가능하게 된다.
+
+타입을 제한함으로써 잘못된 타입을 지정하면 타입 에러를 컴파일 타임에 검출해서 컴파일시 에러를 방지 할 수 있다.
+
 
 인스턴스 생성 시 타입 인자로 Number 또는 이를 상속하는 클래스만 올 수 있음
 ex) class Box<T extends Number> {...} => 와 같이 Number 클래스를 상속하면 기본형으로 타입을 제한-String, Apple과 같은 타입은 들어오지 못함-
@@ -21,11 +34,58 @@ class DDBoxDemo {
     }
 }
 
+
+=======================================================================클래스=======================================================================================
+
+
+class DBox10<L, R> {
+	
+	private L left;
+	private R right;
+
+	public void set(L o, R r) {
+
+		left = o;
+		right = r;
+
+	}
+
+	public String toString() {
+		return left + " & " + right;
+	}
+
+}
+
+class DDBox<L,R>{
+	
+	private L left;
+	private R right;
+	
+	public void set(L o, R r) {
+
+		left = o;
+		right = r;
+
+	}
+	
+	public String toString() {
+		return left + "\n " + right;
+				
+
+	}
+	
+}
+
+
 ==================
 Apple & 25
 Orange & 33
 
-:
+
+
+
+
+
 
 3.아래와 같이 출력값이 나오도록 프로그래밍 하시오.
 
@@ -47,10 +107,13 @@ Orange & 33
 :
 
 4.지네릭 메소드에 대하여 설명하시오.
-:
+
+: 클래스 전부가 아닌 메소드 하나에 대해서만 제네릭을 정의하는 것이다. 지역성을 가진다.
+
+
 
 5.와일드 카드와 상한 제한, 하한 제한에 대하여 설명하시오.
-:
+: 와일드 카드는 제네릭과 기능적으로 거의 같다
 
 6.아래가 에러가 나는 이유를 설명하시오.
 public static void inBox(Box<? super Toy> box, Toy n) {
@@ -58,12 +121,14 @@ public static void inBox(Box<? super Toy> box, Toy n) {
    Toy myToy = box.get();   // 꺼내는 것! Error!
 }
 
-:
+:폴리몰피즘 때문이다.
 
 7.아래와 같이 메소드 오버로딩이 되지 않는 이유는?
 // 다음 두 메소드는 오버로딩 인정 안됨.
    public static void outBox(Box<? extends Toy> box) {...}
    public static void outBox(Box<? extends Robot> box) {...}
+   
+   폴리몰피즘 때문이다. 
 
 :
 
