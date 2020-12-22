@@ -148,12 +148,29 @@ class ArrayExercise<L> {
 
 4.지네릭 메소드에 대하여 설명하시오.
 
+
+메소드 앞에 제네릭 정의가 붙은 것이다 ex. <T> , <L , R>
+
 : 클래스 전부가 아닌 메소드 하나에 대해서만 제네릭을 정의하는 것이다. 지역성을 가진다.
+
+
+
+
 
 
 
 5.와일드 카드와 상한 제한, 하한 제한에 대하여 설명하시오.
 : 와일드 카드는 제네릭과 기능적으로 거의 같다
+
+문법적 표현을 좀더 간결하게 하기 위해서.
+
+상한 제한 extends Number (가장 최상위에 있는 클래스는 Number)
+
+하한 제한 super Integer (가장 아래에 있는 클래스는 Integer)
+
+상한과 하한을 두어 어떠한 상속관계를 두는지 좀 더 명확하게 하기 위해서다.
+
+
 
 6.아래가 에러가 나는 이유를 설명하시오.
 public static void inBox(Box<? super Toy> box, Toy n) {
@@ -161,14 +178,19 @@ public static void inBox(Box<? super Toy> box, Toy n) {
    Toy myToy = box.get();   // 꺼내는 것! Error!
 }
 
+
 :폴리몰피즘 때문이다.
+
+부모 자식이 아니라 자식 부모인 상태로 오니깐 당연히 에러가 날 수 밖에 없다.
+
+
 
 7.아래와 같이 메소드 오버로딩이 되지 않는 이유는?
 // 다음 두 메소드는 오버로딩 인정 안됨.
    public static void outBox(Box<? extends Toy> box) {...}
    public static void outBox(Box<? extends Robot> box) {...}
    
-   폴리몰피즘 때문이다. 
+   extends Toy , extends Robot 이 두가지가 오버로딩의 대상이 아니기 때문이다. 컴파일시 없어짐.
 
 :
 
@@ -244,12 +266,15 @@ class GenericExercise<T> {
 
 
 
-9.콜렉션 프레임워크란?
+9.콜렉션 프레임워크란? 
+
+프레임워크 = 개발자들이 하나의 목적을 위해 만들어 놓은 .class 들의 라이브러리이다.
+자료구조 및 알고리즘을 구현해 놓은 라이브러리로 제네릭 기반에 의해 구현되었다.(캡슐화 개념이랑 유사하다)
 :
 자료 구조 및 알고리즘을 구현해놓은 클래스가 한데 모인 일종의 라이브러리다. 제네릭 기반으로 구현되어있다.
 구현하는 인터페이스의 특성에 따라 사용방법과 특성이 정해진다.
 
-collection<E> - set<E> - List<E> - Queue<E>   || Map<K , V>
+collection<E> - set<E> - List<E> - Queue<E>   || Map<K , V>  셋리큐맵!!
 
 List<E> 인터페이스를 구현하는 대표적인 컬렉션 클래스 둘이다.
 
