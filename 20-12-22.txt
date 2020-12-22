@@ -6,7 +6,7 @@ List<E> 인터페이스를 구현하는 대표적인 컬렉션 클래스 둘이�
 
 ArrayList<E> 배열 기반 자료 구조, 배열을 이용하여 자료를 저장한다. 저장된 인스턴스의 참조가 빠르다.(주소를 찾는 속도가 빠르다. 검색이 빠르다.)
 
-저장공간을 늘리는 과정에서 시간이 비교적 많이 소모된다.
+저장공간을 늘리는 과정에서 시간이 비교적 많이 소모된다. 
 
 
 
@@ -18,15 +18,71 @@ LinkedList<E> 리스트 기반 자료 구조, 리스트를 구성하여 자료�
  
  
  
-2.Scanner 클래스로 -1이 입력될 때까지 양의 정수를 입력받아  저장하고 검색하여 가장 큰 수를 출력하는 프로그램을 작성하라
+2.Scanner 클래스로 -1이 입력될 때까지 양의 정수를 입력받아  저장하고 검색하여 가장 큰 수를 출력하는 프로그램을 작성하라 arrays sort
 
 정수(-1이 입력될 때까지)>> 10 6 22 6 88 77 -1
 
 가장 큰 수는 88
 
+public class ScannerScore {
+	public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+		ArrayList<Integer> list = new ArrayList<>();
+
+		System.out.println("양의 정수를 입력하세요");
+  
+		try {
+			while (true) {
+				int num = sc.nextInt();
+				System.out.println(">>" + num);
+
+				list.add(num);
+
+				if (list.contains(-1)) {
+					break;
+				} else {
+					continue;
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("오류 체크 부탁드립니다.");
+		}
+  
+		System.out.println("가장 큰 정수 : " + Collections.max(list));
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
 3.로또 프로그램을 작성하시오.(Set 으로)
+
+Set<Integer> lotto = new HashSet<Integer>();
+
+		while (lotto.size() < 6) {
+			lotto.add((int) (Math.random() * 45) + 1);
+		}
+
+		System.out.println("인스턴스의 개수 : " + lotto.size());
+		System.out.print(lotto);
+
+
+
+
+
 4.Set에 대하여 설명하시오.
-5.도시 이름, 위도, 경도 정보를 가진 Location 클래스를 작성하고, 도시 이름을 '키'로 하는 HashMap<String, Location> 컬렉션을 만들고, 사용자로부터 입력 받아 4개의 도시를 저장하라. 그리고 도시 이름으로 검색하는 프로그램을 작성하라.
+
+5.도시 이름, 위도, 경도 정보를 가진 Location 클래스를 작성하고, 도시 이름을 '키'로 하는 HashMap<String, Location> 컬렉션을 만들고, 사용자로부터 입력 받아 4개의 도시를 저장하라. 
+그리고 도시 이름으로 검색하는 프로그램을 작성하라.
 
 도시, 경도, 위도를 입력하세요.
 
@@ -65,6 +121,11 @@ LA 34 -118
 6개의 학점을 빈 칸으로 분리 입력(A/B/C/D/F) >> A C A B F D
 
 2.3333333333333335
+
+
+
+
+
 7.출력이 아래와 같이 나오도록 하시오(필수)
         HashSet<Num> set = new HashSet<>();
         set.add(new Num(7799));
@@ -81,7 +142,51 @@ LA 34 -118
 ====출력
 인스턴스 수: 2
 7799	9955
+
+
+import java.util.HashSet;
+
+class Num {
+
+	private int num;
+
+	public Num(int n) {
+		num = n ;
+	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(num);
+	}
+	
+	@Override
+	public int hashCode() {
+		return num % 3;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this.num == ((Num) obj).num) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
 8.Set 호출되는 원리와 순서를 설명하시오?
+
+
+
 9.아래와 같이 출력되도록 하시오.
         HashSet<Person> hSet = new HashSet<Person>();
         hSet.add(new Person("LEE", 10));
@@ -94,3 +199,38 @@ LA 34 -118
 ============
 저장된 데이터 수: 2
 [LEE(10세), PARK(35세)]
+
+
+class Person {
+	String str;
+	int num;
+
+	public Person(String str, int num) {
+		this.str = str;
+		this.num = num;
+	}
+
+	public String toString() {
+		return String.valueOf(str + "(" + num + ")");
+
+	}
+
+	public int hashCode() {
+		return num % 3;
+	}
+
+	public boolean equals(Object obj) {
+
+		if (num == ((Person) obj).num) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+}
+
+
+
+
