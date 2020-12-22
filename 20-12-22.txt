@@ -122,6 +122,75 @@ LA 34 -118
 
 2.3333333333333335
 
+class Grade {
+	ArrayList<String> list = new ArrayList<>();
+
+	public void inputGrade() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("학점을 6개 입력하세요");
+
+		for (int i = 0; list.size() < 6; i++) {
+			list.add(sc.next());
+		}
+
+		sc.close();
+	}
+
+	public double average() {
+		double sum = 0;
+		for (int i = 0; i < list.size(); i++) {
+
+			switch (list.get(i)) {
+			case "A":
+				sum = sum + 4.0;
+				System.out.println("A : " + 4.0);
+				break;
+			case "B":
+				sum = sum + 3.0;
+				System.out.println("B : " + 3.0);
+				break;
+			case "C":
+				sum = sum + 2.0;
+				System.out.println("C : " + 2.0);
+				break;
+			case "D":
+				sum = sum + 1.0;
+				System.out.println("D : " + 1.0);
+				break;
+			case "F":
+				sum = sum + 0.0;
+				System.out.println("F : " + 0.0);
+
+			}
+		}
+		return sum / 6;
+	}
+
+}
+
+public class ArrayPra {
+
+	public static void main(String[] args) {
+
+		Grade myGra = new Grade();
+		myGra.inputGrade();
+
+		System.out.println("평균 : " + myGra.average());
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
