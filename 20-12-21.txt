@@ -122,6 +122,19 @@ class ArrayExercise<L> {
 	}
 
 	public static <L> void swapBox(Box<L> box1, Box<L> box2) {
+	
+		/*
+			int temp ;
+			
+			temp = a ;
+			a = b ;
+			b = temp ; (이 알고리즘을 적용한다.)
+			
+			int temp = a.get();
+			a.set(b.get());
+			b.set(temp.get());
+		 	*/
+
 
 		Box<L> tmp = new Box<L>();
 		tmp.set(box1.get());
