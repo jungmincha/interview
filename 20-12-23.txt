@@ -146,7 +146,8 @@ public class CountryMap {
 Integer num = map.get(country);
 
 
-4.도시 이름, 위도, 경도 정보를 가진 Location 클래스를 작성하고, 도시 이름을 '키'로 하는 HashMap<String, Location> 컬렉션을 만들고, 사용자로부터 입력 받아 4개의 도시를 저장하라. 그리고 도시 이름으로 검색하는 프로그램을 작성하라.
+4.도시 이름, 위도, 경도 정보를 가진 Location 클래스를 작성하고, 도시 이름을 '키'로 하는 HashMap<String, Location> 컬렉션을 만들고, 사용자로부터 입력 받아 4개의 도시를 저장하라. 
+그리고 도시 이름으로 검색하는 프로그램을 작성하라.
 
 도시, 경도, 위도를 입력하세요.
 
@@ -180,6 +181,10 @@ LA 34 -118
 
 도시 이름 >> 그만
 
+
+
+
+
 5.이름과 학점(4.5만점)을 5개 입력받아 해시맵에 저장하고, 장학생 선발 기준을 입력 받아 장학생 명단을 출력하라.
 
 미래장학금관리시스템입니다.
@@ -200,44 +205,99 @@ LA 34 -118
 
 [Hint] HashMap의 전체 요소를 검색하여 학점이 3.2 이상인 학생을 알아내야 한다.
 
-public static void main(String[] args) {
-		// TODO Auto-generated method stub
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Set;
+
+public class HashSwan {
+
+	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 		HashMap<String, Double> map = new HashMap<>();
+		
 		System.out.println("미래장학금관리시스템입니다.");
 		for (int i = 0; i < 5; i++) {
+
 			System.out.println("이름 >>");
 			String Coun = sc.next();
+
 			System.out.println("학점 >>");
 			double popul = sc.nextDouble();
 
 			map.put(Coun, popul);
-
 		}
 
 		System.out.println(map);
 
 		System.out.println("장학생 선발 학점 기준 입력 >>");
-		while (true) {
+		double popul = sc.nextDouble();
 
-			double popul = sc.nextDouble();
-
-			System.out.println("시스템을 종료합니다.");
-			break;
-
+		Set<String> ks = map.keySet();
+		
+		System.out.println("장학생 명단>>");
+		
+		for (String e : ks) {
+			if (map.get(e) >= popul) {
+				
+				System.out.println(e);
+			}
 		}
+
 	}
 }
 
+출력값
+
+미래장학금관리시스템입니다.
+이름 >>
+신선미
+학점 >>
+4.5
+이름 >>
+유수진
+학점 >>
+3.4
+이름 >>
+차정민
+학점 >>
+3.63
+이름 >>
+안성국
+학점 >>
+1.5
+이름 >>
+윤석호
+학점 >>
+2.5
+{차정민=3.63, 안성국=1.5, 신선미=4.5, 윤석호=2.5, 유수진=3.4}
+장학생 선발 학점 기준 입력 >>
+3.63
+장학생 명단>>
+차정민
+신선미
 
 
 
 6.큐와 스택에 대하여 설명하시오.(필수)
+	 
+스택    1 2 3 -> 저장공간 -> 3 2 1  (last in first out)
+
+스택에서 top을 통해 삽입하는 연산을 'push' , top을 통한 삭제하는 연산을 'pop'이라고 한다.
+아래에서부터 차곡차곡 쌓이고 가장 나중에 쌓인 자료부터 하나씩 먼저 꺼내진다.
+
+
+큐     3 2 1 - > 저장공간 - > 1 2 3 (first in first out)
+
+놀이공원 줄을 생각하면 되듯이 처음 저장된 자료가 가장 먼저 꺼내진다.
 
 
 
 7.Map 에 대하여 설명하시오.
+
+key & value
+
+key를 통해 value의 값을 얻어낸다.
 
 
 8.아래의 TreeMap의 Value를 확인 하기 위한 소스를 짜시오.(필수)
