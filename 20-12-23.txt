@@ -22,6 +22,58 @@ France의 인구는 3000
 
 인구 검색 >> 그만
 
+
+public class CountryMap {
+
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		HashMap<String, Integer> map = new HashMap<>();
+		System.out.println("나라 이름과 인구를 입력하세요!");
+		while (true) {
+			System.out.println("나라이름 >>");
+			String Coun = sc.next();
+			if (Coun.equals("그만")) {
+				break;
+			}
+			System.out.println("인구 >>");
+			int popul = sc.nextInt();
+
+			map.put(Coun, popul);
+
+		}
+
+		System.out.println(map);
+
+		System.out.println("인구를 검색하겠습니다!");
+		while (true) {
+			System.out.println("나라이름 >>");
+			String Coun = sc.next();
+
+			if (Coun.equals("그만")) {
+				System.out.println("시스템을 종료합니다.");
+				break;
+
+			} else if (map.get(Coun) != null) {
+
+				System.out.println(map.get(Coun));
+				continue;
+
+			} else {
+				System.out.println(Coun + " 나라는 없습니다.");
+
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
 2.하나의 학생 정보를 나타내는 Student 클래스에는 이름, 학과, 학번, 학점 평균을 저장하는 필드가 있다.
 
 (1) 학생마다 Student 객체를 생성하고 4명의 학생 정보를 ArrayList<Student> 컬렉션에 저장한 후에, ArrayList<Student>의 모든 학생(4명) 정보를 출력하고 학생 이름을 입력받아 해당 학생의 학점 평균을 출력하는 프로그램을 작성하라.
@@ -90,6 +142,10 @@ France의 인구는 3000
 
 3.ArrayList<Student> 대신, HashMap<String, Studnet> 해시맵을 이용하여 다시 작성하라. 해시맵에서 키는 학생 이름으로 한다.
 
+
+Integer num = map.get(country);
+
+
 4.도시 이름, 위도, 경도 정보를 가진 Location 클래스를 작성하고, 도시 이름을 '키'로 하는 HashMap<String, Location> 컬렉션을 만들고, 사용자로부터 입력 받아 4개의 도시를 저장하라. 그리고 도시 이름으로 검색하는 프로그램을 작성하라.
 
 도시, 경도, 위도를 입력하세요.
@@ -144,13 +200,86 @@ LA 34 -118
 
 [Hint] HashMap의 전체 요소를 검색하여 학점이 3.2 이상인 학생을 알아내야 한다.
 
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc = new Scanner(System.in);
+		HashMap<String, Double> map = new HashMap<>();
+		System.out.println("미래장학금관리시스템입니다.");
+		for (int i = 0; i < 5; i++) {
+			System.out.println("이름 >>");
+			String Coun = sc.next();
+			System.out.println("학점 >>");
+			double popul = sc.nextDouble();
+
+			map.put(Coun, popul);
+
+		}
+
+		System.out.println(map);
+
+		System.out.println("장학생 선발 학점 기준 입력 >>");
+		while (true) {
+
+			double popul = sc.nextDouble();
+
+			System.out.println("시스템을 종료합니다.");
+			break;
+
+		}
+	}
+}
+
+
+
+
 6.큐와 스택에 대하여 설명하시오.(필수)
+
+
+
 7.Map 에 대하여 설명하시오.
+
+
 8.아래의 TreeMap의 Value를 확인 하기 위한 소스를 짜시오.(필수)
    TreeMap<Integer, String> map = new TreeMap<>();
    map.put(45, "Brown");
    map.put(37, "James");
    map.put(23, "Martin");
+   
+   System.out.println("45 번 : " + map.get(28));
+	System.out.println("37 번 : " + map.get(45));
+	System.out.println("23 번 : " + map.get(23));
+
+   Set<Integer> ks = map.keySet();
+
+   for (Integer n : ks) {
+			System.out.print(n.toString() + '\t');
+		}
+		System.out.println();
+		for (Integer n : ks) {
+			System.out.print(map.get(n).toString() + '\t');
+		}
+		System.out.println();
+		for (Iterator<Integer> itr = ks.iterator(); itr.hasNext();) {
+
+			System.out.print(map.get(itr.next()) + '\t');
+
+		}
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 9. 아래의 IntegerComparator를 내림차순 정렬이 되게끔 구현하시오.
 class ComparatorIntegerDemo {
     public static void main(String[] args) {
@@ -161,4 +290,25 @@ class ComparatorIntegerDemo {
         System.out.println(tr);	
     }
 }
+
+==================================================================클래스===============================================================================
+
+class IntegerComparator implements Comparator<Integer> { // 정렬하는 인터페이스 중 클래스로 받는 것은 Comparator다.(나머지는 comparable)
+															            // 제네릭의 <T> 타입은 메인에 있는 Integer 타입으로 결정
+
+	@Override
+	public int compare(Integer o1, Integer o2) {
+
+		return o2.intValue() - o1.intValue(); // 내림차순이니 오름차순의 반대로 뺀다.
+	}
+
+}
+
+
+
+
+
+
+
+
 10.Objects.hash의 용도와 사용법은?
