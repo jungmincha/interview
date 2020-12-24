@@ -293,11 +293,30 @@ public class HashSwan {
 
 
 
+
+
+
+
 7.Map 에 대하여 설명하시오.
+
+HashMap, TreeMap 이 있다.
 
 key & value
 
 key를 통해 value의 값을 얻어낸다.
+
+Key:  key를 통해서 다른 요소(value)를 구분 짓는다. (현실의 키 개념과 같다고 생각!) 앞에 키는 중복이 되면 안된다. (c#의 dictionary 의 개념) 
+
+HashMap<K, V> 클래스는 Iterable<T> 인터페이스를 구현하지 않아서 for-each ,Iterator로 순차적 접근을 할 수 없다.
+그래서*Key는 Set으로 관리!  키값을 기준으로 for-each, Iterator 사용한다.
+
+    `public Set<Integer> ks = map.keySet();
+
+    → set 호출 메소드 / Key만 담고 있는 컬렉션 인스턴스 생성
+
+- 예제 소스 코드
+
+TreeMap<K, V> - Tree 자료구조 특성상 반복자가 정렬된 순서대로 key들에 접근함 (반복자의 접근 순서는 컬렉션 인스턴스에 따라 달라질 수 있다.)
 
 
 8.아래의 TreeMap의 Value를 확인 하기 위한 소스를 짜시오.(필수)
@@ -372,3 +391,20 @@ class IntegerComparator implements Comparator<Integer> { // 정렬하는 인터�
 
 
 10.Objects.hash의 용도와 사용법은?
+
+오브젝츠 :  분류값이 중복 되는 것을 피하기 위한 용도이다.(속도를 빠르게 하기 위해서)
+
+
+public static int hash(Object...values)
+// java.util.Objects 에 정의된 메소드 , 전달된 전달된 인자 기반의 해쉬 값 반환
+
+
+@Override
+public int hashCode() {
+	return Objects.hash(model, color); 
+}
+// 전달인자 model, color 기반 해쉬 값 반한
+// 전달된 인자를 모두 반영한 해쉬 값을 반환
+
+
+
