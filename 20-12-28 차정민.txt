@@ -30,16 +30,23 @@ ins 사이에 있는 red 글자 밑에 밑줄을 그어준다(강조효과)
 
 <span>
 
-HTML 문서에서 인라인 요소들을 하나로 묶을 때 사용한다.
+HTML 문서에서 인라인 요소들을 하나로 묶을 때 사용한다. 색상 조절등
 
 
 4.block 태그와 non block 태그에 대하여 설며하시오.
 
-자신의 내용과 앞뒤 태그의 내용을 다른 라인에 출력하는 태그이다.
+block은 
+자신의 내용과 앞뒤 태그의 내용을 서로 다른 라인에 출력하는 태그이다.
 
 내용물의 크기와 상관없이 너비는 항상 100%, 높이는 내용물의 크기에 맞춰 변화한다.
 
 요소 안 내용 길이에 상관없이 요소 자체가 한 줄 전체를 차지하는 요소이다.
+
+대표적인 block 태그
+
+<address>, <article>, <aside>, <audio>, <blockquote>, <canvas>, <dd>, <div>, <dl>, <fieldset>, <figcaption>, <figure>, <footer>, <form>,
+<h1>, <h2>, <h3>, <h4>, <h5>, <h6>, <header>, <hgroup>, <hr>, <noscript>, <ol>, <output>, <p>, <pre>, <section>, <table>, <ul>, <video>
+
 
 
 5.get 방식과 post 방식에 대하여 설명하시오.
@@ -47,27 +54,43 @@ HTML 문서에서 인라인 요소들을 하나로 묶을 때 사용한다.
 get 방식
 
 method 속성이 get 일 경우 호출된다
-웹브라우저의 주소청에서 servlet을 요청한 경우에도 호출된다.
+웹브라우저의 주소청에서 servlet을 요청한 경우에도 호출된다.(url방식으로 처리된다.)
 
 키는 밸류 방식으로 처리하는 것이 겟 방식이다. ? & 뒤의 것이 겟방식
+
+메소드가 defualt 면 get으로 출력된다.
+
+get 방식의 특징
+
+post 보다 비교적 처리속도가 빠르다.
+주소창에 데이터의 정보가 보여서 보안에 취약하다.
+
+https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=CSS&oquery=lql&tqi=U%2BD1cwp0J14ssd%2FzOpVsssssslR-517972
+
+				? 뒤가 데이터 정보
+
 
 post 방식
 
 method 속성이 method = "post" 일 경우 호출된다. 
-
-url방식으로 처리된다.
 
 <form action = "PostMethod" method = "post"> //action 은 클릭했을 때 해당 주소(hw)가 들어감 post 방식으로 처리한다는 뜻
 
 <input type = "submit" value = "post"> // input type 과 value는 post 되는 버튼을 만들어주는 것 
 
 							(post를 누르면 post 방식으로 hw 주소로 보내라는 뜻)
+							
+							
 
 </form>
 
 폼 방식  action 과 method 를 사용한다.
 
 post로 지정하지 않는 이상은 get으로 디폴트로 잡아서 내려온다.
+
+post 방식의 특징
+1. 로그인 정보를 넘길 때 사용한다.
+2. 주소창에 데이터가 보이지 않아 보안에 용이하다.
 
 
 
@@ -78,9 +101,15 @@ post로 지정하지 않는 이상은 get으로 디폴트로 잡아서 내려온
 WAS에서 웹 어플리케이션을 구분하기 위한 path 이다.
 이클립스에서 프로젝트를 생성하면 , 자동으로 server.xml에 추가된다.
 
-7.아래의 객체에 대하여 설명하시오.
-HttpServletRequest
-HttpServletReponse
+7.아래의 객체에 대하여 설명하시오
+
+저장경로
+
+-WAS(톰캣, 제우스)가 웹 브라우저(네이버 크롬)에게 요청받으면 HttpServletRequest 객체를 생성하여 저장한다. 그리고 웹브라우저에게 결과물을 전달하려
+ HttpServletReponse 객체를 생성한다.(빈 객체) 정보가 저장된 HttpServletRequest객체와 텅 비어있는 HttpServletRepons 객체가 서블릿으로 전달된다. 
+
+HttpServletRequest - HTTP 프로토콜의 정보를 서블릿에게 전달하기 위한 목적으로 사용한다.
+HttpServletReponse - 서블릿에서부터 HttpServletReponse객체에 응답코드 , 응답메세지 등 결과값이 저장되 웹 브라우져에 전송된다.  
 
 
 
@@ -267,4 +296,40 @@ HttpServletReponse
 
 
 </body>
+</html>
+
+
+
+주간 히트 노래 예제
+
+<!DOCTYPE html>
+<html>
+
+ <head>
+<meta charset="utf-8">
+<title>비트종로캠프</title>
+ </head>
+ 
+	<body>
+	<table border = "1"> 
+
+<tr>
+<td height = "100">
+
+<h1>주간 히트 노래</h1></td>
+
+</tr>
+<tr>
+<td height = "400">
+<p><img src = "img01.png" alt = "어머니 누구니">어머니 누구니</p>
+<p><img src = "img02.png" alt = "한번 더 말해줘">한번 더 말해줘</p>
+<p><img src = "img03.png" alt = "다른 남자 말고 너">다른 남자 말고 너</p>
+<p><img src = "img04.png" alt = "모두가 내 발아래">모두가 내 발아래</p>
+<p><img src = "img05.png" alt = "조만간 봐요">조만간 봐요</p>
+<audio src="34ex1.mp3" controls = "controls" autoplay = "autoplay" loop = "loop" ></audio>
+</td>
+</tr>
+</table>
+	</body>
+
 </html>
