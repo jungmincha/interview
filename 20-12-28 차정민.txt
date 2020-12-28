@@ -1,0 +1,270 @@
+﻿1.html 이란 무엇인가?
+
+HTML hyper text markup language 웹문서를 기술하는 언어이다. 웹문서를 표현하기 위한 태그들로 구성되어 있다.
+
+
+html을 해석해서 뿌려주는 주체는 웹브라우져(크롬, 사파리,인터넷브라우저)이다. 톰캣이 아니다!!
+
+
+2.css 란 무엇인가?
+
+CSS는 HTML을 디자인적으로 예쁘게 만들어 정보 전달을 좀더 효율적으로 하기 위해 만들어진 문서이다. (화면상의 레이아웃등을 컨트롤하는 문서이다)
+
+
+3.아래의 태그에 대하여 설명하시오.
+
+
+<del>
+
+<del> color </del>
+
+del 사이에 있는 color 글자를 삭제해준다(중간 밑줄)
+
+
+<ins>
+
+
+<ins> red </ins>
+
+ins 사이에 있는 red 글자 밑에 밑줄을 그어준다(강조효과)
+
+<span>
+
+HTML 문서에서 인라인 요소들을 하나로 묶을 때 사용한다.
+
+
+4.block 태그와 non block 태그에 대하여 설며하시오.
+
+자신의 내용과 앞뒤 태그의 내용을 다른 라인에 출력하는 태그이다.
+
+내용물의 크기와 상관없이 너비는 항상 100%, 높이는 내용물의 크기에 맞춰 변화한다.
+
+요소 안 내용 길이에 상관없이 요소 자체가 한 줄 전체를 차지하는 요소이다.
+
+
+5.get 방식과 post 방식에 대하여 설명하시오.
+
+get 방식
+
+method 속성이 get 일 경우 호출된다
+웹브라우저의 주소청에서 servlet을 요청한 경우에도 호출된다.
+
+키는 밸류 방식으로 처리하는 것이 겟 방식이다. ? & 뒤의 것이 겟방식
+
+post 방식
+
+method 속성이 method = "post" 일 경우 호출된다. 
+
+url방식으로 처리된다.
+
+<form action = "PostMethod" method = "post"> //action 은 클릭했을 때 해당 주소(hw)가 들어감 post 방식으로 처리한다는 뜻
+
+<input type = "submit" value = "post"> // input type 과 value는 post 되는 버튼을 만들어주는 것 
+
+							(post를 누르면 post 방식으로 hw 주소로 보내라는 뜻)
+
+</form>
+
+폼 방식  action 과 method 를 사용한다.
+
+post로 지정하지 않는 이상은 get으로 디폴트로 잡아서 내려온다.
+
+
+
+
+
+6.컨텍스트 패스란 무엇인가?
+
+WAS에서 웹 어플리케이션을 구분하기 위한 path 이다.
+이클립스에서 프로젝트를 생성하면 , 자동으로 server.xml에 추가된다.
+
+7.아래의 객체에 대하여 설명하시오.
+HttpServletRequest
+HttpServletReponse
+
+
+
+
+
+
+
+첫번째 문제
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>제주 이색 여행지</title>
+</head>
+<body>
+
+<table border = "1">
+
+<tr>
+<td><h1>제주 이색 여행지</h1>> <br />
+
+<h2>야외 텐트를 닮은 건출물 "테쉬폰"</h2>><br />
+<br />
+
+아일랜드 출신 임피제 신부가 1954년 제주에 오면서 목장 숙소로 짓기 시작한 후 사료공장,<br />
+성당으로 활용됐습니다.<br />
+<br />
+제주에서 점차 다른 지방으로 보급됐지만 현재 제주에만 건축물이 남아있는데, <br />
+국내 근현대 건축사의 한 페이지를 보여주는 가치를 지닌다고 전문가들은 평가합니다.<br />
+
+</td>  
+</tr>
+
+
+<tr>
+<td>
+	<h3>성이시돌목장</h3>
+	<blockquote cite = https://ko.wikipedia.org/wiki/%EC%84%B1%EC%9D%B4%EC%8B%9C%EB%8F%8C%EB%AA%A9%EC%9E%A5>
+	<p>성이시돌목장은 제주특별자치도 제주시 한립음 금악리에 있는 목장이다. 특히 이<br />
+	시돌목장은 제주 지역 최초의 전기업목장으로 1961년 11월 말 제주 <br />
+	시 한립음 금악리에 세워 양돈 사업을 실시하였으며 면양을 사육하였던 것으로<br />
+	알려져 있다. 이시돌목장의 특색있는 건축양식으로 테쉬폰으로 유명하다.</p> <br />
+	<cite>-[출처](향토문화전자대전)</cite>
+	</blockquote>
+
+</td>  
+</tr>
+
+</table>
+
+</body>
+</html>
+
+
+
+
+두번째 문제
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1">
+
+<tr>
+<td>
+<h2>제주 이색 여행지 - 이중섭 거리</h2>
+
+<p><b>주말</b>마다 <b>'서귀포문화예술디자인시장'</b>>이 열립니다.</p>
+<p><em>'아르마켓'</em>이라고도 부르는데, <em>문화예술체험</em>이나 <em>공연관람</em>을 할 수도 있고<br />
+작가들이 직접 만든 창작예술품 등을 판매하기도 합니다
+
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+
+
+
+
+세번째 문제
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1">
+
+<tr>
+<td>
+<h2>야외 텐트를 닮은 건축물 <mark>"테쉬폰"</mark>></h2>
+<p>아일랜드 출신 임치제 신부가 1954년 제주에 오면서 목장 숙소로 짓기 시작한 후 사료공장,<br />
+성당으로 활용됐습니다. 제주에서 점차 다른 지방으로 보급됐지만 현재 제주에만 건축물이<br />
+남아있으며,<span style="background-color:#36FFFF"> 국내 근현대 건축사의 한 페이지를 보여주는 가치를 지닌다고</span> 전문가들은 평가<br />
+합니다.</p>
+</td>
+</tr>
+
+
+네번째 문제
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1">
+
+<tr>
+<td>
+<h2>1박 2일 가족 여행 코스</h2>
+<ul>
+<li>1일 차</li>
+
+<dd>a. 해녀박물관</dd>
+<dd>b. 낚시체험</dd>
+
+<li>2일 차</li>
+
+<dd>c. 용눈이오름</dd>
+<dd>d. 만장굴</dd>
+<dd>e. 카약체험</dd>
+
+</ul>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+
+
+
+
+다섯번째 문제 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1" width ="500" height="300">
+
+<tr> 
+<td height = "70">이름</td>
+<td></td>
+
+<td width = "60">연락처</td>
+<td></td>
+
+</tr>
+
+<tr>
+<td width = "60" height = "70">주소</td>
+<td colspan = "3"></td>
+</tr>
+
+<tr>
+<td>자기소개</td>
+<td colspan = "3"></td>
+</tr>
+
+</table>
+
+
+</body>
+</html>
