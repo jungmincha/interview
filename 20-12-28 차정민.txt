@@ -340,3 +340,58 @@ HttpServletReponse - 서블릿에서부터 HttpServletReponse객체에 응답코
 	</body>
 
 </html>
+
+
+
+
+
+
+5번 선생님 풀이
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style type = "text/css">
+
+.td_blank{
+	width : 100px;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<table border = "1">
+	<tr>
+	<td>이름</td>
+	<td class = "td_blank"></td>
+	<td class = "td_blank"></td>
+	<td>연락처</td>
+	<td class = "td_blank"></td>
+	<td class = "td_blank"></td>
+	</tr>
+	
+	<tr>
+	<td>주소</td>
+	<td colspan = "5"></td>
+	</tr>
+	
+	
+	<tr>
+	<td>자기소개</td>
+	<td colspan = "5"></td>
+	</tr>
+
+
+</body>
+</html>
+
+
