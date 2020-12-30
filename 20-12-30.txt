@@ -81,3 +81,83 @@ public class GuguTest extends HttpServlet{
 </body>
 </html>
 
+
+
+
+
+
+두번째 문제 : 서블릿을 이용하여 가로 세로 값을 받고 화면에 사각형의 넓이를 출력하세요.
+
+package sqaure;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/square")
+public class SquarePractice extends HttpServlet {
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException{
+		System.out.println("doPost");
+		
+		request.setCharacterEncoding("euc-kr");
+		response.setContentType("text/html ; charset = euc-kr");
+		PrintWriter out = response.getWriter();
+	
+		int x = Integer.parseInt(request.getParameter("wi"));
+		int y = Integer.parseInt(request.getParameter("he"));
+		
+		
+		out.print("<table border = 1 width = 400 align = center");
+		out.print("<tr align = center>");
+		out.print("<td>");
+		out.print(" 가로 : " + x + "세로 : " + y );
+		out.print("</td>");
+		out.print("<br />");
+		out.print("<td>");
+		out.print(" 사각형의 넓이 : " + x*y);
+		out.print("</td>");
+		out.print("</tr>");
+		out.print("</table>");
+		out.print("<input type = reset value = 초기화 onclick = 'javascript:history.back()'>");
+	
+	}
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>가로 세로를 입력하세요</h1>
+<form method = "post" action = "square">
+가로 : <input type = "text" name = "wi"/>
+세로 : <input type = "text" name = "he"/>
+<input type = "submit" name = "계산"/>
+
+
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
