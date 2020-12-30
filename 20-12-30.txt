@@ -1,9 +1,83 @@
-1.jsp/servlet ¿¡¼­  ÇÑ±ÛÃ³¸® ¹æ½ÄÀº?
-2.¾Æ·¡ÀÇ ¼±ÅÃÀÚ¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
+1.jsp/servlet ì—ì„œ  í•œê¸€ì²˜ë¦¬ ë°©ì‹ì€?
+2.ì•„ë˜ì˜ ì„ íƒìì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
  >
  +
  ~
  a[href="https://net.tutsplus.com"]
-3.À¥¾îÇÁ¸®ÄÉÀÌ¼Ç °¨½Ã¸¦ À§ÇÑ ÇÁ·Î±×·¡¹Ö ¹æ¹ıÀº?
-4.µ¥ÀÌÅÍ °øÀ¯¸¦ À§ÇÑ ServletContext¿Í ¼­ºí¸´ ÃÊ±âÈ­ ÆÄ¶ó¹ÌÅÍ ServletConfig¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-5.ÈÄ¼Õ ¼±ÅÃÀÚ¿Í ÀÚ½Ä ¼±ÅÃÀÚ¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
+3.ì›¹ì–´í”„ë¦¬ì¼€ì´ì…˜ ê°ì‹œë¥¼ ìœ„í•œ í”„ë¡œê·¸ë˜ë° ë°©ë²•ì€?
+4.ë°ì´í„° ê³µìœ ë¥¼ ìœ„í•œ ServletContextì™€ ì„œë¸”ë¦¿ ì´ˆê¸°í™” íŒŒë¼ë¯¸í„° ServletConfigì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+5.í›„ì† ì„ íƒìì™€ ìì‹ ì„ íƒìì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+
+1ë²ˆ ë¬¸ì œ : ì„œë¸”ë¦¿ì„ í™œìš©í•´ì„œ êµ¬êµ¬ë‹¨ì„ í™”ë©´ì— ì¶œë ¥í•˜ì„¸ìš” 
+
+ì„œë¸”ë¦¿
+
+package com.gugudan;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/gugutest")
+public class GuguTest extends HttpServlet{
+	
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException{
+		System.out.println("doPost");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html ; charset = utf-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		int dan = Integer.parseInt(request.getParameter("dan"));
+		
+		out.print("<table border = 1 width = 200 align = center");
+		out.print("tr align = center>");
+		out.print("<td colspan =2 align = center>" + dan + "ë‹¨ ì¶œë ¥</td>" );
+		out.print("</tr>");
+		
+		for(int i = 1 ; i < 10 ; i ++) {
+			out.println("<tr align = center>");
+		
+		
+		out.print("<td width = 400>");
+		out.print(dan + "*" + i + "=" + (i * dan));
+		out.print("</td>");
+		out.print("</tr>");
+		
+		
+	}
+		out.print("</table>");
+
+		
+		out.print("<input type = reset value = ëŒì•„ê°€ê¸° onclick = 'javascript:history.back()'>");
+		
+	}	
+
+}
+
+=============================================================================================================================================================
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>êµ¬êµ¬ë‹¨ ì…ë ¥ì°½</title>
+</head>
+<body>
+	<h1>ì¶œë ¥í•  êµ¬êµ¬ë‹¨ ë‹¨ìˆ˜ ì…ë ¥</h1>
+	<form method = "post" action = "gugutest">
+	ì¶œë ¥í•  êµ¬êµ¬ë‹¨ : <input type = "text" name = "dan"/>
+	<input type = "submit" value = "ì‹¤í–‰">
+	</form>
+
+</body>
+</html>
+
