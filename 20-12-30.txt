@@ -1,11 +1,86 @@
 1.jsp/servlet 에서  한글처리 방식은?
+
+톰캣 서버의 기본 문차 처리 방식은 IOS-8859-1 방식이다. 따라서 개발자가 별도로 한글 인코딩을 하지 않으면 한글이 꺠져보인다.
+
+겟방식과 포스트 방식이 있다.
+
+
+GET 방식 <server.xml 수정> = <connector URIEncoding = "EUC-KR" port = "8181" ~~>
+
+post 방식 <request.setCharacterEncoding("EUC-KR") 메소드를 호출한다>
+
+
 2.아래의 선택자에 대하여 설명하시오.
- >
- +
- ~
+
+ div>h1 div가 부모 h1이 자손관계가 되는 선택자이다.
+ 
+ h3+div : h3 아래에 있는 것을 적용시킨다.
+ 
+ h3~div : h3 아래부터 div까지 전부 적용한다
+ 
+ 
  a[href="https://net.tutsplus.com"]
+ 
+ 
+ 
 3.웹어프리케이션 감시를 위한 프로그래밍 방법은?
+
+웹어플리케이션의 생명주기를 감시하는 리스너(Listenr)가 있다.
+
+리스너의 해당 메소드(오버라이딩됨)가 웹 어플리케이션의 시작과 종료 시 호출 된다.
+contextInitialized() , contextDestroyed()
+
+그리고 web.xml 파일에 리스너 클래스를 추가한다.
+
+<listener>
+<listener-class>com.javalec.ex.ContextListeneEx</listener-class>
+</listener>
+
+그리고 ContextListeneEx 클래스 위에 @WebListener 를 추가해주면 끝난다.
+
+
 4.데이터 공유를 위한 ServletContext와 서블릿 초기화 파라미터 ServletConfig에 대하여 설명하시오.
+
+특정 경로 및 아이디 정보들을 초기화해주어야 한다.
+
+web.xml 에 기술하고 서블릿에서는 ServletConfig 클래스를 이용해서 접근한다.
+
+
+
+ </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>ServletInitParam</servlet-name>
+  	<servlet-class>com.javalec.ex.ServletInitParam</servlet-class>
+  	
+  	<init-param>
+  		<param-name>id</param-name>
+  		<param-value>wjdalsck</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>pw</param-name>
+  		<param-value>23423</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>path</param-name>
+  		<param-value>C:\\javalec\\workspace</param-value>
+  	</init-param>
+  	
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletInitParam</servlet-name>
+	<url-pattern>/InitParam</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+
+init param 은 한 서블릿에만 적용되고
+context param 은 공유된다.
+
+
+
+
+
 5.후손 선택자와 자식 선택자에 대하여 설명하시오.
 
 1번 문제 : 서블릿을 활용해서 구구단을 화면에 출력하세요 
@@ -153,6 +228,73 @@ public class SquarePractice extends HttpServlet {
 
 
 
+4번째 문제 별을 입력받아 서블릿 처리하여 화면에 출력 하세요
+
+package starServlet2;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/star")
+public class StarPractice extends HttpServlet{
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException{
+		System.out.println("doPost");
+		
+		request.setCharacterEncoding("euc-kr");
+		response.setContentType("text/time ; charset = euc-kr");
+		PrintWriter out = response.getWriter();
+		
+		int x = Integer.parseInt(request.getParameter("st"));
+		
+		for(int i = 1 ; i < x ; i++) {
+			for(int j = 0 ; j < i ; j++) {
+			
+			out.print("*");
+		}
+			out.println();
+		}
+		
+		for(int i = 0 ; i < x ; i++) {
+			for(int j = 0 ; j < x-i ; j++) {
+				out.print("*");
+			}
+			out.println();
+		}
+		
+		
+	}
+	
+
+}
+
+=============================================================================================================================
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>별 찍기 프로그램</h1>
+
+<form method = "post" action = "star">
+별 찍기<input type = "text" name = "st"/>
+
+<input type = "submit" value = "출력"/>
+
+</form>
+
+</body>
+</html>
 
 
 
