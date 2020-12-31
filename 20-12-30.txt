@@ -5,9 +5,16 @@
 겟방식과 포스트 방식이 있다.
 
 
-GET 방식 <server.xml 수정> = <connector URIEncoding = "EUC-KR" port = "8181" ~~>
+서버 : GET 방식 <server.xml 수정> = <connector URIEncoding = "EUC-KR" port = "8181" ~~>
 
-post 방식 <request.setCharacterEncoding("EUC-KR") 메소드를 호출한다>
+서블렛 : post 방식
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+<request.setCharacterEncoding("EUC-KR") 메소드를 호출한다> 
+}
+
+서버는 건들지 않는게 좋으니 서블릿 파일을 수정하는 것이 좋다.
 
 
 2.아래의 선택자에 대하여 설명하시오.
@@ -17,6 +24,11 @@ post 방식 <request.setCharacterEncoding("EUC-KR") 메소드를 호출한다>
  h3+div : h3 아래에 있는 것을 적용시킨다.
  
  h3~div : h3 아래부터 div까지 전부 적용한다
+ 
+ 
+ 
+ 
+ 
  
  
  a[href="https://net.tutsplus.com"]
@@ -37,6 +49,9 @@ contextInitialized() , contextDestroyed()
 </listener>
 
 그리고 ContextListeneEx 클래스 위에 @WebListener 를 추가해주면 끝난다.
+
+
+톰캣이 어플리케이션이 죽을 때 죽기 전에 처리해야 할 정보들을 관리감독해주어야 하기 떄문이다.
 
 
 4.데이터 공유를 위한 ServletContext와 서블릿 초기화 파라미터 ServletConfig에 대하여 설명하시오.
@@ -82,6 +97,25 @@ context param 은 공유된다.
 
 
 5.후손 선택자와 자식 선택자에 대하여 설명하시오.
+
+후손 선택자
+
+div li { //후손
+	font-size: 25px;
+}
+
+<!-- div 하고 한칸 띄우고 li 하면 li가 후손 선택자임을 말함 -->
+
+자식 선택자
+
+div > h1 {  //자손
+	font-size: 25px;
+}
+
+<!-- div가 크니까 div 바로 밑에 있는h1을 말함  -->
+
+
+
 
 1번 문제 : 서블릿을 활용해서 구구단을 화면에 출력하세요 
 
