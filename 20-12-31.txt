@@ -68,6 +68,83 @@ body div:nth-child(4) {
 	text-align: center;
 }
 
+1번 문제 
+
+
+
+
+package square_servlet_pkage;
+
+import java.io.IOException;
+
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+
+
+@WebServlet("/sqaure")
+public class SqaureServ extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public SqaureServ() {
+		super();
+	}
+	
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at:").append(request.getContextPath());
+		System.out.println("doGet");
+	}
+	
+	
+	
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("doPost");
+
+		request.setCharacterEncoding("euc-kr");
+		response.setContentType("text/html ; charset = euc-kr");
+
+		PrintWriter writer = response.getWriter();
+
+		writer.print("<html>");
+		writer.print("<body>");
+		writer.println("<head>");
+	
+		writer.print("</head>");
+			
+
+		writer.print("<table border = 1 width = 100 align = center>");
+
+		for (int i = 2; i <= 9; i++) {
+			writer.println("<tr>");
+			for (int j = 1; j <= 9; j++) {
+				writer.println("<td>" + i + "*" + j + "=" + (i * j) + "</td>");
+			}
+
+			writer.println("</tr>");
+		}
+
+		writer.println("</table>");
+		writer.println("<div style=\"widht=150\" align=\"center\" \"margin-left: auto; margin-right:auto;\">");
+		writer.print("<input type = reset value = 초기화 onclick = 'javascript:history.back()'>");
+		writer.println("</div>");
+		writer.print("</html>");
+		writer.print("</body>");
+
+	}
+}
+
 body div:nth-child(5) {
 	width: 100px;
 	height: 100px;
