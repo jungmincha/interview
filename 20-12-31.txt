@@ -397,7 +397,7 @@ public class SqaureServ extends HttpServlet {
 	}
 }
 
-
+===================================================================================================================================================
 
 <!DOCTYPE html>
 <html>
@@ -488,7 +488,7 @@ for(int i = 2 ; i <=9 ; i++){
 </body>
 </html>
 
-
+===================================================================================================================================================
 
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -544,7 +544,7 @@ out.println("</tr>");
 
 </body>
 </html>
-
+===================================================================================================================================================
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -602,8 +602,11 @@ out.print("이메일 : " + a3 + "<br/> ");
 </html>
 
 
+===================================================================================================================================================
+
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -612,19 +615,21 @@ out.print("이메일 : " + a3 + "<br/> ");
 </head>
 <body>
 
-<% request.setCharacterEncoding("EUC-KR"); %>
-
 <%
-
-String a1  = request.getParameter("fruite");
-		
-
+		request.setCharacterEncoding("EUC-KR");
 %>
 
-<%=a1 %>
+<%
+		String[] a1 = request.getParameterValues("fruite");
+
+		for (int i = 0; i < a1.length; i++) {
+			out.print(a1[i] + ",");
+		}
+%>
+
+
 
 
 
 </body>
 </html>
-
