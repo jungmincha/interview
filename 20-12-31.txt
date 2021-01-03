@@ -323,6 +323,104 @@ include : 현재 페이지내에 다른 페이지를 삽입할 때 사용된다.
 
 -액션태그<jsp:action> </jsp:action> 자바빈연결
 
+1번  서블릿으로 구구단을 작성하세요.
+
+
+
+import java.io.IOException;
+
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+
+
+@WebServlet("/sqaure")
+public class SqaureServ extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public SqaureServ() {
+		super();
+	}
+	
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at:").append(request.getContextPath());
+		System.out.println("doGet");
+	}
+	
+	
+	
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("doPost");
+
+		request.setCharacterEncoding("euc-kr");
+		response.setContentType("text/html ; charset = euc-kr");
+
+		PrintWriter writer = response.getWriter();
+
+		writer.print("<html>");
+		writer.print("<body>");
+		writer.println("<head>");
+	
+		writer.print("</head>");
+			
+
+		writer.print("<table border = 1 width = 100 align = center>");
+
+		for (int i = 2; i <= 9; i++) {
+			writer.println("<tr>");
+			for (int j = 1; j <= 9; j++) {
+				writer.println("<td>" + i + "*" + j + "=" + (i * j) + "</td>");
+			}
+
+			writer.println("</tr>");
+		}
+
+		writer.println("</table>");
+		writer.println("<div style=\"widht=150\" align=\"center\" \"margin-left: auto; margin-right:auto;\">");
+		writer.print("<input type = reset value = 초기화 onclick = 'javascript:history.back()'>");
+		writer.println("</div>");
+		writer.print("</html>");
+		writer.print("</body>");
+
+	}
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>구구단 입력</h1>
+<form method = "post" action = "sqaure">
+
+<input type = "submit" value = "출력" />
+
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
 
 
 
@@ -354,6 +452,178 @@ for(int i = 2 ; i <=9 ; i++){
 
 %>
 </table>
+
+</body>
+</html>
+
+
+
+3.  include 액션태크로 구구단을 출력하세요
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+<h4>구구단 출력하기</h4>
+
+
+
+<form method = "post" action = "include_date.jsp">
+
+구구단 입력하기<input type = "text" name = "number"><br/>
+<input type = "submit" value = "입력">
+
+</form>
+
+
+</body>
+</html>
+
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<table border = 1 width = 100 align = left>
+<%
+
+int dan = Integer.parseInt(request.getParameter("number"));
+
+out.println("<tr>");
+out.println(dan + "단" + "<br/>");
+for(int i = 1 ; i <= 9 ; i++){
+	out.println("<td>" + dan + "*" + i + "=" + (dan*i) + "</td>");
+}
+out.println("</tr>");
+
+%>
+</table>
+
+</body>
+</html>
+
+
+4번 jsp로 정보를 전달하세요.
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method = "post" action = "hongss.jsp">
+
+이름 : <input type = "text" name = "str1"><br/> 
+주소 : <input type = "text" name = "str2"> <br/> 
+이메일 : <input type = "text" name = "str3"> <br/> 
+<input type = "submit" value = "전송">
+
+</form>
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<% request.setCharacterEncoding("EUC-KR"); %>
+
+<%
+
+String a1 = request.getParameter("str1");
+String a2 = request.getParameter("str2");
+String a3 = request.getParameter("str3");
+
+out.print("아이디 : " + a1 + "<br/> ");
+out.print("주소 : " + a2 + "<br/> " );
+out.print("이메일 : " + a3 + "<br/> ");
+
+%>
+
+</body>
+</html>
+
+
+5. 다음 정보를 jsp를 사용해서 전달해라 
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method = "post" action = "hongss.jsp">
+
+ <input type = "checkbox" name = "fruite" value = "오렌지">오렌지
+ 
+<input type = "checkbox" name = "fruite" value = "사과">사과
+
+<input type = "checkbox" name = "fruite" value = "바나나">바나나
+
+<input type = "submit" value = "전송">
+
+</form>
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<% request.setCharacterEncoding("EUC-KR"); %>
+
+<%
+
+String a1  = request.getParameter("fruite");
+		
+
+%>
+
+<%=a1 %>
+
+
 
 </body>
 </html>
