@@ -1,8 +1,8 @@
-1.box-sizing �Ӽ��鿡 ���Ͽ� �����Ͻÿ�.
-2.margin �� padding�� ���̴�?
-3.���尴ü�� ���Ͽ� �����Ͻÿ�.
-4.�������� ���η� ��Ÿ������ jsp �� ¥�ÿ�.
-  - out.println ������ ���� <%= expression�� ��� �Ͻÿ�.
+1.box-sizing 속성들에 대하여 설명하시오.
+2.margin 과 padding의 차이는?
+3.내장객체에 대하여 설명하시오.
+4.구구단을 세로로 나타내도록 jsp 로 짜시오.
+  - out.println 을쓰지 말고 <%= expression을 사용 하시오.
 
 <table border = 1  width = 100 align = center> 
 <%
@@ -23,4 +23,334 @@ for(int i = 2 ; i <=9 ; i++){
 
 
 
-5.redirect forward �� ���̴�?
+5.redirect forward 의 차이는?
+
+
+
+
+1번 문제
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+
+<style>
+
+#nav {
+
+width:800px;
+margin:0 auto;
+border:1px solid #cccccc;
+overflow:hidden;
+
+}
+
+#nav div{
+
+width:150px;
+height:100px;
+line-height:100px;
+float:left;
+font-size:1.5em;
+text-align:center;
+font-weight:bold;
+margin:5px;
+border-top:1px solid #cccccc;
+border-bottom:1px solid #cccccc;
+
+
+}
+
+a{
+text-decoration:none;
+color:black;
+}
+</style>
+
+<body>
+
+    <div id="nav">
+        <div><a href="#">menu1</a></div>
+        <div><a href="#">menu2</a></div>
+        <div><a href="#">menu3</a></div>
+        <div><a href="#">menu4</a></div>
+        <div><a href="#">menu5</a></div>
+    </div>
+
+</body>
+</html>
+
+
+
+2번 문제
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+body{
+
+width:800px;
+height:280px;
+margin:0 auto;
+border:1px solid #cccccc;
+overflow:hidden;
+text-align:center;
+
+}
+
+div{
+margin:5px;
+
+}
+
+div:nth-child(1){
+
+text-decoration:underline;
+
+}
+
+div:nth-child(2){
+
+text-align:left;
+font-size:1.2em;
+
+}
+div:nth-child(3){
+text-align:left;
+font-size:1.0em;
+
+}
+
+div:nth-child(4){
+
+text-align:right;
+
+}
+
+
+div:nth-child(5){
+
+text-align:center;
+}
+
+
+a{
+
+font-size:1.2em;
+text-decoration:none;
+
+}
+
+
+</style>
+</head>
+<body>
+
+<div>
+
+<h1>HTML,CSS3,Document</h1>
+
+</div>
+
+<div>To, all member</div>
+
+<div>html5,css5 study is very easy</div>
+
+<div>From.SBA</div>
+
+<hr/>
+<br/>
+
+<div><a href="https://new.sba.kr/user/main.do">서울산업진흥원</a></div>
+
+</body>
+</html>
+
+
+
+3번 문제
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+body{
+
+width:1000px;
+height:550px;
+margin:0 auto;
+border:1px solid #cccccc;
+
+
+
+}
+
+div{
+margin:5px;
+}
+
+div:nth-child(1){
+
+border:1px solid #cccccc;
+font-size:30px;
+color:green;
+font-weight:bold;
+}
+
+img{
+
+width:600px;
+height:250px;
+}
+
+
+a{
+
+font-size:0.8em;
+text-decoration:none;
+
+}
+
+div:nth-child(3){
+
+font-size:20px;
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<div>
+
+<p>세계 3대 미항</p>
+
+
+</div>
+
+<div><img src = "74.jpg"></div>
+<div><a href = "http://okinawaclip.com/kr/detail/213">출처</a></div>
+<div>
+<p>오키나와(Okinawa), 일본</p>
+<p>리우데자네이루(Rio de janeiro), 브라질</p>
+<p>나폴리(Napoles), 이탈리아</p>
+
+</div>
+
+</body>
+</html>
+
+
+4번 문제
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<form action = "profile.jsp" method = "post">
+
+이름 : <input type = "text" name = "name" size = "10"><br/>
+아이디 : <input type = "text" name = "id" size = "10"><br/>
+비밀번호 : <input type = "password" name = "pw" size = "10"><br/>
+취미 : <input type = "checkbox" name = "hobby" value = "cook">요리
+<input type = "checkbox" name = "hobby" value = "swim">수영
+<input type = "checkbox" name = "hobby" value = "sleep">잠
+<input type = "checkbox" name = "hobby" value = "run">달리기<br/>
+
+전공: <input type = "radio" name = "major" value = "eng">영어
+<input type = "radio" name = "major" value = "math">수학
+<input type = "radio" name = "major" value = "jp">일본어<br/>
+
+<select name = "protocol">
+<option value = "http">http</option>
+<option value = "ftp" selected = "selected">ftp</option>
+<option value = "smtp">smtp</option>
+<option value = "pop">pop</option>
+
+</select><br/>
+<input type = "submit" value = "전송">
+<input type = "reset" value = "초기화">
+
+
+</form>
+
+</body>
+</html>
+
+=========================================================================================================================
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+String name , id , pw , major , protocol;
+String[] hobbys;
+
+%>
+
+<%
+request.setCharacterEncoding("EUC-KR");
+
+name = request.getParameter("name");
+id = request.getParameter("id");
+pw = request.getParameter("pw");
+major = request.getParameter("major");
+protocol = request.getParameter("protocol");
+
+hobbys = request.getParameterValues("hobby");
+%>
+
+이름 : <%= name%>
+<br/>
+아이디 : <%= id%>
+<br/>
+비밀번호 : <%= pw%>
+<br/>
+취미 : 
+<%
+for(int i = 0 ; i < hobbys.length ; i++){
+	out.println(hobbys[i]);
+}
+%>
+<br/>
+전공 : <%= major%>
+<br/>
+프로토콜 : <%= protocol%>
+
+</body>
+</html>
+
