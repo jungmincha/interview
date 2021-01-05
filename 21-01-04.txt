@@ -20,22 +20,42 @@ padding은 안쪽 여백의 속성을 지정해준다.
 4.구구단을 세로로 나타내도록 jsp 로 짜시오.
   - out.println 을쓰지 말고 <%= expression을 사용 하시오.
 
-<table border = 1  width = 100 align = center> 
-<%
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1">
+
+
+
+
+
+<%for(int i = 2 ; i < 10 ; i++){%>
 	
-for(int i = 2 ; i <=9 ; i++){
+	<tr>
+	
+<%for(int j = 1 ; j < 10 ; i++){%>
 
-	out.println("<td>");
-	for(int j = 1 ; j <=9 ; j++){
-		out.println(i + "*" + j + "=" + (i * j)+<hr/>);
-	}
-	out.println("</td>");
-}
+	
+	
+<td> <%=i + "*" + j + "=" + i* j %>
 
-%>
+</td>
+
+ <%	} %> </tr>
+ <%	} %>
+
+
 </table>
 
-
+</body>
+</html>
 
 
 
