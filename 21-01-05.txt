@@ -1,16 +1,215 @@
-1.Àı´ë°æ·Î¿Í »ó´ë°æ·Î¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-2.¾Æ·¡ÀÇ action ¼Ó¼º¿¡ ´ëÇÏ¿© ¾Æ·¡ÀÇ 3°¡Áö ÄÉÀÌ½º¿¡ ´ëÇÏ¿© Å×½ºÆ® ÇÏ°í °á·ĞÀ» ³»·Á º¸¼¼¿ä.
+1.ì ˆëŒ€ê²½ë¡œì™€ ìƒëŒ€ê²½ë¡œì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+2.ì•„ë˜ì˜ action ì†ì„±ì— ëŒ€í•˜ì—¬ ì•„ë˜ì˜ 3ê°€ì§€ ì¼€ì´ìŠ¤ì— ëŒ€í•˜ì—¬ í…ŒìŠ¤íŠ¸ í•˜ê³  ê²°ë¡ ì„ ë‚´ë ¤ ë³´ì„¸ìš”.
 
 0105/request_send.jsp
 ..0105/request_send.jsp
 /0105/request_send.jsp
 
 <form action="0105/request_send.jsp">
-´ç½ÅÀÇ ³ªÀÌ´Â : <input type="text" name="age" size="5">
-		<input type="submit" value="Àü¼Û">
+ë‹¹ì‹ ì˜ ë‚˜ì´ëŠ” : <input type="text" name="age" size="5">
+		<input type="submit" value="ì „ì†¡">
 	</form>
-3. css¿¡¼­ÀÇ position ÀÇ 4°¡Áö ¼³¸íÇÏ½Ã¿À.
-4. float ¼Ó¼º¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-5.ÄíÅ°¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-6.¾×¼Ç ÅÂ±×¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
+3. cssì—ì„œì˜ position ì˜ 4ê°€ì§€ ì„¤ëª…í•˜ì‹œì˜¤.
+4. float ì†ì„±ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+5.ì¿ í‚¤ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+6.ì•¡ì…˜ íƒœê·¸ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
 
+
+
+
+
+1ë²ˆ ë¬¸ì œ 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+div{
+
+font-weight:bold;
+
+}
+
+
+#green{
+width:800px;
+height:100px;
+background-color:green;
+}
+
+#yellow{
+width:100px;
+height:600px;
+background-color:yellow;
+top:0;
+left:0;
+}
+
+#red{
+width:600px;
+height:600px;
+background-color:red;
+position:absolute;
+top:108px;
+left:108px;
+
+}
+
+#gray{
+width:100px;
+height:600px;
+background-color:gray;
+position:absolute;
+top:108px;
+left:708px;
+
+}
+
+#blue{
+width:800px;
+height:100px;
+background-color:blue;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div id = "green">í—¤ë”</div>
+<div id = "yellow">ì»¨í…ì¸ left</div>
+<div id = "red">ì»¨í…ì¸ center</div>
+<div id = "gray">ì»¨í…ì¸ right</div>
+<div id = "blue">í‘¸í„°</div>
+
+
+</body>
+</html>
+
+
+2ë²ˆ ë¬¸ì œ
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+#body{
+
+width:790px;
+height:640px;
+border:1px solid #dddddd;
+margin:0 auto;
+padding:20px;
+font-weight:bold;
+text-align:center;
+}
+
+#header{
+width:780px;
+height:100px;
+border:1px solid #dddddd;
+
+line-height:100px;
+margin:5px;
+}
+
+#nav{
+width:780px;
+height:100px;
+overflow:hidden;
+border:1px solid #dddddd;
+margin:5px;
+}
+
+#nav ul li {
+
+width:138px; 
+height:40px;
+line-height:40px;
+list-style:none;
+float:left;
+border:1px solid #dddddd;
+}
+
+#wrap{
+width:780px;
+overflow:hidden;
+border:1px solid #dddddd;
+margin:5px;
+
+}
+
+#content {
+
+width:600px;
+height:300px;
+float:left;
+border:1px solid #dddddd;
+margin:5px;
+}
+
+#banner{
+width:150px;
+height:300px;
+float:left;
+border:1px solid #dddddd;
+margin:5px;
+
+}
+
+#footer{
+width:780px;
+height:100px;
+border:1px solid #dddddd;
+line-height:100px;
+margin:5px;
+
+}
+
+
+</style>
+
+</head>
+<body id = "body">
+<div>
+<header id = "header">HEADER</header>
+</div>
+
+<div id = "nav">
+NAVIGATION
+<ul>
+<li>menu1</li>
+<li>menu2</li>
+<li>menu3</li>
+<li>menu4</li>
+<li>menu5</li>
+
+</ul>
+</div>
+
+
+<div id = "wrap">
+
+<div id = "content">CONTENT</div>
+
+<div id = "banner">BANNER</div>
+
+
+</div>
+<div>
+<footer id = "footer">FOOTER</footer>
+</div>
+
+</body>
+</html>
