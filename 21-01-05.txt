@@ -1,0 +1,16 @@
+1.절대경로와 상대경로에 대하여 설명하시오.
+2.아래의 action 속성에 대하여 아래의 3가지 케이스에 대하여 테스트 하고 결론을 내려 보세요.
+
+0105/request_send.jsp
+..0105/request_send.jsp
+/0105/request_send.jsp
+
+<form action="0105/request_send.jsp">
+당신의 나이는 : <input type="text" name="age" size="5">
+		<input type="submit" value="전송">
+	</form>
+3. css에서의 position 의 4가지 설명하시오.
+4. float 속성에 대하여 설명하시오.
+5.쿠키에 대하여 설명하시오.
+6.액션 태그에 대하여 설명하시오.
+
