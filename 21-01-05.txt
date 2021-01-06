@@ -44,6 +44,9 @@ URL에서는 항상 http:// 로 시작된다.
 	</form>
 	
 	
+	
+	
+	
 3. css에서의 position 의 4가지 설명하시오.
 
 static - 아무것도 쓰지 않는 default는 모두 static으로 처리된다. top과 left가 적용불가능하며 계속 아래로 내려간다.
