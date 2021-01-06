@@ -1,5 +1,151 @@
-1.session �̶�?
-2.DBMS�� �ǹ̿� ������?
-3.sessin id ��?
-4.���������� ó�� ��� 2������ �����Ͻÿ�?
-5.bean �̶�?
+1.session 이란?
+2.DBMS의 의미와 종류는?
+3.sessin id 란?
+4.에러페이지 처리 방법 2가지를 설명하시오?
+5.bean 이란?
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+</head>
+<body>
+
+<div>
+<h2>가위바위보 게임</h2>
+<img src="img01.jpg" width = 300px height = 300px>
+
+<form action="output.jsp" method = "post">
+<select name = "select">
+<option value = "가위">가위</option>
+<option value = "바위">바위</option>
+<option value = "보">보</option>
+</select>
+<input type = "submit" value = "제출">
+</form>
+
+</div>
+
+</body>
+</html>
+
+
+
+==========================================================
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+#wrap{
+font-weight:bold;
+font-size:2.3em;
+}
+</style>
+
+</head>
+<body>
+
+
+
+<%! String str; %>
+
+<%
+
+request.setCharacterEncoding("EUC-KR");
+
+str = request.getParameter("select");
+%>
+
+<%
+if(str.equals("가위")){
+
+str = "1";
+
+}else if(str.equals("바위")){
+	
+	str = "2";
+}else{
+	str = "3";
+}
+%>
+
+<%
+int val = Integer.parseInt(str);
+
+int com = (int) (Math.random() * 3) + 1;
+%>
+
+
+<h1>당신이 낸 것</h1>
+
+<%
+
+if (val == 1) {
+	
+	out.println("<img src = 'seaser.png'>");
+} else if (val == 2) {
+	
+	out.println("<img src = 'rockrock.jpg'>");
+} else  {
+	
+	out.println("<img src = 'paper.png'>");
+}
+
+%>
+
+<br/>
+
+<h1>컴퓨터가 낸 것</h1>
+
+<%
+
+if (com == 1) {
+	
+	out.println("<img src = 'seaser.png'>");
+} else if (com == 2) {
+	
+	out.println("<img src = 'rockrock.jpg'>");
+} else {
+	
+	out.println("<img src = 'paper.png'>");
+
+}
+
+%>
+
+<br/>
+<div id = "wrap">
+<%
+if ((val == 1) && (com == 2)) {
+	out.println("패배");
+		} else if ((val == 1) && (com == 3)) {
+			out.println("승리");
+		} else if ((val == 2) && (com == 1)) {
+			out.println("승리");
+		} else if (val == 2 && com == 3) {
+			out.println("패배");
+		} else if (val == 3 && com == 1) {
+			out.println("패배");
+		} else if (val == 3 && com == 2) {
+			out.println("승리");
+		} else {
+			out.println("무승부");
+		}
+
+%>
+</div>
+
+<a href = "input.html">되돌아가기</a>
+
+</body>
+</html>
