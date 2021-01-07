@@ -1,26 +1,26 @@
-1.¾Æ·¡¸¦ SQL¹®À¸·Î Ç¥±â ÇÏ½Ã¿À.
--- ºÎ¼­ ¹øÈ£(DEPTNO)°¡ 20ÀÎ »ç¿ø¿¡ °üÇÑ Á¤º¸¸¸ Ãâ·Â
---ÀÌ¸§(ENAME)ÀÌ FORDÀÎ »ç¶÷ÀÇ »ç¹ø(empno), ÀÌ¸§(ename), ±Þ¿©(SAL)¸¦ Ãâ·ÂÇÏ´Â Äõ¸®¹®
---1982³â 1¿ù 1ÀÏ ÀÌÈÄ¿¡ ÀÔ»çÇÑ »ç¿øÀ» Ãâ·ÂÇÏ´Â Äõ¸®¹®
---job ÀÌ manage ÀÌ°í 10¹ø ºÎ¼­ÀÎ »ç¿ø
---job ÀÌ manage ÀÌ°Å³ª 10¹ø ºÎ¼­ÀÎ »ç¿ø
---10¹ø ºÎ¼­°¡ ¾Æ´Ñ »ç¿ø
---±Þ¿©°¡ 2000~3000 »çÀÌÀÇ »ç¿øÀ» °Ë»öÇÏ´Â Äõ¸®¹®
---±Þ¿©°¡ 2000 ¹Ì¸¸ÀÌ°Å³ª 3000 ÃÊ°úÀÎ »ç¿øÀ» °Ë»öÇÏ´Â Äõ¸®¹®
---1987³â¿¡ ÀÔ»çÇÑ »ç¿øÀ» Ãâ·ÂÇÏ´Â Äõ¸®¹®
---Ä¿¹Ì¼Ç(COMM)ÀÌ 300 È¤Àº 500 È¤Àº 1400ÀÎ »ç¿øÀÌ ÀÖ´ÂÁö °Ë»öÇÏ´Â Äõ¸®¹®
---Ä¿¹Ì¼Ç(COMM)ÀÌ 300 È¤Àº 500 È¤Àº 1400ÀÌ ¾Æ´Ñ »ç¿øÀÌ ÀÖ´ÂÁö °Ë»öÇÏ´Â Äõ¸®¹®
---ÀÌ F·Î ½ÃÀÛÇÏ´Â »ç¶÷À» Ã£´Â Äõ¸®¹®
---À§Ä¡ »ó°ü ¾øÀÌ ÀÌ¸§ Áß¿¡ A°¡ µé¾îÀÖ´Â »ç¶÷À» Ã£´Â Äõ¸®¹®
---ÀÌ¸§ÀÌ NÀ¸·Î ³¡³ª´Â »ç¶÷À» Ã£´Â Äõ¸®¹®
---ÀÌ¸§ÀÇ µÎ ¹øÂ° ±ÛÀÚ°¡ AÀÎ »ç¿øÀ» Ã£´Â Äõ¸®¹®
---ÀÌ¸§ÀÇ ¼¼ ¹øÂ° ±ÛÀÚ°¡ AÀÎ »ç¿øÀ» Ã£´Â Äõ¸®¹®
---ÀÌ¸§¿¡ A¸¦ Æ÷ÇÔÇÏÁö ¾Ê´Â »ç¶÷¸¸ °Ë»öÇÏ´Â Äõ¸®¹®
+1.ì•„ëž˜ë¥¼ SQLë¬¸ìœ¼ë¡œ í‘œê¸° í•˜ì‹œì˜¤.
+-- ë¶€ì„œ ë²ˆí˜¸(DEPTNO)ê°€ 20ì¸ ì‚¬ì›ì— ê´€í•œ ì •ë³´ë§Œ ì¶œë ¥
+--ì´ë¦„(ENAME)ì´ FORDì¸ ì‚¬ëžŒì˜ ì‚¬ë²ˆ(empno), ì´ë¦„(ename), ê¸‰ì—¬(SAL)ë¥¼ ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--1982ë…„ 1ì›” 1ì¼ ì´í›„ì— ìž…ì‚¬í•œ ì‚¬ì›ì„ ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--job ì´ manage ì´ê³  10ë²ˆ ë¶€ì„œì¸ ì‚¬ì›
+--job ì´ manage ì´ê±°ë‚˜ 10ë²ˆ ë¶€ì„œì¸ ì‚¬ì›
+--10ë²ˆ ë¶€ì„œê°€ ì•„ë‹Œ ì‚¬ì›
+--ê¸‰ì—¬ê°€ 2000~3000 ì‚¬ì´ì˜ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ê¸‰ì—¬ê°€ 2000 ë¯¸ë§Œì´ê±°ë‚˜ 3000 ì´ˆê³¼ì¸ ì‚¬ì›ì„ ê²€ìƒ‰í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--1987ë…„ì— ìž…ì‚¬í•œ ì‚¬ì›ì„ ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ì»¤ë¯¸ì…˜(COMM)ì´ 300 í˜¹ì€ 500 í˜¹ì€ 1400ì¸ ì‚¬ì›ì´ ìžˆëŠ”ì§€ ê²€ìƒ‰í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ì»¤ë¯¸ì…˜(COMM)ì´ 300 í˜¹ì€ 500 í˜¹ì€ 1400ì´ ì•„ë‹Œ ì‚¬ì›ì´ ìžˆëŠ”ì§€ ê²€ìƒ‰í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ì´ Fë¡œ ì‹œìž‘í•˜ëŠ” ì‚¬ëžŒì„ ì°¾ëŠ” ì¿¼ë¦¬ë¬¸
+--ìœ„ì¹˜ ìƒê´€ ì—†ì´ ì´ë¦„ ì¤‘ì— Aê°€ ë“¤ì–´ìžˆëŠ” ì‚¬ëžŒì„ ì°¾ëŠ” ì¿¼ë¦¬ë¬¸
+--ì´ë¦„ì´ Nìœ¼ë¡œ ëë‚˜ëŠ” ì‚¬ëžŒì„ ì°¾ëŠ” ì¿¼ë¦¬ë¬¸
+--ì´ë¦„ì˜ ë‘ ë²ˆì§¸ ê¸€ìžê°€ Aì¸ ì‚¬ì›ì„ ì°¾ëŠ” ì¿¼ë¦¬ë¬¸
+--ì´ë¦„ì˜ ì„¸ ë²ˆì§¸ ê¸€ìžê°€ Aì¸ ì‚¬ì›ì„ ì°¾ëŠ” ì¿¼ë¦¬ë¬¸
+--ì´ë¦„ì— Aë¥¼ í¬í•¨í•˜ì§€ ì•ŠëŠ” ì‚¬ëžŒë§Œ ê²€ìƒ‰í•˜ëŠ” ì¿¼ë¦¬ë¬¸
 
---»ç¿øµéÀÇ ±Þ¿©¸¦ ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÏ´Â Äõ¸®¹®
---°¡Àå ÃÖ±Ù¿¡ ÀÔ»çÇÑ »ç¿øºÎÅÍ Ãâ·ÂÇÏ´Â Äõ¸®¹®
---»ç¿øµéÀÌ ¼Ò¼ÓµÇ¾î ÀÖ´Â ºÎ¼­ÀÇ ¹øÈ£¸¦ Ãâ·ÂÇÏ´Â Äõ¸®¹®
---¾Æ·¡¿Í °°ÀÌ Ãâ·ÂÇÏ½Ã¿À.
+--ì‚¬ì›ë“¤ì˜ ê¸‰ì—¬ë¥¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ê°€ìž¥ ìµœê·¼ì— ìž…ì‚¬í•œ ì‚¬ì›ë¶€í„° ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ì‚¬ì›ë“¤ì´ ì†Œì†ë˜ì–´ ìžˆëŠ” ë¶€ì„œì˜ ë²ˆí˜¸ë¥¼ ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ì•„ëž˜ì™€ ê°™ì´ ì¶œë ¥í•˜ì‹œì˜¤.
 SMITH is a CLERK
 ALLEN is a SALESMAN
 WARD is a SALESMAN
@@ -34,3 +34,132 @@ JAMES is a CLERK
 FORD is a ANALYST
 MILLER is a CLERK
 
+
+
+
+
+
+
+
+1ë²ˆ ë¬¸ì œ :  ê°€ìœ„ë°”ìœ„ë³´ í”„ë¡œê·¸ëž¨ì„ usebeanì„ ì‚¬ìš©í•´ì„œ (ê°ì²´ë¡œ ë§Œë“¤ì–´)ì§œì„¸ìš”
+
+
+
+
+2ë²ˆ ë¬¸ì œ : sql ê°’ì„ ê°€ì ¸ì™€ì„œ jspë¡œ ì¶œë ¥í•˜ì„¸ìš”(ê°ì²´ë¥¼ ì‚¬ìš©í•´ì„œ)
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+
+<%@ page import="java.sql.*"%>
+<%!Connection connection;
+	Statement statement;
+	ResultSet resultSet;
+
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String uid = "scott";
+	String upw = "tiger";
+	String query = "select * from emp";%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+table{
+
+margin:0 auto;
+text-align:center;
+
+}
+
+</style>
+
+</head>
+<body>
+	<%
+		try {
+
+		Class.forName(driver);//ë“œë¼ì´ë²„ : ì˜¤ë¼í´ê³¼ ì—°ê²°ì‹œì¼œì¤Œ ë©”ëª¨ë¦¬ë¡œ ì˜¬ë¼ê°
+
+		connection = DriverManager.getConnection(url, uid, upw);
+		statement = connection.createStatement();
+		resultSet = statement.executeQuery(query);
+	%>
+	<table border="1">
+		<tr>
+			<td>empno</td>
+			<td>ì´ë¦„</td>
+			<td>ì§ì—…</td>
+			<td>mgr</td>
+			<td>ê³ ìš©ì¼</td>
+			<td>ì›”ê¸‰</td>
+			<td>ì»¤ë¨¸ì…˜</td>
+			<td>deptno</td>
+		</tr>
+		<%
+			while (resultSet.next()) {
+
+			String empno = resultSet.getString("empno");
+			String name = resultSet.getString("ename");
+			String job = resultSet.getString("job");
+			String mgr = resultSet.getString("mgr");
+			String hire = resultSet.getString("hiredate");
+			String sal = resultSet.getString("sal");
+			String comm = resultSet.getString("comm");
+			String deptno = resultSet.getString("deptno");
+		%>
+		
+		<%
+		
+		if(comm == null){
+			comm = "";
+		}
+		
+		%>
+
+		<tr>
+			<td><%=empno%></td>
+			<td><%=name%></td>
+			<td><%=job%></td>
+			<td><%=mgr%></td>
+			<td><%=hire%></td>
+			<td><%=sal%></td>
+			<td><%=comm%></td>
+			<td><%=deptno%></td>
+		</tr>
+
+		<%
+			}
+		%>
+	</table>
+	
+	<%
+		} catch (Exception e) {
+
+	} finally {
+
+	try {
+
+		if (resultSet != null)
+			resultSet.close();
+
+		if (statement != null)
+			statement.clearBatch();
+
+		if (connection != null)
+			connection.close();
+
+	} catch (Exception e) {
+
+	}
+}
+	%>
+
+</body>
+</html>
