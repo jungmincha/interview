@@ -52,7 +52,10 @@ MILLER is a CLERK
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import="java.sql.*"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
 <%!Connection connection;
 	Statement statement;
 	ResultSet resultSet;
@@ -82,84 +85,160 @@ text-align:center;
 
 </head>
 <body>
-	<%
-		try {
 
-		Class.forName(driver);//드라이버 : 오라클과 연결시켜줌 메모리로 올라감
+ <jsp:useBean id="Employee" class="com.bit.ex.Employee" scope="page" />
+   
+   <%
+      try {
+      Class.forName(driver);
+      connection = DriverManager.getConnection(url, uid, upw);
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(query);
+   %>
+   <table border="1">
+      <tr>
+         <td>empno</td>
+         <td>name</td>
+         <td>job</td>
+         <td>mgr</td>
+         <td>hiredate</td>
+         <td>sal</td>
+         <td>comm</td>
+         <td>deptno</td>
+      </tr>
+      <%
+         while (resultSet.next()) {
+         String empno = resultSet.getString("empno");
+         String name = resultSet.getString("ename");
+         String job = resultSet.getString("job");
+         String mgr = resultSet.getString("mgr");
+         String hiredate = resultSet.getString("hiredate");
+         String sal = resultSet.getString("sal");
+         String comm = resultSet.getString("comm");
+         String deptno = resultSet.getString("deptno");
+      %>
+      
+      <jsp:setProperty property="empno" name="Employee" value="<%=empno %>"/>
+      <jsp:setProperty property="name" name="Employee" value="<%=name %>"/>
+      <jsp:setProperty property="job" name="Employee" value="<%=job %>"/>
+      <jsp:setProperty property="mgr" name="Employee" value="<%=mgr %>"/>
+      <jsp:setProperty property="hiredate" name="Employee" value="<%=hiredate %>"/>
+      <jsp:setProperty property="sal" name="Employee" value="<%=sal %>"/>
+      <jsp:setProperty property="comm" name="Employee" value="<%=comm %>"/>
+      <jsp:setProperty property="deptno" name="Employee" value="<%=deptno %>"/>
+      
+      
+      <tr>
+         <td><jsp:getProperty property="empno" name="Employee"/></td>
+         <td><jsp:getProperty property="name" name="Employee"/></td>
+         <td><jsp:getProperty property="job" name="Employee"/></td>
+         <td><jsp:getProperty property="mgr" name="Employee"/></td>
+         <td><jsp:getProperty property="hiredate" name="Employee"/></td>
+         <td><jsp:getProperty property="sal" name="Employee"/></td>
+         <td><jsp:getProperty property="comm" name="Employee"/></td>
+         <td><jsp:getProperty property="deptno" name="Employee"/></td>
+      </tr>
+      <%
+         } 
+      %>
+   </table>
+   <%
+      } catch (Exception e) {
 
-		connection = DriverManager.getConnection(url, uid, upw);
-		statement = connection.createStatement();
-		resultSet = statement.executeQuery(query);
-	%>
-	<table border="1">
-		<tr>
-			<td>empno</td>
-			<td>이름</td>
-			<td>직업</td>
-			<td>mgr</td>
-			<td>고용일</td>
-			<td>월급</td>
-			<td>커머션</td>
-			<td>deptno</td>
-		</tr>
-		<%
-			while (resultSet.next()) {
+   } finally {
+   if (resultSet != null) {
+      resultSet.close();
+   }
+   if (statement != null) {
+      statement.close();
+   }
+   if (connection != null) {
+      connection.close();
+   }
 
-			String empno = resultSet.getString("empno");
-			String name = resultSet.getString("ename");
-			String job = resultSet.getString("job");
-			String mgr = resultSet.getString("mgr");
-			String hire = resultSet.getString("hiredate");
-			String sal = resultSet.getString("sal");
-			String comm = resultSet.getString("comm");
-			String deptno = resultSet.getString("deptno");
-		%>
-		
-		<%
-		
-		if(comm == null){
-			comm = "";
-		}
-		
-		%>
-
-		<tr>
-			<td><%=empno%></td>
-			<td><%=name%></td>
-			<td><%=job%></td>
-			<td><%=mgr%></td>
-			<td><%=hire%></td>
-			<td><%=sal%></td>
-			<td><%=comm%></td>
-			<td><%=deptno%></td>
-		</tr>
-
-		<%
-			}
-		%>
-	</table>
-	
-	<%
-		} catch (Exception e) {
-
-	} finally {
-
-	try {
-
-		if (resultSet != null)
-			resultSet.close();
-
-		if (statement != null)
-			statement.clearBatch();
-
-		if (connection != null)
-			connection.close();
-
-	} catch (Exception e) {
-
-	}
-}
-	%>
-
+   }
+   %>
+   
 </body>
 </html>
+
+
+=========================================================자바 빈 ==================================================================
+
+package com.bit.ex;
+
+public class Employee {
+	
+	  String empno;
+	   String name;
+	   String job;
+	   String mgr;
+	   String hiredate;
+	   String sal;
+	   String comm;
+	   String deptno;
+	   
+	public String getEmpno() {
+		return empno;
+	}
+	public void setEmpno(String empno) {
+		this.empno = empno;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public String getMgr() {
+		return mgr;
+	}
+	public void setMgr(String mgr) {
+		if(mgr == null) {
+			this.mgr = "";
+		}else {
+			this.mgr = mgr;
+		}
+	}
+	public String getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
+	}
+	public String getSal() {
+		return sal;
+	}
+	public void setSal(String sal) {
+		this.sal = sal;
+	}
+	public String getComm() {
+		return comm;
+	}
+	public void setComm(String comm) {
+		if(comm == null) {
+			this.comm = "";
+		}else {
+			this.comm = comm;
+		}
+		
+	}
+	public String getDeptno() {
+		return deptno;
+	}
+	public void setDeptno(String deptno) {
+		this.deptno = deptno;
+	}
+	
+
+	   
+
+}
+
+
