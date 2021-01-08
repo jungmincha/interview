@@ -1,0 +1,97 @@
+
+==html------
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action = "rectangle.jsp" method = "post">
+가로<input type = "text" name = "width"><br/>
+세로<input type = "text" name = "height"><br/>
+<input type = "submit" value = "전송">
+
+
+</form>
+
+</body>
+</html>
+
+
+
+===============jsp(user 빈 적용)==============================
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    <jsp:useBean id = "arearec" class = "edu.bit.ex.Arearec" scope = "page"/> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+int width =Integer.parseInt(request.getParameter("width"));
+int height = Integer.parseInt(request.getParameter("height"));
+// <%=arearec.getArea()
+
+%>
+
+<jsp:setProperty name = "arearec" property = "width" value = "<%=width %>"/>
+<jsp:setProperty name = "arearec" property = "height" value = "<%=height%>"/>
+
+
+
+사각형의 넓이는<jsp:getProperty property="getArea" name="arearec"/>입니다.
+
+</body>
+</html>
+
+
+
+===========java 빈===================================
+
+package edu.bit.ex;
+
+public class Arearec {
+	
+	private int width;
+	private int height;
+	private int getArea;
+	
+	
+	public Arearec() {
+	
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getGetArea() {
+		return width*height;
+	}
+
+	public void setGetArea(int getArea) {
+		this.getArea = getArea;
+	}
+
+	
