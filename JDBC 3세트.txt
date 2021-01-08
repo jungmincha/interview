@@ -1,0 +1,148 @@
+JSP
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@page import="edu.bit.ex.dao.EmpDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="edu.bit.ex.vo.EmpVO"%>
+<%@page import="java.sql.*"%>
+<jsp:useBean id="eDao" class="edu.bit.ex.dao.EmpDAO" scope="page" />
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+   //EmpDAO eDao = new EmpDAO();   
+   
+   ArrayList<EmpVO> dtos = eDao.empSelect();
+   for (int i = 0; i < dtos.size() ; i++){
+      EmpVO vo = dtos.get(i);
+      
+      out.println("이름: "+vo.getEname()+", 번호: "+vo.getEmpno()+"<br/>");
+   }
+
+%>
+</body>
+</html>
+
+============================================================================
+package edu.bit.ex.dao;
+
+public class EmpDAO {
+   
+   String url = "jdbc:oracle:thin:@localhost:1521:xe";//1521 오라클의 포트번호
+   String uid = "scott";
+   String upw = "tiger";
+   
+   public EmpDAO() {
+      
+      try {
+         Class.forName("oracle.jdbc.driver.OracleDriver"); //메모리에 오라클드라이버가 로드된다
+      } catch (Exception e) {
+         // TODO: handle exception
+      }
+   }
+   
+   public ArrayList<EmpVO> empSelect() {
+      ArrayList<EmpVO> dtos = new ArrayList<EmpVO>();
+      
+      Connection con = null;
+      Statement stmt = null;//쿼리용 객체
+      ResultSet rs = null;
+      
+      String sql = "select * from emp order by ename";
+      
+       try {//성공할시
+
+            con = DriverManager.getConnection(url, uid, upw);//접속
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("select * from emp"); //해당 데이터를 갖고 옴
+
+            while (rs.next()) {
+               String name = rs.getString("ename");
+               int empno = rs.getInt("empno");
+               String job = rs.getString("job");
+
+               EmpVO eDto = new EmpVO(name, empno, job);
+               dtos.add(eDto); //어레이 리스트로 관리 
+            }
+
+         } catch (Exception e) {//성공못할시
+            e.printStackTrace();
+
+         } finally {
+
+            try {
+               
+               if (rs != null) rs.close();
+               if(stmt != null) stmt.close();
+               if (con != null) con.close(); 
+
+            } catch (Exception e2) {
+               e2.printStackTrace();
+            }
+
+         }
+
+         return dtos;
+
+      
+   }
+
+}
+
+============================================================================
+
+package edu.bit.ex.vo;
+
+public class EmpVO {
+	   
+	   private String ename;
+	   private int empno;
+	   private Timestamp date;
+	   private String job;
+	   
+	   public EmpVO(){
+	      
+	   }
+	 
+
+	   public EmpVO(String name, int empno, String job) {
+		   this.ename = name;
+		      this.empno = empno;
+		      this.job = job;
+	}
+
+	public String getEname() {
+	      return ename;
+	   }
+	   public void setEname(String ename) {
+	      this.ename = ename;
+	   }
+	   public int getEmpno() {
+	      return empno;
+	   }
+	   public void setEmpno(int empno) {
+	      this.empno = empno;
+	   }
+	   public Timestamp getDate() {
+	      return date;
+	   }
+	   public void setDate(Timestamp date) {
+	      this.date = date;
+	   }   
+	   
+	}
+
+
+
+
+
+
+
+
+
