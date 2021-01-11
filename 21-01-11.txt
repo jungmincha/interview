@@ -221,7 +221,7 @@ public class Arearec {
 
 
 
-2번 데이터베이스 파일을 불러와서 자료 입출력 결과 확인하기
+2번 데이터베이스 파일을 불러와서 자료 입출력 결과 확인하기()
 
 
 ============================================================html============================================================================
@@ -253,6 +253,224 @@ public class Arearec {
 <option value = "(20)SALES"> (20)SALES </option>
 </select>
 </form>
+
+</body>
+</html>
+
+
+==================================================================java====================================================================
+
+
+package edu.bit.ex.vo;
+
+import java.security.Timestamp;
+
+public class EmpVO {
+	   
+	   private String ename;
+	   private int empno;
+	   private String job;
+	   private int mgr;
+	   private String hiredate;
+	
+	   
+	   public EmpVO(){
+	      
+	   }
+	 
+
+	   public EmpVO(String name, int empno, String job ,int mgr,String hiredate) {
+		   this.ename = name;
+		      this.empno = empno;
+		      this.job = job;
+		      this.mgr = mgr;
+		      this.setHiredate(hiredate);
+		     
+		    
+	   }
+
+
+	public int getMgr() {
+		return mgr;
+	}
+
+
+	public void setMgr(int mgr) {
+		this.mgr = mgr;
+	}
+
+
+	public String getEname() {
+		return ename;
+	}
+
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+
+	public int getEmpno() {
+		return empno;
+	}
+
+
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+
+
+	public String getJob() {
+		return job;
+	}
+
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+
+	public String getHiredate() {
+		return hiredate;
+	}
+
+
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
+	}
+
+
+	
+==========================================================================
+	
+	   
+	}
+	
+	package edu.bit.ex.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import edu.bit.ex.vo.EmpVO;
+
+
+
+public class EmpDAO {
+   
+   String url = "jdbc:oracle:thin:@localhost:1521:xe";//1521 오라클의 포트번호
+   String uid = "scott";
+   String upw = "tiger";
+   
+   public EmpDAO() {
+      
+      try {
+         Class.forName("oracle.jdbc.driver.OracleDriver"); //메모리에 오라클드라이버가 로드된다
+      } catch (Exception e) {
+         // TODO: handle exception
+      }
+   }
+   
+   public ArrayList<EmpVO> empSelect() {
+      ArrayList<EmpVO> dtos = new ArrayList<EmpVO>();
+      
+      Connection con = null;
+      Statement stmt = null;//쿼리용 객체
+      ResultSet rs = null;
+      
+      String sql = "select * from emp ,dept";
+      
+       try {//성공할시
+
+            con = DriverManager.getConnection(url, uid, upw);//접속
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("select * from emp , dept"); //해당 데이터를 갖고 옴
+
+            while (rs.next()) {
+        
+               String name = rs.getString("ename");
+               int empno = rs.getInt("empno");
+               String job = rs.getString("job");
+               int mgr = rs.getInt("mgr");
+              String hiredate = rs.getString("hiredate" );
+              
+
+               EmpVO eDto = new EmpVO(name, empno, job, mgr , hiredate);
+               dtos.add(eDto); //어레이 리스트로 관리 
+            }
+
+         } catch (Exception e) {//성공못할시
+            e.printStackTrace();
+
+         } finally {
+
+            try {
+               
+               if (rs != null) rs.close();
+               if(stmt != null) stmt.close();
+               if (con != null) con.close(); 
+
+            } catch (Exception e2) {
+               e2.printStackTrace();
+            }
+
+         }
+
+         return dtos;
+
+      
+   }
+
+}
+	
+	=================================================jsp=======================================================================
+	
+	
+	<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@page import="edu.bit.ex.dao.EmpDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="edu.bit.ex.vo.EmpVO"%>
+<%@page import="java.sql.*"%>
+<jsp:useBean id="eDao" class="edu.bit.ex.dao.EmpDAO" scope="page" />
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<%
+   //EmpDAO eDao = new EmpDAO();   
+   
+   ArrayList<EmpVO> dtos = eDao.empSelect();
+   for (int i = 0; i < dtos.size() ; i++){
+      EmpVO vo = dtos.get(i);
+      
+    
+      
+      
+      
+      out.print("<table border = '1'>");
+      out.print("<tr>");
+      out.println("<td> " +  vo.getEmpno() + "</td>");
+      out.println("<td> " +  vo.getEname() + "</td>");
+      out.println("<td> " +  vo.getJob() + "</td>");
+      out.println("<td> " +  vo.getMgr() + "</td>");
+      out.println("<td> " +  vo.getHiredate() + "</td>");
+      
+     out.print("</tr>");
+     out.print("</table>");
+   }
+
+%>
+
+
 
 </body>
 </html>
