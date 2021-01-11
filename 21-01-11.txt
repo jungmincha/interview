@@ -1,10 +1,219 @@
-1.el ÀÌ¶õ ¹«¾ùÀÎ°¡?
-2.jstl ¹®¹ı¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-3.scope ¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-4.joinÀÇ Á¾·ù¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À 
-5.¾Æ·¡¸¦ sql ¹®À¸·Î Ã³¸® ÇÏ½Ã¿À.
--EMPÅ×ÀÌºíÀ» EMPLOTEE¿Í MANAGER·Î º°ÄªÀ» ÁöÁ¤ÇÑ ÈÄ Æ¯Á¤ »ç¿øÀÇ ¸Å´ÏÀú°¡ ´©±¸ÀÎÁö ¾Ë¾Æ³»´Â Äõ¸®¹®
--»ç¿ø Á¤º¸¸¦ Ãâ·ÂÇÒ ¶§, °¢ »ç¿øÀÌ ¼Ò¼ÓµÈ ºÎ¼­ÀÇ »ó¼¼ Á¤º¸¸¦ Ãâ·ÂÇÏ±â À§ÇØ µÎ °³ÀÇ Å×ÀÌºíÀ» Á¶ÀÎÇÏ´Â Äõ¸®¹®
---ºÎ¼­ÀÇ ÃÖ´ë°ª°ú ÃÖ¼Ò°ªÀ» ±¸ÇÏµÇ, ÃÖ´ë ±Ş¿©°¡ 2900 ÀÌ»óÀÎ ºÎ¼­¸¸ Ãâ·ÂÇÏ´Â Äõ¸®¹®
--- ºÎ¼­º° »ç¿øÀÇ ¼ö¿Í Ä¿¹Ì¼ÇÀ» ¹Ş´Â »ç¿øÀÇ ¼ö¸¦ °è»êÇÏ´Â Äõ¸®¹®
-----¼Ò¼Ó ºÎ¼­º° ±Ş¿© ÃÑ¾×°ú Æò±Õ ±Ş¿©¸¦ ±¸ÇÏ´Â Äõ¸®¹®
+1.el ì´ë€ ë¬´ì—‡ì¸ê°€?
+2.jstl ë¬¸ë²•ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+3.scope ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+4.joinì˜ ì¢…ë¥˜ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤ 
+5.ì•„ë˜ë¥¼ sql ë¬¸ìœ¼ë¡œ ì²˜ë¦¬ í•˜ì‹œì˜¤.
+-EMPí…Œì´ë¸”ì„ EMPLOTEEì™€ MANAGERë¡œ ë³„ì¹­ì„ ì§€ì •í•œ í›„ íŠ¹ì • ì‚¬ì›ì˜ ë§¤ë‹ˆì €ê°€ ëˆ„êµ¬ì¸ì§€ ì•Œì•„ë‚´ëŠ” ì¿¼ë¦¬ë¬¸
+-ì‚¬ì› ì •ë³´ë¥¼ ì¶œë ¥í•  ë•Œ, ê° ì‚¬ì›ì´ ì†Œì†ëœ ë¶€ì„œì˜ ìƒì„¸ ì •ë³´ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ë‘ ê°œì˜ í…Œì´ë¸”ì„ ì¡°ì¸í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+--ë¶€ì„œì˜ ìµœëŒ€ê°’ê³¼ ìµœì†Œê°’ì„ êµ¬í•˜ë˜, ìµœëŒ€ ê¸‰ì—¬ê°€ 2900 ì´ìƒì¸ ë¶€ì„œë§Œ ì¶œë ¥í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+-- ë¶€ì„œë³„ ì‚¬ì›ì˜ ìˆ˜ì™€ ì»¤ë¯¸ì…˜ì„ ë°›ëŠ” ì‚¬ì›ì˜ ìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+----ì†Œì† ë¶€ì„œë³„ ê¸‰ì—¬ ì´ì•¡ê³¼ í‰ê·  ê¸‰ì—¬ë¥¼ êµ¬í•˜ëŠ” ì¿¼ë¦¬ë¬¸
+
+
+1ë²ˆë¬¸ì œ ê°ì²´ë¥¼ ì´ìš©í•´ html jsp java ë¬¸ìœ¼ë¡œ ì…ì¶œë ¥ ê°’ì„ ë°›ì•„ í™”ë©´ì— ë„ìš°ì‹œì˜¤(el ì‚¬ìš©í•´ì„œ ì‘ì„±í•˜ê¸°)
+
+============================================html=====================================================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border = "1">
+<form action = "rectangle.jsp" method = "post">
+
+<tr>
+
+<td colspan = "2">í•™ë²ˆ</td>
+<td><input type = "text" name = "hakbun"></td>
+</tr>
+<tr>
+<td rowspan = "3">ê³¼ëª©</td>
+<td>Java</td>
+
+<td><input type = "text" name = "java"></td>
+
+</tr>
+<tr>
+
+<td>Database</td>
+<td><input type = "text" name = "database"></td>
+</tr>
+<tr>
+
+<td>Jsp</td>
+<td><input type = "text" name = "jsp"></td>
+</tr>
+<tr>
+<td><input type = "submit" value = "ì „ì†¡"></td>
+</tr>
+</form>
+
+</table>
+
+</body>
+</html>
+
+
+
+==========================================================================jsp===================================================================
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    <jsp:useBean id = "score" class = "edu.bit.ex.Arearec" scope = "page"/> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style>
+
+a{
+text-decoration:none;
+
+}
+
+div{
+font-weight:bold;
+}
+
+#red{
+
+color:red;
+}
+
+
+</style>
+</head>
+<body>
+
+<%
+
+int hakbun =Integer.parseInt(request.getParameter("hakbun"));
+double jsp = Integer.parseInt(request.getParameter("jsp"));
+double java =Integer.parseInt(request.getParameter("java"));
+double database =Integer.parseInt(request.getParameter("database"));
+
+// <%=arearec.getArea()
+
+%>
+<jsp:setProperty name = "score" property = "hakbun" value = "<%=hakbun %>"/>
+<jsp:setProperty name = "score" property = "jsp" value = "<%=jsp %>"/>
+<jsp:setProperty name = "score" property = "java" value = "<%=java%>"/>
+<jsp:setProperty name = "score" property = "database" value = "<%=database %>"/>
+
+
+
+ 
+<table border = "1">
+<form action = "rectangle.jsp" method = "post">
+
+<tr>
+
+<td colspan = "2" style = "background-color:#aacee2">í•™ë²ˆ</td>
+<td><div>${score.hakbun}</div></td>
+</tr>
+<tr>
+<td rowspan = "3" style = "background-color:#cab9f1">ê³¼ëª©</td>
+<td>Java</td>
+
+<td><div>${score.java}</div></td>
+
+</tr>
+<tr>
+
+<td>Database</td>
+<td><div>${score.database}</div></td>
+</tr>
+<tr>
+
+<td>Jsp</td>
+<td><div>${score.jsp}</div></td>
+</tr>
+
+<tr>
+
+<td colspan = "2" style = "background-color:#00adce">í‰ê· ì ìˆ˜</td>
+<td><div id = "red">${score.getavg}</div></td>
+
+</tr>
+
+<tr>
+
+<td><a href = "input.html" style = "background-color:#ef84c1">ëŒì•„ê°€ê¸°</a></td>
+</tr>
+</form>
+
+</table> 
+ 
+</body>
+</html>
+
+
+
+
+
+===============================================================java.class============================================================
+
+
+package edu.bit.ex;
+
+public class Arearec {
+	
+	private int hakbun;
+	private double java;
+	private double jsp;
+	private double database;
+	private double getavg;
+	
+	public Arearec() {
+		
+	}
+
+	
+	public int getHakbun() {
+		return hakbun;
+	}
+
+	public void setHakbun(int hakbun) {
+		this.hakbun = hakbun;
+	}
+
+	public double getJava() {
+		return java;
+	}
+
+	public void setJava(double java) {
+		this.java = java;
+	}
+
+	public double getJsp() {
+		return jsp;
+	}
+
+	public void setJsp(double jsp) {
+		this.jsp = jsp;
+	}
+
+	public double getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(double database) {
+		this.database = database;
+	}
+
+	public double getGetavg() {
+		return (java+jsp+database)/3;
+	}
+
+	public void setGetavg(double getavg) {
+		this.getavg = getavg;
+	}
+
+}
