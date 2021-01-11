@@ -217,3 +217,42 @@ public class Arearec {
 	}
 
 }
+
+
+
+
+2번 데이터베이스 파일을 불러와서 자료 입출력 결과 확인하기
+
+
+============================================================html============================================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>사원 정보 입력</h1>
+<hr/>
+<form action = "infor.jsp" method = "post">
+
+사원번호<input type = "text" name = "id"/><br/>
+사원이름<input type = "text" name = "name"/><br/>
+사원직급<input type = "text" name = "grade"/><br/>
+매니저 <select name = "manager"><br/>
+<option value = "(7839)KING" selected = "selected"> (7839)KING </option>
+<option value = "(4839)MING"> (4839)MING </option>
+</select>
+<br/>
+입사일 <input type = "text" name = "day"/><br/>
+급여  <input type = "text" name = "sal"/><br/>
+커미션 <input type = "text" name = "comm"/><br/>
+부서  <select name = "division"><br/>
+<option value = "(40)OPERATION" selected = "selected"> (40)OPERATION </option>
+<option value = "(20)SALES"> (20)SALES </option>
+</select>
+</form>
+
+</body>
+</html>
