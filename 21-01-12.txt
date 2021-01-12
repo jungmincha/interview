@@ -1,1 +1,55 @@
-sf
+https://meetingsapac47.webex.com/meet/pr1659250633
+
+커넥션 풀(DBCP) - 클라이언트에서 다수의 요청(100만 1000만 어쩌면 그 이상)이 발생할 경우 데이터베이스에 부하가 발생하게 된다. 이러한 문제를 해결하기 위해 커넥션풀을 이용한다. 서버에서 오라클 접속을 할 때 오류가 빈번히 발생한다.
+(요즘 웹서버는 셋팅만 잘해놓으면 잘 죽지 않는다.) 웹서버가 아니기 때문에 오라클(데이터베이스)는 많은
+처리를 받아내지 못한다.
+
+커넥션 개체를 미리 만들어놓는다. 클라이언트들을 줄을 세우고 순서대로 나누어서 받는다.(서버가 죽지않기 위해) 서버에 저장한다.
+ <Resource 
+       auth="Container" 
+       driverClassName="oracle.jdbc.OracleDriver" 
+       maxIdle="10" 
+       maxTotal="20" 
+       maxWaitMillis="-1" 
+       name="jdbc/oracle" 
+       password="tiger" 
+       type="javax.sql.DataSource" 
+       url="jdbc:oracle:thin:@127.0.0.1:1521:xe" 
+       username="scott"
+    />
+   
+   <!--
+    auth : 컨테이너를 자원 관리자로 기술
+    name : JDBC이름, 변경 가능
+    driverClassName : JDBC 드라이버
+    type : 웹에서 이 리소스를 사용할 때 DataSource로 리턴됨
+    username : 접속계정
+    password : 접속할 계정 비밀번호
+    
+    loginTimeout : 연결 끊어지는 시간
+    maxActive : 최대 연결 가능한 Connection수 (기본 20개)
+    maxIdle : Connection pool 유지를 위해 최대 대기 connection 숫자
+    maxWait : 사용 가능한 커넥션이 없을 때 커넥션 회수를 기다리는 시간 (1000 = 1초)
+    testOnBorrow : db에 test를 해볼 것인지
+   --> 
+    
+    
+    2.MVC패턴 (model view controller)
+    
+    c 클라이언트가 FrontController에 요청 (서블릿으로 짠다.)
+    
+    m 데이터 다루는 쪽  Command - DAO DTO DB(로직 실행)
+   
+    v 화면에 보이는 쪽 ui
+    
+    Database 생성
+    
+   bid bname btitle bcontent bdate bhit
+   
+   댓글 : bGroup : 원본 댓글(1)에 대한 자식(2,3)까지 포함한 그룹
+   bStep : 원글 번호에 대해 세로에 대해 몇번째를 나타내주는 것
+   bIndent : 원글 번호에 대해 가로에 대해 몇번째를 나타내주는 것
+    
+    
+    
+
