@@ -68,3 +68,13 @@ SELECT ENAME,DECODE(COMM,NULL,'no commission',COMM)"COMM" FROM EMP;
 
 --20> 모든 사원의 이름,부서번호,부서이름을 표시하는 질의를 작성하라.(DECODE)
 select ename, deptno, decode(deptno,10,'ACCOUNTING ',20,'RESEARCH',30,'SALES',40,'OPERATIONS') "NEW DNAME" from emp order by deptno;
+
+
+데이터 지워주는 문장
+
+alter table emp drop column NewSalary;
+alter table emp drop column INCREASE;
+alter table emp drop column NAMELENGTH;
+alter table emp drop column NEWNAME;
+SELECT * FROM EMP;
+commit;
