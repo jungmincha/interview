@@ -1,0 +1,985 @@
+
+
+클라이언트가 컨트롤러에게 요청한다 그러면 프론트 컨트롤러가 로직을 실행하는 모델에게 로직 실행지시를 한다. 그리고 값을 받아 view 에 응답해준다.
+
+===========================================컨트롤러 ==서블릿========================
+
+package edu.bit.ex.controller;//frontcontroller
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.command.BCommand;
+import edu.bit.ex.command.BDeleteCommand;
+import edu.bit.ex.command.BModifyCommand;
+import edu.bit.ex.command.BReplyCommand;
+import edu.bit.ex.command.BReplyViewCommand;
+import edu.bit.ex.command.BWriteCommand;
+import edu.bit.ex.command.BlistCommand;
+import edu.bit.ex.command.ContentCommand;
+
+/**
+ * Servlet implementation class FrontController
+ */
+@WebServlet("*.do")//무조건 받겠다
+public class BFrontController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BFrontController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doGet");
+		actionDo(request,response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doaPost");
+		actionDo(request,response);
+	}
+	
+	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("actionDo");
+		
+		request.setCharacterEncoding("EUC-KR");
+		
+		String viewPage = null;
+		BCommand command = null;//Command
+		
+		String uri = request.getRequestURI();
+	      String conPath = request.getContextPath();
+	      String com = uri.substring(conPath.length());
+	      
+	      System.out.println(uri);
+	      System.out.println(conPath);
+	      System.out.println(com);
+	      
+	      if(com.equals("/list.do")){
+	         command = new BlistCommand();
+	         command.execute(request, response);
+	         viewPage = "list.jsp";
+	         
+	         
+	      } else if(com.equals("/content_view.do")){
+		         command = new ContentCommand();
+		         command.execute(request, response);
+		         viewPage = "content_view.jsp";
+		         
+		      } else if(com.equals("/write_view.do")){
+			  
+			         viewPage = "write_view.jsp";
+			         
+			         
+			      }else if(com.equals("/write.do")){
+				         command = new BWriteCommand();
+				         command.execute(request, response);
+				         viewPage = "list.do";
+				         
+			      }else if(com.equals("/reply_view.do")) {
+			          command = new BReplyViewCommand();
+			          command.execute(request, response);
+			          viewPage = "reply_view.jsp";
+			          
+			       } else if(com.equals("/reply.do")) {
+			           command = new BReplyCommand();
+			           command.execute(request, response);
+			           viewPage = "list.do";
+			           
+			        } else if(com.equals("/delete.do")) {
+						command = new BDeleteCommand();
+						command.execute(request, response);
+						viewPage = "list.do";
+					
+					}else if(com.equals("/modify.do")) {
+				         command = new BModifyCommand();
+				         command.execute(request, response);
+				         viewPage = "list.do";
+				      }
+	      
+	      
+	      
+	      
+	      RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+	      dispatcher.forward(request, response);
+	}
+
+}
+
+
+===========================================model부분이고 각 커맨드들이 doa로 간다음 dto에서 객체 생서해주고 db로 값을 저장한다.
+
+==============================================Dao==============================================================
+
+package edu.bit.ex.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;//무조건 sql꺼로 받아야와야 한다.
+
+import edu.bit.ex.dto.BDto;
+
+public class BDao {//data access object
+	DataSource dataSource; //커넥션 풀 객체는 DataSource 
+
+	 public BDao() {
+	      // TODO Auto-generated constructor stub
+	      
+	      try {//context.xml에 추가한것
+	         Context context = new InitialContext();//javaxnaming
+	         dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracle");//커넥션 풀 가져오는 공식
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      }
+	   }
+	
+	 public ArrayList<BDto> list() {
+	      
+	      ArrayList<BDto> dtos = new ArrayList<BDto>();
+	      
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	      ResultSet resultSet = null;
+	      
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from mvc_board order by bGroup desc, bStep asc";
+	        
+	         preparedStatement = connection.prepareStatement(query);
+	         resultSet = preparedStatement.executeQuery();
+	         
+	         while (resultSet.next()) {
+	            int bId = resultSet.getInt("bId");
+	            String bName = resultSet.getString("bName");
+	            String bTitle = resultSet.getString("bTitle");
+	            String bContent = resultSet.getString("bContent");
+	            Timestamp bDate = resultSet.getTimestamp("bDate");
+	            int bHit = resultSet.getInt("bHit");
+	            int bGroup = resultSet.getInt("bGroup");
+	            int bStep = resultSet.getInt("bStep");
+	            int bIndent = resultSet.getInt("bIndent");
+	            
+	            BDto dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+	            dtos.add(dto);
+	         }
+	         
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if(resultSet != null) resultSet.close();
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	            
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	      return dtos;
+	   }
+
+	public BDto contentView(String bId) {
+	
+		 BDto dtos = null;
+	      
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	      ResultSet resultSet = null;
+	      
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "select * from mvc_board where bId = ?"; //?는 변수로 넘어오는 것을 집어넣을 때 사용한다.
+	        
+	         preparedStatement = connection.prepareStatement(query);
+	         
+	         
+	         preparedStatement.setInt(1, Integer.parseInt(bId));
+	         
+	         resultSet = preparedStatement.executeQuery();
+	         
+	         while (resultSet.next()) {
+	            int Id = resultSet.getInt("bId");
+	            String bName = resultSet.getString("bName");
+	            String bTitle = resultSet.getString("bTitle");
+	            String bContent = resultSet.getString("bContent");
+	            Timestamp bDate = resultSet.getTimestamp("bDate");
+	            int bHit = resultSet.getInt("bHit");
+	            int bGroup = resultSet.getInt("bGroup");
+	            int bStep = resultSet.getInt("bStep");
+	            int bIndent = resultSet.getInt("bIndent");
+	            
+	            dtos = new BDto(Id, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+	          
+	         }
+	         
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if(resultSet != null) resultSet.close();
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	            
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	      return dtos;
+	   }
+
+	public void write(String bName, String bTitle, String bContent) {
+		
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	       
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent)  values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0 )";
+	         		 
+	        
+	         	preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, bName);
+				preparedStatement.setString(2, bTitle);
+				preparedStatement.setString(3, bContent);
+				int rn = preparedStatement.executeUpdate();
+	         
+	            
+	      } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+			}
+			
+	}
+
+	public void delete(String bId) {
+	
+	      
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	  
+	      
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "delete from mvc_board where bId = ?"; //?는 변수로 넘어오는 것을 집어넣을 때 사용한다.
+	         preparedStatement = connection.prepareStatement(query); 
+	         
+	         preparedStatement.setInt(1, Integer.parseInt(bId)); 
+	         
+	         int rn = preparedStatement.executeUpdate();
+	         
+	        
+	         
+	         
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	           
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	            
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	  
+	   
+
+		
+	}
+
+	public BDto reply_view(String bId) {
+		 BDto dtos = null;
+	      
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	      ResultSet resultSet = null;
+	      
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "select * from mvc_board where bId = ?"; //?는 변수로 넘어오는 것을 집어넣을 때 사용한다.
+	        
+	         preparedStatement = connection.prepareStatement(query);
+	         preparedStatement.setInt(1, Integer.parseInt(bId));
+	         
+	         resultSet = preparedStatement.executeQuery();
+	         
+	         while (resultSet.next()) {
+	            int Id = resultSet.getInt("bId");
+	            String bName = resultSet.getString("bName");
+	            String bTitle = resultSet.getString("bTitle");
+	            String bContent = resultSet.getString("bContent");
+	            Timestamp bDate = resultSet.getTimestamp("bDate");
+	            int bHit = resultSet.getInt("bHit");
+	            int bGroup = resultSet.getInt("bGroup");
+	            int bStep = resultSet.getInt("bStep");
+	            int bIndent = resultSet.getInt("bIndent");
+	            
+	            dtos = new BDto(Id, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+	          
+	         }
+	         
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if(resultSet != null) resultSet.close();
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	            
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	      return dtos;
+	   }
+
+	public void reply(String bId, String bName, String bTitle, String bContent, String bGroup, String bStep,
+			String bIndent) {
+		
+			replyShape(bGroup , bStep);
+		Connection connection = null;
+	    PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	       
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query = "insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, ?, ?, ?)";
+	         		 
+	        
+	         	preparedStatement = connection.prepareStatement(query);
+	         	preparedStatement.setString(1, bName);
+	            preparedStatement.setString(2, bTitle);
+	            preparedStatement.setString(3, bContent);
+	            
+	            preparedStatement.setInt(4, Integer.parseInt(bGroup));
+	            preparedStatement.setInt(5, Integer.parseInt(bStep) + 1);
+	            preparedStatement.setInt(6, Integer.parseInt(bIndent) + 1);
+				
+				int rn = preparedStatement.executeUpdate(); // executeUpdate insert update delete 쿼리문을 실행하기 위한 메서드이다 처리된 레코드 수를 리턴한다.
+	         
+	            
+	      } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+			}
+			
+	}
+
+	 private void replyShape( String strGroup, String strStep) {
+	      // TODO Auto-generated method stub
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;
+	      
+	      try {
+	         connection = dataSource.getConnection();
+	         String query = "update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?"; //모두 1로 주면 정렬이 되지 않기 떄문에 step에 +1을 해주어서 한칸씩 밀리도록 정렬한다. 같은 그룹 내의 원글이 0이라고 하면 +1 씩 1,2,3,4,.....
+	         preparedStatement = connection.prepareStatement(query);
+	         preparedStatement.setInt(1, Integer.parseInt(strGroup));
+	         preparedStatement.setInt(2, Integer.parseInt(strStep));
+	         
+	         int rn = preparedStatement.executeUpdate();
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	   }
+
+	public void modify(String bId, String bName, String bTitle, String bContent) {
+		
+		Connection connection = null;
+	      PreparedStatement preparedStatement = null;//preparedstatement : 보안이 더 좋고 사용하기 더 쉽다.
+	       
+	      try {
+	    	  
+	         connection = dataSource.getConnection();//커넥션풀 객체를 가져오는것
+	         
+	         String query =  "update mvc_board set bName = ?, bTitle = ?, bContent = ? where bId = ?";
+	         		 
+	        
+	         	preparedStatement = connection.prepareStatement(query);
+	         	
+				preparedStatement.setString(1, bName);
+				preparedStatement.setString(2, bTitle);
+				preparedStatement.setString(3, bContent);
+				preparedStatement.setInt(4, Integer.parseInt(bId));
+				int rn = preparedStatement.executeUpdate();
+	         
+	            
+	      } catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null) connection.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+			}
+			
+	}
+}
+
+
+===========================================================dto=======================================
+
+package edu.bit.ex.dto;
+
+import java.sql.Timestamp;
+
+/*
+ * bId number(4) primary key,
+bName varchar2(20),
+bTitle varchar2(100),
+bContent varchar2(300),
+bDate date default sysdate,
+bHit number(4) default 0,
+bGroup number(4),
+bStep number(4),
+bIndent number(4)
+ * 
+ * 
+ */
+
+public class BDto { 
+	
+	   private int bId;
+	   private String bName;
+	   private String bTitle;
+	   private String bContent;
+	   private Timestamp bDate;
+	   private int bHit;
+	   private int bGroup;
+	   private int bStep;
+	   private int bIndent;
+	   
+	   public BDto() {//디폴트생성자 만들어주어야 한다.
+	      // TODO Auto-generated constructor stub
+	   }
+	   
+	   public BDto(int bId, String bName, String bTitle, String bContent, Timestamp bDate, int bHit, int bGroup, int bStep, int bIndent) {
+	      // TODO Auto-generated constructor stub
+	      this.bId = bId;
+	      this.bName = bName;
+	      this.bTitle = bTitle;
+	      this.bContent = bContent;
+	      this.bDate = bDate;
+	      this.bHit = bHit;
+	      this.bGroup = bGroup;
+	      this.bStep = bStep;
+	      this.bIndent = bIndent;
+	      
+	   }
+
+	   public int getbId() {
+	      return bId;
+	   }
+
+	   public void setbId(int bId) {
+	      this.bId = bId;
+	   }
+
+	   public String getbName() {
+	      return bName;
+	   }
+
+	   public void setbName(String bName) {
+	      this.bName = bName;
+	   }
+
+	   public String getbTitle() {
+	      return bTitle;
+	   }
+
+	   public void setbTitle(String bTitle) {
+	      this.bTitle = bTitle;
+	   }
+
+	   public String getbContent() {
+	      return bContent;
+	   }
+
+	   public void setbContent(String bContent) {
+	      this.bContent = bContent;
+	   }
+
+	   public Timestamp getbDate() {
+	      return bDate;
+	   }
+
+	   public void setbDate(Timestamp bDate) {
+	      this.bDate = bDate;
+	   }
+
+	   public int getbHit() {
+	      return bHit;
+	   }
+
+	   public void setbHit(int bHit) {
+	      this.bHit = bHit;
+	   }
+
+	   public int getbGroup() {
+	      return bGroup;
+	   }
+
+	   public void setbGroup(int bGroup) {
+	      this.bGroup = bGroup;
+	   }
+
+	   public int getbStep() {
+	      return bStep;
+	   }
+
+	   public void setbStep(int bStep) {
+	      this.bStep = bStep;
+	   }
+
+	   public int getbIndent() {
+	      return bIndent;
+	   }
+
+	   public void setbIndent(int bIndent) {
+	      this.bIndent = bIndent;
+	   }
+	   
+	}
+	
+	
+
+==================================상속받을 부모 커맨드 작성===============================================
+
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public interface BCommand {//자손이 구현해야 할 것 
+	
+	abstract void execute(HttpServletRequest request, HttpServletResponse response);
+		
+	}
+
+
+
+===========================delete커맨드==========================================
+
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+
+public class BDeleteCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	
+		String bId = request.getParameter("bId");
+		BDao dao = new BDao(); 
+		dao.delete(bId);
+
+	}
+
+}
+
+============================BlistCommand 커맨드===========================
+
+package edu.bit.ex.command;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+import edu.bit.ex.dto.BDto;
+
+public class BlistCommand implements BCommand{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		BDao dao = new BDao();
+		
+		ArrayList<BDto>dtos = dao.list();
+		request.setAttribute("list", dtos);
+		
+	}
+
+}
+===========================BModifyCommand===================================
+
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+
+public class BModifyCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	
+		  String bId = request.getParameter("bId");
+	      String bName = request.getParameter("bName");
+	      String bTitle = request.getParameter("bTitle");
+	      String bContent = request.getParameter("bContent");
+	      
+	      BDao  dao = new BDao();
+	      dao.modify(bId, bName, bTitle, bContent);
+	      
+	      
+		
+
+	}
+
+}
+=====================BReplyCommand.java========================================
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+import edu.bit.ex.dto.BDto;
+
+public class BReplyCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+
+		 String bId = request.getParameter("bId");
+	      String bName = request.getParameter("bName");
+	      String bTitle = request.getParameter("bTitle");
+	      String bContent = request.getParameter("bContent");
+	      String bGroup = request.getParameter("bGroup");
+	      String bStep = request.getParameter("bStep");
+	      String bIndent = request.getParameter("bIndent");
+	      
+	      BDao dao = new BDao();
+	      dao.reply(bId, bName, bTitle, bContent, bGroup, bStep, bIndent);
+	}
+
+}
+
+==============================BReplyViewCommand.java===============================
+
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+import edu.bit.ex.dto.BDto;
+
+public class BReplyViewCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	
+		 String bId = request.getParameter("bId");
+	      
+	      BDao dao = new BDao();
+	      BDto dto = dao.reply_view(bId);
+	      
+	      request.setAttribute("reply_view", dto);
+		
+
+	}
+
+}
+===============================BWriteCommand.java===============================================
+
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+
+public class BWriteCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String bName = request.getParameter("bName");
+		String bTitle = request.getParameter("bTitle");
+		String bContent = request.getParameter("bContent");
+		
+		BDao dao = new BDao();
+		dao.write( bName,bTitle,bContent);
+	}
+
+}
+==============================ContentCommand.java===================================================
+package edu.bit.ex.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import edu.bit.ex.dao.BDao;
+import edu.bit.ex.dto.BDto;
+
+public class ContentCommand implements BCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String bId = request.getParameter("bId");
+		
+		BDao dao = new BDao(); 
+		
+		
+		BDto dto = dao.contentView(bId);
+		
+		request.setAttribute("content_view",dto);
+	}
+
+}
+
+
+=====================================view===========================================================
+
+화면 구현부분이며 프론트 컨트롤러에서 값을 응답받아 화면에 표시된다.
+
+
+========================================list.jsp==================================================
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title> 
+</head>
+<body>
+   
+   <table width="500" cellpadding="0" cellspacing="0" border="1">
+      <tr>
+         <td>번호</td>
+         <td>이름</td>
+         <td>제목</td>
+         <td>날짜</td>
+         <td>히트</td>
+      </tr>
+      <c:forEach items="${list}" var="dto"> 
+      <!-- 웹브라우저가 알아볼수 있는것은 html과 자바스크립트이다. c:forEach도 자바문법이다 -->
+      <tr>
+         <td>${dto.bId}</td>
+         <td>${dto.bName}</td>
+         <td>
+            <c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
+            <a href="content_view.do?bId=${dto.bId}">${dto.bTitle}</a></td>
+         <td>${dto.bDate}</td>
+         <td>${dto.bHit}</td>
+      </tr>
+      </c:forEach>
+      <tr>
+         <td colspan="5"> <a href="write_view.do">글작성</a> </td>
+      </tr>
+   </table>
+   
+</body>
+</html>
+
+================================================content_view.jsp==================================================
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+   <table width="500" cellpadding="0" cellspacing="0" border="1">
+      <form action="modify.do" method="post">
+         <input type="hidden" name="bId" value="${content_view.bId}">
+         <tr>
+            <td> 번호 </td>
+            <td> ${content_view.bId} </td>
+         </tr>
+         <tr>
+            <td> 히트 </td>
+            <td> ${content_view.bHit} </td>
+         </tr>
+         <tr>
+            <td> 이름 </td>
+            <td> <input type="text" name="bName" value="${content_view.bName}"></td>
+         </tr>
+         <tr>
+            <td> 제목 </td>
+            <td> <input type="text" name="bTitle" value="${content_view.bTitle}"></td>
+         </tr>
+         <tr>
+            <td> 내용 </td>
+            <td> <textarea rows="10" name="bContent" >${content_view.bContent}</textarea></td>
+         </tr>
+         <tr >
+            <td colspan="2"> <input type="submit" value="수정"> &nbsp;&nbsp; <a href="list.do">목록보기</a> &nbsp;&nbsp; <a href="delete.do?bId=${content_view.bId}">삭제</a> &nbsp;&nbsp; <a href="reply_view.do?bId=${content_view.bId}">답변</a></td>
+         </tr>
+      </form>
+   </table>
+   
+</body>
+</html>
+
+
+===========================================write_view.jsp================================================================
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+   <table width="500" cellpadding="0" cellspacing="0" border="1">
+      <form action="write.do" method="post">
+         <tr>
+            <td> 이름 </td>
+            <td> <input type="text" name="bName" size = "50"> </td>
+         </tr>
+         <tr>
+            <td> 제목 </td>
+            <td> <input type="text" name="bTitle" size = "50"> </td>
+         </tr>
+         <tr>
+            <td> 내용 </td>
+            <td> <textarea name="bContent" rows="10" ></textarea> </td>
+         </tr>
+         <tr >
+            <td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; <a href="list.do">목록보기</a></td>
+         </tr>
+      </form>
+   </table>
+   
+</body>
+</html>
+
+======================================reply_view.jsp=======================================================================
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+   <table width="500" cellpadding="0" cellspacing="0" border="1">
+      <form action="reply.do" method="post">
+         <input type="hidden" name="bId" value="${reply_view.bId}">
+         <input type="hidden" name="bGroup" value="${reply_view.bGroup}">
+         <input type="hidden" name="bStep" value="${reply_view.bStep}">
+         <input type="hidden" name="bIndent" value="${reply_view.bIndent}">
+         <tr>
+            <td> 번호 </td>
+            <td> ${reply_view.bId} </td>
+         </tr>
+         <tr>
+            <td> 히트 </td>
+            <td> ${reply_view.bHit} </td>
+         </tr>
+         <tr>
+            <td> 이름 </td>
+            <td> <input type="text" name="bName" value="${reply_view.bName}"></td>
+         </tr>
+         <tr>
+            <td> 제목 </td>
+            <td> <input type="text" name="bTitle" value="${reply_view.bTitle}"></td>
+         </tr>
+         <tr>
+            <td> 내용 </td>
+            <td> <textarea rows="10"  name="bContent">${reply_view.bContent}</textarea></td>
+         </tr>
+         <tr >
+            <td colspan="2"><input type="submit" value="답변"> <a href="list.do" >목록</a></td>
+         </tr>
+      </form>
+   </table>
+   
+</body>
+</html>
