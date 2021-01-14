@@ -117,7 +117,7 @@ public class BFrontController extends HttpServlet {
 	      
 	      
 	      RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
-	      dispatcher.forward(request, response);
+	      dispatcher.forward(request, response); //디스패처는 서블릿에서 포워딩을 해주는 방법이다.
 	}
 
 }
