@@ -1,2 +1,71 @@
 원글에서 댓글 달면 무조건 스택 인덕트 1씩 더한다.
 댓글에 댓글 달면 댓글 스택 인덕트에 더하기 1씩 한다.
+
+
+1.게시판 설계도를 그리시오(Model 2,MVC)?
+
+2.DB 관련하여 아래를 정리하시오.
+-게시판 DB 설계(특히 댓글관련 컬럼)
+-list 뽑아내는 sql
+-댓글 달기 위한 sql
+-수정 sql
+-게시판 글 insert sql
+3.Servlet 에서 forward 방법은?
+4.게시판을 한시간 정도로 짤수 있도록 노력합시다.
+5.모르는 부분은 선생님 한테 질문할것.
+
+
+
+1.게시판 댓글 달기 위한 SQL 구문(3개)들을 설명하시오.(반드시 이해 할것)
+
+-list를 표현하기 위한 쿼리
+"select * from mvc_board where bId = ?"
+(reply_view) bId값에 해당하는 원본글을 불러옴
+
+-shapeReply 함수의 쿼리
+"update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?"
+답글을 저장할 때의 양식.
+set bStep = bStep + 1 : 답글이 달릴 때마다 원본글로부터 한 칸씩 내려감
+
+where bGroup = ? and bStep > ? : 
+답변을 달기로 한 "원본글"을 기준으로 원본글과 그룹이 같고 원본글의 step(=0)보다 스텝이 큰 기존글들의 스텝을 증가시킴.
+(기존글은 모두 원본글보다 step이 큼)
+(reply함수에서 원본글 밑에 생성되는 최초의 댓글은 step이 1이게끔 설정함.)
+그래야 지금 생성되는 글 밑으로 이전 생성글들이 밀리니까.
+
+-댓글 insert 
+replyShape(bGroup, bStep); -> step 조정
+
+-댓글 insert 쿼리
+"insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) "
+               + "values (mvc_board_seq.nextval, ?, ?, ?, ?, ?, ?)"
+새로 입력한 답글 값을 저장
+
+===========================================
+group: 원본글의 그룹 넘버. 원본글과 답변글을 모두 묶은 id값.
+step: 원본글로부터 몇 번째 아래에 답변글이 있는지를 표시.
+indent: 얼마만큼 안쪽으로 글이 들어가서 시작할 것인지를 표시.
+===========================================
+
+
+
+
+
+6.아래 쿼리를 푸시오
+
+
+--43> 자신의 급여가 평균 급여보다 많고 이름에 T가 들어가는 사원과 
+
+동일한 부서에 근무하는 모든 사원의 사원 번호, 이름 및 급여를 출력하라.
+
+
+ SELECT ENAME, DEPTNO, SAL FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE SAL >SAL/12 AND ENAME LIKE '%T%');
+
+
+--45> Dallas에서 근무하는 사원과 직업이 일치하는 사원의 이름,부서이름, 및 급여를 출력하시오
+
+
+SELECT JOB , ENAME ,LOC FROM EMP E , DEPT D WHERE E.DEPTNO = D.DEPTNO AND LOC = 'DALLAS';
+
+
+SELECT ENAME, DNAME, SAL FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO AND JOB IN (SELECT JOB FROM EMP E , DEPT D WHERE E.DEPTNO = D.DEPTNO AND LOC = 'DALLAS');
