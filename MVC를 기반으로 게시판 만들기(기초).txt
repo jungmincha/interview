@@ -1,8 +1,8 @@
 
 
-Å¬¶óÀÌ¾ğÆ®°¡ ÄÁÆ®·Ñ·¯¿¡°Ô ¿äÃ»ÇÑ´Ù ±×·¯¸é ÇÁ·ĞÆ® ÄÁÆ®·Ñ·¯°¡ ·ÎÁ÷À» ½ÇÇàÇÏ´Â ¸ğµ¨¿¡°Ô ·ÎÁ÷ ½ÇÇàÁö½Ã¸¦ ÇÑ´Ù. ±×¸®°í °ªÀ» ¹Ş¾Æ view ¿¡ ÀÀ´äÇØÁØ´Ù.
+í´ë¼ì´ì–¸íŠ¸ê°€ ì»¨íŠ¸ë¡¤ëŸ¬ì—ê²Œ ìš”ì²­í•œë‹¤ ê·¸ëŸ¬ë©´ í”„ë¡ íŠ¸ ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ë¡œì§ì„ ì‹¤í–‰í•˜ëŠ” ëª¨ë¸ì—ê²Œ ë¡œì§ ì‹¤í–‰ì§€ì‹œë¥¼ í•œë‹¤. ê·¸ë¦¬ê³  ê°’ì„ ë°›ì•„ view ì— ì‘ë‹µí•´ì¤€ë‹¤.
 
-===========================================ÄÁÆ®·Ñ·¯ ==¼­ºí¸´========================
+===========================================ì»¨íŠ¸ë¡¤ëŸ¬ ==ì„œë¸”ë¦¿========================
 
 package edu.bit.ex.controller;//frontcontroller
 
@@ -27,7 +27,7 @@ import edu.bit.ex.command.ContentCommand;
 /**
  * Servlet implementation class FrontController
  */
-@WebServlet("*.do")//¹«Á¶°Ç ¹Ş°Ú´Ù
+@WebServlet("*.do")//ë¬´ì¡°ê±´ ë°›ê² ë‹¤
 public class BFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -123,7 +123,7 @@ public class BFrontController extends HttpServlet {
 }
 
 
-===========================================modelºÎºĞÀÌ°í °¢ Ä¿¸ÇµåµéÀÌ doa·Î °£´ÙÀ½ dto¿¡¼­ °´Ã¼ »ı¼­ÇØÁÖ°í db·Î °ªÀ» ÀúÀåÇÑ´Ù.
+===========================================modelë¶€ë¶„ì´ê³  ê° ì»¤ë§¨ë“œë“¤ì´ doaë¡œ ê°„ë‹¤ìŒ dtoì—ì„œ ê°ì²´ ìƒì„œí•´ì£¼ê³  dbë¡œ ê°’ì„ ì €ì¥í•œë‹¤.
 
 ==============================================Dao==============================================================
 
@@ -137,19 +137,19 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.sql.DataSource;//¹«Á¶°Ç sql²¨·Î ¹Ş¾Æ¾ß¿Í¾ß ÇÑ´Ù.
+import javax.sql.DataSource;//ë¬´ì¡°ê±´ sqlêº¼ë¡œ ë°›ì•„ì•¼ì™€ì•¼ í•œë‹¤.
 
 import edu.bit.ex.dto.BDto;
 
 public class BDao {//data access object
-	DataSource dataSource; //Ä¿³Ø¼Ç Ç® °´Ã¼´Â DataSource 
+	DataSource dataSource; //ì»¤ë„¥ì…˜ í’€ ê°ì²´ëŠ” DataSource 
 
 	 public BDao() {
 	      // TODO Auto-generated constructor stub
 	      
-	      try {//context.xml¿¡ Ãß°¡ÇÑ°Í
+	      try {//context.xmlì— ì¶”ê°€í•œê²ƒ
 	         Context context = new InitialContext();//javaxnaming
-	         dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracle");//Ä¿³Ø¼Ç Ç® °¡Á®¿À´Â °ø½Ä
+	         dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracle");//ì»¤ë„¥ì…˜ í’€ ê°€ì ¸ì˜¤ëŠ” ê³µì‹
 	      } catch (Exception e) {
 	         // TODO: handle exception
 	         e.printStackTrace();
@@ -161,12 +161,12 @@ public class BDao {//data access object
 	      ArrayList<BDto> dtos = new ArrayList<BDto>();
 	      
 	      Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	      ResultSet resultSet = null;
 	      
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
 	         String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from mvc_board order by bGroup desc, bStep asc";
 	        
@@ -206,18 +206,18 @@ public class BDao {//data access object
 	   }
 
 	public BDto contentView(String bId) {
-	
+		upHit(bId);
 		 BDto dtos = null;
 	      
 	      Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	      ResultSet resultSet = null;
 	      
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
-	         String query = "select * from mvc_board where bId = ?"; //?´Â º¯¼ö·Î ³Ñ¾î¿À´Â °ÍÀ» Áı¾î³ÖÀ» ¶§ »ç¿ëÇÑ´Ù.
+	         String query = "select * from mvc_board where bId = ?"; //?ëŠ” ë³€ìˆ˜ë¡œ ë„˜ì–´ì˜¤ëŠ” ê²ƒì„ ì§‘ì–´ë„£ì„ ë•Œ ì‚¬ìš©í•œë‹¤.
 	        
 	         preparedStatement = connection.prepareStatement(query);
 	         
@@ -261,11 +261,11 @@ public class BDao {//data access object
 	public void write(String bName, String bTitle, String bContent) {
 		
 	      Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	       
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
 	         String query = "insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent)  values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0 )";
 	         		 
@@ -296,14 +296,14 @@ public class BDao {//data access object
 	
 	      
 	      Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	  
 	      
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
-	         String query = "delete from mvc_board where bId = ?"; //?´Â º¯¼ö·Î ³Ñ¾î¿À´Â °ÍÀ» Áı¾î³ÖÀ» ¶§ »ç¿ëÇÑ´Ù.
+	         String query = "delete from mvc_board where bId = ?"; //?ëŠ” ë³€ìˆ˜ë¡œ ë„˜ì–´ì˜¤ëŠ” ê²ƒì„ ì§‘ì–´ë„£ì„ ë•Œ ì‚¬ìš©í•œë‹¤.
 	         preparedStatement = connection.prepareStatement(query); 
 	         
 	         preparedStatement.setInt(1, Integer.parseInt(bId)); 
@@ -337,14 +337,14 @@ public class BDao {//data access object
 		 BDto dtos = null;
 	      
 	      Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	      ResultSet resultSet = null;
 	      
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
-	         String query = "select * from mvc_board where bId = ?"; //?´Â º¯¼ö·Î ³Ñ¾î¿À´Â °ÍÀ» Áı¾î³ÖÀ» ¶§ »ç¿ëÇÑ´Ù.
+	         String query = "select * from mvc_board where bId = ?"; //?ëŠ” ë³€ìˆ˜ë¡œ ë„˜ì–´ì˜¤ëŠ” ê²ƒì„ ì§‘ì–´ë„£ì„ ë•Œ ì‚¬ìš©í•œë‹¤.
 	        
 	         preparedStatement = connection.prepareStatement(query);
 	         preparedStatement.setInt(1, Integer.parseInt(bId));
@@ -382,17 +382,47 @@ public class BDao {//data access object
 	      }
 	      return dtos;
 	   }
+	   
+	   private void upHit(String bId) { //
+	      // TODO Auto-generated method stub
+	      Connection connection = null;
+	      PreparedStatement preparedStatement = null;
+	      
+	      try {
+	         connection = dataSource.getConnection();
+	         String query = "update mvc_board set bHit = bHit + 1 where bId = ?";
+	         preparedStatement = connection.prepareStatement(query);
+	         preparedStatement.setString(1, bId);
+	         
+	         int rn = preparedStatement.executeUpdate();
+	               
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if(preparedStatement != null) preparedStatement.close();
+	            if(connection != null) connection.close();
+	         } catch (Exception e2) {
+	            // TODO: handle exception
+	            e2.printStackTrace();
+	         }
+	      }
+	   }
+	   
+	   
+	   
 
 	public void reply(String bId, String bName, String bTitle, String bContent, String bGroup, String bStep,
 			String bIndent) {
 		
 			replyShape(bGroup , bStep);
 		Connection connection = null;
-	    PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	    PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	       
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
 	         String query = "insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, ?, ?, ?)";
 	         		 
@@ -406,7 +436,7 @@ public class BDao {//data access object
 	            preparedStatement.setInt(5, Integer.parseInt(bStep) + 1);
 	            preparedStatement.setInt(6, Integer.parseInt(bIndent) + 1);
 				
-				int rn = preparedStatement.executeUpdate(); // executeUpdate insert update delete Äõ¸®¹®À» ½ÇÇàÇÏ±â À§ÇÑ ¸Ş¼­µåÀÌ´Ù Ã³¸®µÈ ·¹ÄÚµå ¼ö¸¦ ¸®ÅÏÇÑ´Ù.
+				int rn = preparedStatement.executeUpdate(); // executeUpdate insert update delete ì¿¼ë¦¬ë¬¸ì„ ì‹¤í–‰í•˜ê¸° ìœ„í•œ ë©”ì„œë“œì´ë‹¤ ì²˜ë¦¬ëœ ë ˆì½”ë“œ ìˆ˜ë¥¼ ë¦¬í„´í•œë‹¤.
 	         
 	            
 	      } catch (Exception e) {
@@ -431,7 +461,7 @@ public class BDao {//data access object
 	      
 	      try {
 	         connection = dataSource.getConnection();
-	         String query = "update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?"; //¸ğµÎ 1·Î ÁÖ¸é Á¤·ÄÀÌ µÇÁö ¾Ê±â ‹š¹®¿¡ step¿¡ +1À» ÇØÁÖ¾î¼­ ÇÑÄ­¾¿ ¹Ğ¸®µµ·Ï Á¤·ÄÇÑ´Ù. °°Àº ±×·ì ³»ÀÇ ¿ø±ÛÀÌ 0ÀÌ¶ó°í ÇÏ¸é +1 ¾¿ 1,2,3,4,.....
+	         String query = "update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?"; //ëª¨ë‘ 1ë¡œ ì£¼ë©´ ì •ë ¬ì´ ë˜ì§€ ì•Šê¸° Â‹Âšë¬¸ì— stepì— +1ì„ í•´ì£¼ì–´ì„œ í•œì¹¸ì”© ë°€ë¦¬ë„ë¡ ì •ë ¬í•œë‹¤. ê°™ì€ ê·¸ë£¹ ë‚´ì˜ ì›ê¸€ì´ 0ì´ë¼ê³  í•˜ë©´ +1 ì”© 1,2,3,4,.....
 	         preparedStatement = connection.prepareStatement(query);
 	         preparedStatement.setInt(1, Integer.parseInt(strGroup));
 	         preparedStatement.setInt(2, Integer.parseInt(strStep));
@@ -454,11 +484,11 @@ public class BDao {//data access object
 	public void modify(String bId, String bName, String bTitle, String bContent) {
 		
 		Connection connection = null;
-	      PreparedStatement preparedStatement = null;//preparedstatement : º¸¾ÈÀÌ ´õ ÁÁ°í »ç¿ëÇÏ±â ´õ ½±´Ù.
+	      PreparedStatement preparedStatement = null;//preparedstatement : ë³´ì•ˆì´ ë” ì¢‹ê³  ì‚¬ìš©í•˜ê¸° ë” ì‰½ë‹¤.
 	       
 	      try {
 	    	  
-	         connection = dataSource.getConnection();//Ä¿³Ø¼ÇÇ® °´Ã¼¸¦ °¡Á®¿À´Â°Í
+	         connection = dataSource.getConnection();//ì»¤ë„¥ì…˜í’€ ê°ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ”ê²ƒ
 	         
 	         String query =  "update mvc_board set bName = ?, bTitle = ?, bContent = ? where bId = ?";
 	         		 
@@ -521,7 +551,7 @@ public class BDto {
 	   private int bStep;
 	   private int bIndent;
 	   
-	   public BDto() {//µğÆúÆ®»ı¼ºÀÚ ¸¸µé¾îÁÖ¾î¾ß ÇÑ´Ù.
+	   public BDto() {//ë””í´íŠ¸ìƒì„±ì ë§Œë“¤ì–´ì£¼ì–´ì•¼ í•œë‹¤.
 	      // TODO Auto-generated constructor stub
 	   }
 	   
@@ -615,14 +645,14 @@ public class BDto {
 	
 	
 
-==================================»ó¼Ó¹ŞÀ» ºÎ¸ğ Ä¿¸Çµå ÀÛ¼º===============================================
+==================================ìƒì†ë°›ì„ ë¶€ëª¨ ì»¤ë§¨ë“œ ì‘ì„±===============================================
 
 package edu.bit.ex.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public interface BCommand {//ÀÚ¼ÕÀÌ ±¸ÇöÇØ¾ß ÇÒ °Í 
+public interface BCommand {//ìì†ì´ êµ¬í˜„í•´ì•¼ í•  ê²ƒ 
 	
 	abstract void execute(HttpServletRequest request, HttpServletResponse response);
 		
@@ -630,7 +660,7 @@ public interface BCommand {//ÀÚ¼ÕÀÌ ±¸ÇöÇØ¾ß ÇÒ °Í
 
 
 
-===========================deleteÄ¿¸Çµå==========================================
+===========================deleteì»¤ë§¨ë“œ==========================================
 
 package edu.bit.ex.command;
 
@@ -652,7 +682,7 @@ public class BDeleteCommand implements BCommand {
 
 }
 
-============================BlistCommand Ä¿¸Çµå===========================
+============================BlistCommand ì»¤ë§¨ë“œ===========================
 
 package edu.bit.ex.command;
 
@@ -812,7 +842,7 @@ public class ContentCommand implements BCommand {
 
 =====================================view===========================================================
 
-È­¸é ±¸ÇöºÎºĞÀÌ¸ç ÇÁ·ĞÆ® ÄÁÆ®·Ñ·¯¿¡¼­ °ªÀ» ÀÀ´ä¹Ş¾Æ È­¸é¿¡ Ç¥½ÃµÈ´Ù.
+í™”ë©´ êµ¬í˜„ë¶€ë¶„ì´ë©° í”„ë¡ íŠ¸ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ê°’ì„ ì‘ë‹µë°›ì•„ í™”ë©´ì— í‘œì‹œëœë‹¤.
 
 
 ========================================list.jsp==================================================
@@ -831,14 +861,14 @@ public class ContentCommand implements BCommand {
    
    <table width="500" cellpadding="0" cellspacing="0" border="1">
       <tr>
-         <td>¹øÈ£</td>
-         <td>ÀÌ¸§</td>
-         <td>Á¦¸ñ</td>
-         <td>³¯Â¥</td>
-         <td>È÷Æ®</td>
+         <td>ë²ˆí˜¸</td>
+         <td>ì´ë¦„</td>
+         <td>ì œëª©</td>
+         <td>ë‚ ì§œ</td>
+         <td>íˆíŠ¸</td>
       </tr>
       <c:forEach items="${list}" var="dto"> 
-      <!-- À¥ºê¶ó¿ìÀú°¡ ¾Ë¾Æº¼¼ö ÀÖ´Â°ÍÀº html°ú ÀÚ¹Ù½ºÅ©¸³Æ®ÀÌ´Ù. c:forEachµµ ÀÚ¹Ù¹®¹ıÀÌ´Ù -->
+      <!-- ì›¹ë¸Œë¼ìš°ì €ê°€ ì•Œì•„ë³¼ìˆ˜ ìˆëŠ”ê²ƒì€ htmlê³¼ ìë°”ìŠ¤í¬ë¦½íŠ¸ì´ë‹¤. c:forEachë„ ìë°”ë¬¸ë²•ì´ë‹¤ -->
       <tr>
          <td>${dto.bId}</td>
          <td>${dto.bName}</td>
@@ -850,7 +880,7 @@ public class ContentCommand implements BCommand {
       </tr>
       </c:forEach>
       <tr>
-         <td colspan="5"> <a href="write_view.do">±ÛÀÛ¼º</a> </td>
+         <td colspan="5"> <a href="write_view.do">ê¸€ì‘ì„±</a> </td>
       </tr>
    </table>
    
@@ -873,27 +903,27 @@ public class ContentCommand implements BCommand {
       <form action="modify.do" method="post">
          <input type="hidden" name="bId" value="${content_view.bId}">
          <tr>
-            <td> ¹øÈ£ </td>
+            <td> ë²ˆí˜¸ </td>
             <td> ${content_view.bId} </td>
          </tr>
          <tr>
-            <td> È÷Æ® </td>
+            <td> íˆíŠ¸ </td>
             <td> ${content_view.bHit} </td>
          </tr>
          <tr>
-            <td> ÀÌ¸§ </td>
+            <td> ì´ë¦„ </td>
             <td> <input type="text" name="bName" value="${content_view.bName}"></td>
          </tr>
          <tr>
-            <td> Á¦¸ñ </td>
+            <td> ì œëª© </td>
             <td> <input type="text" name="bTitle" value="${content_view.bTitle}"></td>
          </tr>
          <tr>
-            <td> ³»¿ë </td>
+            <td> ë‚´ìš© </td>
             <td> <textarea rows="10" name="bContent" >${content_view.bContent}</textarea></td>
          </tr>
          <tr >
-            <td colspan="2"> <input type="submit" value="¼öÁ¤"> &nbsp;&nbsp; <a href="list.do">¸ñ·Ïº¸±â</a> &nbsp;&nbsp; <a href="delete.do?bId=${content_view.bId}">»èÁ¦</a> &nbsp;&nbsp; <a href="reply_view.do?bId=${content_view.bId}">´äº¯</a></td>
+            <td colspan="2"> <input type="submit" value="ìˆ˜ì •"> &nbsp;&nbsp; <a href="list.do">ëª©ë¡ë³´ê¸°</a> &nbsp;&nbsp; <a href="delete.do?bId=${content_view.bId}">ì‚­ì œ</a> &nbsp;&nbsp; <a href="reply_view.do?bId=${content_view.bId}">ë‹µë³€</a></td>
          </tr>
       </form>
    </table>
@@ -917,19 +947,19 @@ public class ContentCommand implements BCommand {
    <table width="500" cellpadding="0" cellspacing="0" border="1">
       <form action="write.do" method="post">
          <tr>
-            <td> ÀÌ¸§ </td>
+            <td> ì´ë¦„ </td>
             <td> <input type="text" name="bName" size = "50"> </td>
          </tr>
          <tr>
-            <td> Á¦¸ñ </td>
+            <td> ì œëª© </td>
             <td> <input type="text" name="bTitle" size = "50"> </td>
          </tr>
          <tr>
-            <td> ³»¿ë </td>
+            <td> ë‚´ìš© </td>
             <td> <textarea name="bContent" rows="10" ></textarea> </td>
          </tr>
          <tr >
-            <td colspan="2"> <input type="submit" value="ÀÔ·Â"> &nbsp;&nbsp; <a href="list.do">¸ñ·Ïº¸±â</a></td>
+            <td colspan="2"> <input type="submit" value="ì…ë ¥"> &nbsp;&nbsp; <a href="list.do">ëª©ë¡ë³´ê¸°</a></td>
          </tr>
       </form>
    </table>
@@ -956,27 +986,27 @@ public class ContentCommand implements BCommand {
          <input type="hidden" name="bStep" value="${reply_view.bStep}">
          <input type="hidden" name="bIndent" value="${reply_view.bIndent}">
          <tr>
-            <td> ¹øÈ£ </td>
+            <td> ë²ˆí˜¸ </td>
             <td> ${reply_view.bId} </td>
          </tr>
          <tr>
-            <td> È÷Æ® </td>
+            <td> íˆíŠ¸ </td>
             <td> ${reply_view.bHit} </td>
          </tr>
          <tr>
-            <td> ÀÌ¸§ </td>
+            <td> ì´ë¦„ </td>
             <td> <input type="text" name="bName" value="${reply_view.bName}"></td>
          </tr>
          <tr>
-            <td> Á¦¸ñ </td>
+            <td> ì œëª© </td>
             <td> <input type="text" name="bTitle" value="${reply_view.bTitle}"></td>
          </tr>
          <tr>
-            <td> ³»¿ë </td>
+            <td> ë‚´ìš© </td>
             <td> <textarea rows="10"  name="bContent">${reply_view.bContent}</textarea></td>
          </tr>
          <tr >
-            <td colspan="2"><input type="submit" value="´äº¯"> <a href="list.do" >¸ñ·Ï</a></td>
+            <td colspan="2"><input type="submit" value="ë‹µë³€"> <a href="list.do" >ëª©ë¡</a></td>
          </tr>
       </form>
    </table>
