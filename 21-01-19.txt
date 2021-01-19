@@ -5,6 +5,8 @@
  외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지
  소멸되지 않는 특성을 의미한다.
  
+ 클로저의 사용 이유 : Closure로 정보은닉과 캡슐화를 제공할 수 있다.
+ 
  <script>
 function funName(){
     return function(x){
