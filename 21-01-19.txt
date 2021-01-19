@@ -1,11 +1,66 @@
 
 1.클로져란 무엇인가?
+
+ 클로저란 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 
+ 외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지
+ 소멸되지 않는 특성을 의미한다.
+ 
+ <script>
+function funName(){
+    return function(x){
+	for(var i = 1 ; i < 10; i++){
+	console.log(x + "*" + i + "=" + (x*i));
+		}
+	};
+}
+var returnFun = funName();
+returnFun(4);
+</script>
+ 
+ 
+
 2.js를 이용하여, 구구단중 홀수단만 나오게 하시오.
+
+<script>
+		document.write("<h1>");
+		document.write("구구단");
+		document.write("</h1>");
+		document.write("<table border=1>");
+
+		document.write("<tr>");
+		document.write("<td>1단</td>");
+		document.write("<td>3단</td>");
+		document.write("<td>5단</td>");
+		document.write("<td>7단</td>");
+		document.write("<td>9단</td>");
+		
+		document.write("</tr>");
+
+		for (var i = 1; i <= 9; i++) {
+
+			document.write("<tr>");
+
+			for (var j = 1; j <= 9; j++) {
+				
+				if( j % 2 == 1){
+
+				document.write("<td>");
+
+				document.write(j + "*" + i + " = " + (j * i));
+
+				document.write("</td>");
+				}
+			}
+			document.write("<br>");
+			document.write("</tr>");
+		}
+		document.write("</table>");
+	</script>
 
 
 3.부서별로 sal의 최소 값을 구하는데, 30번 부서의 sal 최소값 보다 큰것을 구하시오. 
 
-
+SELECT DNAME, MIN(SAL) FROM EMP E , DEPT D WHERE E.SAL > (SELECT MIN(SAL) FROM EMP WHERE DEPTNO = 30) AND E.DEPTNO=D.DEPTNO GROUP BY DNAME ;
 
 
 4.삼각형및 사각형의 넓이를 구하는 프로그래밍을 IoC 컨테이너를 이용하여 프로그래밍 하시오.(스프링)
@@ -89,10 +144,10 @@ public class MyCalCul {
       <value>도형 넓이구하기</value>
     </property>
     <property name="weight">
-      <value>10</value>
+      <value>10</value> //가로
     </property>
     <property name="height">
-      <value>5</value>
+      <value>5</value> //
     </property>
     
   </bean>
@@ -154,7 +209,7 @@ document.write("</table>");
 
 </script>
 
-성젹표
+===================================성젹표====================================================================================
 
 
 <script>
@@ -202,12 +257,6 @@ console.log("평균 : " + avg);
 
 
 </script>
-
- //클로저란 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 
-   //외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지
-   //소멸되지 않는 특성을 의미한다.
-
-
 
 
 di 메인 함수에서 객체주입 해주는 것 
