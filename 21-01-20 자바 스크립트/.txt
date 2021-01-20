@@ -138,6 +138,8 @@ function Circle(){
 	
 }
 }
+
+
 var myCircle = new Circle();
 
 myCircle.setUser();
@@ -317,6 +319,10 @@ public class Student  {
 interface IShape{
 	double getArea();
 }
+
+
+
+
 
 
 
@@ -568,3 +574,71 @@ console.log(myCircle.getArea());
 </script>
 </body>
 </html>
+
+
+
+
+
+===========================================================pencil============================================================
+
+<PencilMain.java>
+
+package edu.bit.ex;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class PencilMain {
+
+	public static void main(String[] args) {
+		String configLocatioin = "classpath:applicationCTX2.xml";
+
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocatioin);
+		Pencil pencil = ctx.getBean("pencil", Pencil.class);
+		pencil.use();
+	}
+
+}
+
+<Pencil.java>
+
+package edu.bit.ex;
+
+public interface Pencil {
+	void use();
+}
+
+<Pencil_4B.java>
+
+package edu.bit.ex;
+
+public class Pencil_4B implements Pencil{
+	@Override
+	public void use(){
+		System.out.println("4B 연필");
+	}
+	
+}
+
+<Pencil_6B_with.java>
+
+package edu.bit.ex;
+
+public class Pencil_6B_with implements Pencil{
+	@Override
+	public void use(){
+		System.out.println("6B 연필 " +"with 지우개");
+	}
+	
+}
+
+<applicationCTX2.xml>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <bean id="pencil" class="edu.bit.ex.Pencil_4B"></bean>
+ 	<!-- 클래스명만 수정하면 다른 결과값 출력 가능  -->
+ </beans>
