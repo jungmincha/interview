@@ -68,6 +68,90 @@ document.write(myCircle.getArea());
 
 -DOM 객체를 배우면 이미지도 바꿔 보도록 합시다.
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+alert("가위바위보 게임입니다~!!");
+var inputUser = prompt("가위 , 바위 ,보 ,중 한개를 입력하세요", "입력");
+alert("유저 : " + inputUser);
+
+
+function Circle(){
+	
+	var user = inputUser;
+	
+	this.getUser = function(){
+		return this.user;
+	};
+	
+	this.setUser = function(user){
+		if(!isNaN(user)){
+			this.user = user;
+		}else{
+			console.log("user is not a number")
+		};
+	};
+	
+	this.Output = function(){
+		//가위 : 1번 , 바위 : 2번 보 : 3번 
+		
+		var com = parseInt(Math.random() * 3) + 1;
+	
+		if(com == 1){
+			com = "가위";
+			alert("컴퓨터 : 가위");
+		}else if(com == 2){
+			com = "바위";
+			alert("컴퓨터 : 바위");
+		}else if(com == 3){
+			com = "보";
+			alert("컴퓨터 : 보");
+		}
+	
+	
+		
+		if((user == "가위" && com =="바위")|| (user == "바위"  && com =="보")||(user == "보"  &&com =="가위")){
+			document.write("당신의 패배입니다");
+			alert("당신의 패배입니다");
+		}else if(user == com){
+			document.write("비겼습니다");
+			alert("비겼습니다");
+		}else{
+			document.write("당신의 승리입니다");
+			alert("당신의 승리입니다");
+		}
+		document.write("<br/>");
+		document.write("최종 결과");
+		document.write("<br/>");
+		document.write("===========");
+		document.write("<br/>");
+		document.write("유저 : " + user);
+		document.write("<br/>");
+		document.write("컴퓨터 : " + com);		
+	
+	
+}
+}
+var myCircle = new Circle();
+
+myCircle.setUser();
+
+
+myCircle.Output();
+
+</script>
+</body>
+</html>
+
+
+
+
 
 
 
@@ -77,11 +161,167 @@ document.write(myCircle.getArea());
 
 6.annotation 방식으로 하여 객체 생성후 사각형과 삼각형 넓이를 구하시오.
 
+
+==========================================main================================================
+package edu.bit.ex;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class MainStudent {
+
+
+		
+		public static void main(String[] args) {
+			
+			AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+
+		    Student student1 = ctx.getBean("student1", Student.class);
+		    System.out.println("================");
+		    System.out.println("도형 : " + student1.getName());
+		    System.out.println("번호 : " + student1.getAge());
+		
+		    System.out.println("세로 : " + student1.getHeight());
+		    System.out.println("가로 : " + student1.getWeight());
+		    System.out.println("넓이 : " + student1.getSquare());
+		    
+		    System.out.println("================");
+		    Student student2 = ctx.getBean("student2", Student.class);
+		    System.out.println("도형 : " + student2.getName());
+		    System.out.println("번호 : " + student2.getAge());
+		  
+		    System.out.println("세로 : " + student2.getHeight());
+		    System.out.println("가로 : " + student2.getWeight());
+		    System.out.println("넓이 : " + student2.getTriangle());
+
+		    ctx.close();
+		}
+}
+
+
+=========================================================ApplicationConfig=============
+package edu.bit.ex;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import java.util.ArrayList;
+
+@Configuration
+public class ApplicationConfig {
+	
+	 @Bean
+	  public Student student1() {
+	
+
+	    Student student = new Student("사각형", 1);
+	    student.setHeight(10);
+	    student.setWeight(10);
+	    student.getSquare();
+
+	    return student;
+	  }
+
+	  @Bean
+	  public Student student2() {
+	 
+
+	    Student student = new Student("삼각형", 2);
+	    student.setHeight(10);
+	    student.setWeight(10);
+	    student.getTriangle();
+
+	    return student;
+	  }
+	}
+
+
+=================================student================================================
+
+package edu.bit.ex;
+
+import java.util.ArrayList;
+
+public class Student  {
+	  private String name;
+	  private int age;
+
+	  private double height;
+	  private double weight;
+
+	  public Student(String name, int age) {
+	    this.name = name;
+	    this.age = age;
+	  
+	  }
+
+	 
+
+	public void setName(String name) {
+	    this.name = name;
+	  }
+
+	  public void setAge(int age) {
+	    this.age = age;
+	  }
+
+	
+
+	  public void setHeight(double height) {
+	    this.height = height;
+	  }
+
+	  public void setWeight(double weight) {
+	    this.weight = weight;
+	  }
+	  
+	  public double getSquare() {
+		  return height * weight;
+	  }
+
+	  public String getName() {
+	    return name;
+	  }
+
+	  public int getAge() {
+	    return age;
+	  }
+
+	 
+
+	  public double getHeight() {
+	    return height;
+	  }
+
+	  public double getWeight() {
+	    return weight;
+	  }
+
+
+
+	public double getTriangle() {
+		
+		return (height * weight)/2;
+	}
+	}
+
+
+
+
+
+
+
+
 7.금일 배운 Pencil의 예처럼 아래를 인터 페이스를 구현하여, 원, 삼각형, 사각형의 넓이를 설정파일 에서 바꾸면 각각의 넓이가  구하여 지도록 하시오.
 
 interface IShape{
 	double getArea();
 }
+
+
+
+
+
 
 8.스프링 미리 공부 구현 해야될 내용-미리준비해 놓읍시다.(한마디로 외워 제낍시다).
 스프링 게시판(오라클 + 마이바티스),스프링 시큐리티, 소셜로그인(OAuth2)-카카오,네이버 먼저, 결재구현(아임포트)
