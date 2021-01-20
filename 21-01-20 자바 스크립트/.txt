@@ -1,0 +1,330 @@
+1.아래를 설명하시오.
+-DI
+-IoC
+-IoC 컨테이너
+2.JS로 시간이 초단위로 갱신되는 페이지를 만드시오.
+3.js 에서의 객체생성 방법은?
+
+
+4.아래를 자바 스크립트로 작성하시오.
+-변수 radius
+-get set 함수 작성
+-프롬프트로 숫자 입력값 받음
+-set 함수를 radius 값 세팅
+-객체 생성후 getArea() 함수 호출하면 원넓이 출력
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+function Circle(){
+	
+	var radius =0;
+	
+	
+	this.getArea = function(){
+		return (this.radius * this.radius)*3.14;	
+	};
+	
+	this.getRadius = function(){
+		return this.radius;
+	};
+	
+	this.setRadius = function(radius){
+		if(!isNaN(radius)){
+			this.radius = radius;
+		}else{
+			console.log("radius is not a number")
+		};
+	};
+	
+	this.getWeight = function(){
+		return this.weight;
+	};
+	
+}
+
+var myCircle = new Circle();
+
+myCircle.setRadius(5);
+
+console.log(myCircle.getArea());
+document.write(myCircle.getArea());
+</script>
+</body>
+</html>
+
+
+
+
+
+
+5.위와 같은 방식으로 가위바위보 게임을 짜시오.
+
+-DOM 객체를 배우면 이미지도 바꿔 보도록 합시다.
+
+
+
+
+
+
+
+
+6.annotation 방식으로 하여 객체 생성후 사각형과 삼각형 넓이를 구하시오.
+
+7.금일 배운 Pencil의 예처럼 아래를 인터 페이스를 구현하여, 원, 삼각형, 사각형의 넓이를 설정파일 에서 바꾸면 각각의 넓이가  구하여 지도록 하시오.
+
+interface IShape{
+	double getArea();
+}
+
+8.스프링 미리 공부 구현 해야될 내용-미리준비해 놓읍시다.(한마디로 외워 제낍시다).
+스프링 게시판(오라클 + 마이바티스),스프링 시큐리티, 소셜로그인(OAuth2)-카카오,네이버 먼저, 결재구현(아임포트)
+
+
+
+
+
+
+
+
+스프링 애너테이션으로 멤버 정보 등록 
+
+==============================================MainStudent.java=================================================================
+
+package edu.bit.ex;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class MainStudent {
+
+	public static void main(String[] args) {
+		
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class); //자바소스코드 내에서 객체주입하는 것-디버깅이 됨
+
+	    Student student1 = ctx.getBean("student1", Student.class);
+	    System.out.println("이름 : " + student1.getName());
+	    System.out.println("나이 : " + student1.getAge());
+	    System.out.println("취미 : " + student1.getHobbys());
+	    System.out.println("신장 : " + student1.getHeight());
+	    System.out.println("몸무게 : " + student1.getWeight());
+
+	    Student student2 = ctx.getBean("student2", Student.class);
+	    System.out.println("이름 : " + student2.getName());
+	    System.out.println("나이 : " + student2.getAge());
+	    System.out.println("취미 : " + student2.getHobbys());
+	    System.out.println("신장 : " + student2.getHeight());
+	    System.out.println("몸무게 : " + student2.getWeight());
+
+	    ctx.close();
+		
+
+	}
+
+}
+
+==============================================Student.java=================================================================
+package edu.bit.ex;
+
+import java.util.ArrayList;
+
+public class Student  {
+	  private String name;
+	  private int age;
+	  private ArrayList<String> hobbys;
+	  private double height;
+	  private double weight;
+
+	  public Student(String name, int age, ArrayList<String> hobbys) {
+	    this.name = name;
+	    this.age = age;
+	    this.hobbys = hobbys;
+	  }
+
+	 
+
+	public void setName(String name) {
+	    this.name = name;
+	  }
+
+	  public void setAge(int age) {
+	    this.age = age;
+	  }
+
+	  public void setHobbys(ArrayList<String> hobbys) {
+	    this.hobbys = hobbys;
+	  }
+
+	  public void setHeight(double height) {
+	    this.height = height;
+	  }
+
+	  public void setWeight(double weight) {
+	    this.weight = weight;
+	  }
+
+	  public String getName() {
+	    return name;
+	  }
+
+	  public int getAge() {
+	    return age;
+	  }
+
+	  public ArrayList<String> getHobbys() {
+	    return hobbys;
+	  }
+
+	  public double getHeight() {
+	    return height;
+	  }
+
+	  public double getWeight() {
+	    return weight;
+	  }
+	}
+
+
+==============================================ApplicationConfi.java=================================================================
+
+package edu.bit.ex;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import java.util.ArrayList;
+
+@Configuration
+public class ApplicationConfig {
+	
+	 @Bean
+	  public Student student1() {
+	    ArrayList<String> hobbys = new ArrayList<String>();
+	    hobbys.add("수영");
+	    hobbys.add("요리");
+
+	    Student student = new Student("홍길동", 20, hobbys);
+	    student.setHeight(180);
+	    student.setWeight(80);
+
+	    return student;
+	  }
+
+	  @Bean
+	  public Student student2() {
+	    ArrayList<String> hobbys = new ArrayList<String>();
+	    hobbys.add("독서");
+	    hobbys.add("음악감상");
+
+	    Student student = new Student("홍길순", 18, hobbys);
+	    student.setHeight(170);
+	    student.setWeight(55);
+
+	    return student;
+	  }
+	}
+
+
+
+
+
+bmi 구하기
+
+<script>
+
+function BMICalculator(){
+	
+	var height =0;
+	var weight =0;
+	
+	this.bmi = function(){
+		return (this.weight/(this.height * this.height)).toFixed(2);
+		
+	};
+	
+	this.getHeight = function(){
+		return this.height;
+	};
+	
+	this.setHeight = function(height){
+		if(!isNaN(height)){
+			this.height = height;
+		}else{
+			console.log("height is not a number")
+		};
+	};
+	
+	this.getWeight = function(){
+		return this.weight;
+	};
+	
+	this.setWeight = function(){
+		if(!isNaN(weight)){
+			this.weight = weight;
+		}else{
+			console.log("weight is not a number")
+		};
+			
+	};
+	
+}
+
+var myBMI = new BMICalculator();
+myBMI.setHeight(1,9);
+myBMI.setWeight(90);
+console.log("myBMI.bmi : " + myBMI.bmi());
+</script>
+
+
+====원주율 구하기======
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+function Circle(){
+	
+	var radius =0;
+	
+	
+	this.getArea = function(){
+		return (this.radius * this.radius)*3.14;	
+	};
+	
+	this.getRadius = function(){
+		return this.radius;
+	};
+	
+	this.setRadius = function(radius){
+		if(!isNaN(radius)){
+			this.radius = radius;
+		}else{
+			console.log("radius is not a number")
+		};
+	};
+	
+	this.getWeight = function(){
+		return this.weight;
+	};
+	
+	
+}
+
+var myCircle = new Circle();
+myCircle.setRadius(5);
+
+console.log(myCircle.getArea());
+</script>
+</body>
+</html>
