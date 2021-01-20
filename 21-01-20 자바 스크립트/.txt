@@ -1,7 +1,13 @@
 1.아래를 설명하시오.
--DI
+-DI 흔히 주입성이라고 하지만 개체생성과 다를바 없다. 추후 유지보수에 용이하다. 메인소스코드를 건드리지 않고 폴리몰피즘(인터페이스) 적용해서xml에서 관리한다.
+부품들을 생성 혹은 조립이다. 
+
+자바소스코드 내에서 처리하는 방법은 애너테이션이라고 한다. 한데 모아있어 xml로 처리하는 것 보다 불편해보이지만 디버깅을 할수 있는 큰 장점이 있다.
+
 -IoC
 -IoC 컨테이너
+
+
 2.JS로 시간이 초단위로 갱신되는 페이지를 만드시오.
 3.js 에서의 객체생성 방법은?
 
@@ -320,11 +326,197 @@ interface IShape{
 	double getArea();
 }
 
+===========================================================xml===============================================
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <bean id="ishape" class="edu.bit.ex.Sqaure">
+ 
+ 
+ <property name="width">
+           <value>10</value>
+        </property>
+ 
+ 
+ <property name="height">
+           <value>10</value>
+        </property>
+ 
+ <property name="radius">
+           <value>2</value>
+        </property>
+ 
+ </bean>
+ 	<!-- 클래스명만 수정하면 다른 결과값 출력 가능  -->
+ </beans>
+
+===========================================================RectangleMain.java===============================================
+
+package edu.bit.ex;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class RectangleMain {
+
+	public static void main(String[] args) {
+		String configLocatioin = "classpath:applicationCTX2.xml";
+
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocatioin);//의존성 주입
+		IShape ishape = ctx.getBean("ishape", IShape.class);
+		ishape.use();
+		
+
+===========================================================IShape.java===============================================
+//부모 클래스: 인터페이스 : 자식이 구현하라
+package edu.bit.ex;
+
+public interface IShape {
+	void use();
+}
+
+===========================================================Sqaure.java===============================================
+package edu.bit.ex;
+
+public class Sqaure implements IShape{
+
+	double width;
+	double height;
+	double getArea;
+	double radius;
+	
+	public double getRadius() {
+		return radius;
+	}
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	@Override
+	public void use(){
+		System.out.println("사각형입니다.");
+		System.out.println("가로 : " + width);
+		System.out.println("세로 : " + height);
+		
+		System.out.println(getGetArea());
+			
+	}
+	public double getGetArea() {
+		return height * width;
+	}
+	public void setGetArea(double getArea) {
+		this.getArea = getArea;
+	}
+	public double getWidth() {
+		return width;
+	}
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	public double getHeight() {
+		return height;
+	}
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
+}
+===========================================================Triangle.java===============================================
+package edu.bit.ex;
+
+public class Triangle implements IShape{
+	
+	double width;
+	double height;
+	double getArea;
+	double radius;
+	
+	public double getRadius() {
+		return radius;
+	}
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	@Override
+	public void use(){
+		System.out.println("삼각형입니다.");
+		System.out.println("가로 : " + width);
+		System.out.println("세로 : " + height);
+		
+		System.out.println(getGetArea());
+			
+	}
+	public double getGetArea() {
+		return (height * width)/2;
+	}
+	public void setGetArea(double getArea) {
+		this.getArea = getArea;
+	}
+	public double getWidth() {
+		return width;
+	}
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	public double getHeight() {
+		return height;
+	}
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
+}
+
+===============================================Circle.java===============================================
 
 
+package edu.bit.ex;
 
+public class Circle implements IShape{
+	
+	double width;
+	double height;
+	
+	public double getWidth() {
+		return width;
+	}
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	public double getHeight() {
+		return height;
+	}
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	double radius;
+	double getArea;
+	
+	@Override
+	public void use(){
+		
+		System.out.println("원입니다.");
+		System.out.println("원주율 : " + radius);
+		System.out.println(getGetArea());
+			
+	}
+	public double getGetArea() {
+		return (radius * radius)*3.14;
+	}
+	public void setGetArea(double getArea) {
+		this.getArea = getArea;
+	}
+	public double getRadius() {
+		return radius;
+	}
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 
-
+	
+}
 
 
 
@@ -339,7 +531,7 @@ interface IShape{
 
 
 
-스프링 애너테이션으로 멤버 정보 등록 
+스프링 애너테이션으로 멤버 정보 등록 **************************복습!*******************************************************
 
 ==============================================MainStudent.java=================================================================
 
