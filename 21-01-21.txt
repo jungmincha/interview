@@ -1,11 +1,228 @@
-1.�Խ��� replyShape ������ �Ʒ��� ����������
-bStep > ? �� ���� �ǹ� �ΰ�?
+1.게시판 replyShape 생성시 아래의 쿼리문에서
+bStep > ? 은 무슨 의미 인가?
 
-update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?
+update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?\
 
-2.sql ����
--17. �μ��� �޿� ����� ����Ͻÿ�.
--18. ������ ������ΰ�? 
--10. EMP Table���� �޿��� 1800 �̻��̸� ��good��, �ƴϸ� ��poor���� ����Ͻÿ�. 
-3.���������� �̹��� �־ ¥�ÿ�.
-4.Bom , �� Dom �̶�?
+bgroup , bstep, bindent는 답변에 대한 컬럼이다. bstep은 원글에 대한 답변이 세로로 가게 하는 컬럼이다. 
+
+원글에 대해서 +1을 해주면서 최신것이 맨 위로 오게 되는 시스템이다.
+
+
+
+--2.sql 문제17. 부서별 급여 평균을 출력하시오.
+
+SELECT D.DNAME"부서", AVG(E.SAL)"부서별 급여 평균" FROM EMP E , DEPT D WHERE E.DEPTNO = D.DEPTNO GROUP BY D.DNAME;
+
+---18. 오늘은 몇요일인가? 
+
+SELECT SYSDATE , TO_CHAR(SYSDATE, 'DAY')FROM DUAL;
+
+--10. EMP Table에서 급여가 5000 이상이면 ‘good’, 아니면 ‘poor’를 출력하시오. 
+
+SELECT ENAME, SAL ,CASE WHEN SAL > 5000 THEN 'GOOD' WHEN SAL <5000 THEN 'POOR' END "등급"FROM EMP;
+
+
+3.가위바위보 이미지 넣어서 짜시오.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+
+var imgNode = document.createElement("img"); 
+imgNode.src = "seaser.png";
+imgNode.width = "174";
+imgNode.height = "65";
+
+
+
+var imgNode2 = document.createElement("img");
+imgNode2.src = "seaserseaser.png";
+imgNode2.width = "174";
+imgNode2.height = "65";
+
+
+
+var imgNode3 = document.createElement("img");
+
+imgNode3.setAttribute("src", "rockrock.jpg");
+imgNode3.setAttribute("width", 174);
+imgNode3.setAttribute("height", 65);
+imgNode3.setAttribute("tempDate", "logoImg");
+
+
+</script>
+</head>
+<body>
+<script>
+
+alert("가위바위보 게임입니다~!!");
+var inputUser = prompt("가위 , 바위 ,보 ,중 한개를 입력하세요", "입력");
+alert("유저 : " + inputUser);
+
+
+
+function Circle(){
+	
+	var user = inputUser;
+	
+	this.getUser = function(){
+		return this.user;
+	};
+	
+	this.setUser = function(user){
+		if(!isNaN(user)){
+			this.user = user;
+		}else{
+			console.log("user is not a number")
+		};
+	};
+	
+	this.Output = function(){
+		//가위 : 1번 , 바위 : 2번 보 : 3번 
+		
+		var com = parseInt(Math.random() * 3) + 1;
+	
+		if(com == 1){
+			com = "가위";
+			alert("컴퓨터 : 가위");
+			
+		}else if(com == 2){
+			com = "바위";
+			alert("컴퓨터 : 바위");
+			
+		}else if(com == 3){
+			com = "보";
+			alert("컴퓨터 : 보");
+			
+		}
+		
+
+		
+		if((user == "가위" && com =="바위")|| (user == "바위"  && com =="보")||(user == "보"  &&com =="가위")){
+			document.write("<h1>");
+			document.write("LOSER");
+			document.write("</h1>");
+			alert("당신의 패배입니다");
+			
+		}else if(user == com){
+			document.write("<h1>");
+			document.write("DRAW");
+			document.write("</h1>");
+			alert("비겼습니다");
+			
+		}else{
+			document.write("<h1>");
+			document.write("WINNER");
+			document.write("</h1>");
+			alert("당신의 승리입니다");
+		}
+		
+		
+		document.write("<br/>");
+		document.write("===========");
+		document.write("<br/>");
+		document.write("유저");
+		document.write("<br/>");
+		 
+		 
+		 if(user == "가위"){
+				
+	         document.body.appendChild(imgNode);//가위
+	      }else if(user == "바위"){
+	    	 
+	         document.body.appendChild(imgNode3);//바위
+	      }else{
+	    	  
+	         document.body.appendChild(imgNode2);//보
+	      }
+		 
+		 document.write("<br/>");
+		 document.write("<br/>");
+		 document.write("컴퓨터");
+		 document.write("<br/>");
+		 
+		 if(com == "가위"){
+				
+	         document.body.appendChild(imgNode);//가위
+	      }else if(com == "바위"){
+	    	 
+	         document.body.appendChild(imgNode3);//바위
+	      }else{
+	    	  
+	         document.body.appendChild(imgNode2);//보
+	      }
+		
+		
+		
+		document.write("<br/>");
+		document.write("최종 결과");
+		document.write("<br/>");
+		document.write("===========");
+		document.write("<br/>");
+		document.write("유저 :" + user);
+		document.write("<br/>");
+		document.write("컴퓨터 : " + com);
+		
+		/*
+		if((user == 1 && com ==2)|| (user == 2  && com ==3)||(user == 3  &&com ==1)){
+			document.write("당신의 패배입니다");
+			
+		}else if((user == 1 && com ==3)|| (user == 2 && com ==1)||(user == 3  && com ==2)){
+			document.write("당신의 승리입니다");
+			
+		}else {
+			
+			document.write("비겼습니다");
+		}
+		document.write("<br/>");
+		
+		document.write("유저 : " + user);
+		document.write("컴퓨터 : " + com);
+	};
+	*/
+	
+	
+ }
+}
+var myCircle = new Circle();
+
+myCircle.setUser();
+
+
+myCircle.Output();
+
+</script>
+</body>
+</html>
+
+
+
+
+
+4.Bom , 과 Dom 이란?
+
+
+BOM은 Browser object model 의 줄임말이다. 자바스크립트에서 브라우저와 관련된 객체라는 뜻이며 페이지 불러오기, 페이지 이동시키기 등 다양한 기능들이 있다
+window , screen , location 객체 등이 있다.
+ Dom : document object model 의 줄임말이다. 웹문서(태그)와 관련된 객체이다. 자바스크립트를 이용해 html 태그 객체를 생성, 추가, 삭제, 이동 등의 작업을 할 수 있다.
+ 
+ 두가지의 표현 방법이 있다.
+ 
+ 요소노트          ----------------------------> <p>javascript......</p>
+ 텍스트 노트
+ 를 작성해준다.
+ 
+ ==========================
+ 
+ 객체생성해준다
+ 
+ img src = ""
+  img width = ""    ----------------------------> 노드 연결
+   img height = ""                                document.baby.append.........(body에 넣어주어라)
+ 
+ 
+ 
