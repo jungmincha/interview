@@ -1,0 +1,11 @@
+1.게시판 replyShape 생성시 아래의 쿼리문에서
+bStep > ? 은 무슨 의미 인가?
+
+update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?
+
+2.sql 문제
+-17. 부서별 급여 평균을 출력하시오.
+-18. 오늘은 몇요일인가? 
+-10. EMP Table에서 급여가 1800 이상이면 ‘good’, 아니면 ‘poor’를 출력하시오. 
+3.가위바위보 이미지 넣어서 짜시오.
+4.Bom , 과 Dom 이란?
