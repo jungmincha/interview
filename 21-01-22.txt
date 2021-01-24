@@ -1,9 +1,49 @@
 1.command 객체에 대하여 설명하시오.
+
+값을 받아올때 쓰는 객체이다. 요청값을 일일이 다 안써주어도 되기 때문에 편리하다. getter/setter를 만들어주어야 한다. 출력페이지에서는 빈의 객체 값으로 jstl을 사용해서 출력값을 받는다.
+
+@RequestMapping("/member/join")
+public String joinData(Member member) { 
+    retrun "member/join";
+    ------------------------------------------------
+    public class Member{
+    private int width;
+    private int height;
+    public Member(){
+    }
+    public Member(int width...)
+    this.width = width;
+    ..
+    getter
+    setter...
+-----------------------------------------------------
+가로 ${member.width}
+세로 ${member.height}
+
+
+
+
 2.ModelAndView 객체에 대하여 설명하시오.
+
+modelAndView에 값을 전달하는 방법이다.
+
+@RequestMapping("/board/content")
+public ModelAndView content() {
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("/board/content");
+    mv.addObject("data", 123);
+    
+    return mv;
+}
+
+
 3.아래의 골뱅이에 대하여 설명하시오.
 @Controller
+컨트롤러를 선언해준다.
 @RequestParam
+변수를 클라이언트에게 받아 addAttribute(추가) 시킨다
 @RequestMapping
+jsp 파일의 경로를 맵핑한다.(없으면 페이지 이동 불가하다)
 
 
 스프링mvc를 받아 사각형의 넓이를 구하세요
@@ -145,7 +185,220 @@ public double getArea() {
 -국영수 입력 페이지
 -국영수점수를 서버에서 받아서,총점과 평균을 리턴
 -해당 총점과 평균의 점수의 색깔은 각각 빨간색과 파란색으로 만들것(JS로).
+==============================================================HomeController.java====================================================================
+package edu.bit.ex;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import edu.bit.ex2.Score;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "home";
+	}
+	@RequestMapping("/grade/input")
+	public String inScore() {
+		
+		
+		return "grade/input";
+	
+	}
+	
+	@RequestMapping("/grade/output")
+	public String outScore(Score score) {
+		
+		
+		return "grade/output";
+		
+		
+		
+	}
+	
+}
+==============================================================Score.java====================================================================
+package edu.bit.ex2;
+
+public class Score {
+	
+	private double kor;
+	private double eng;
+	private double math;
+	
+	
+	public Score() {
+		
+	}
+
+
+	public Score(double kor, double eng, double math) {
+		super();
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+	}
+
+
+	public double getKor() {
+		return kor;
+	}
+
+
+	public void setKor(double kor) {
+		this.kor = kor;
+	}
+
+
+	public double getEng() {
+		return eng;
+	}
+
+
+	public void setEng(double eng) {
+		this.eng = eng;
+	}
+
+
+	public double getMath() {
+		return math;
+	}
+
+
+	public void setMath(double math) {
+		this.math = math;
+	}
+	
+	public double getSum() {
+		return kor + eng + math;
+	}
+	
+	public double getAvg() {
+		return (getSum())/3;
+	}
+	
+}
+
+==============================================================input.jsp====================================================================
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action = "output" method = "get">
+
+국어 : <input type = "text" name = "kor" size = "7"><br/>
+수학 : <input type = "text" name = "math" size = "7"><br/>
+영어 : <input type = "text" name = "eng" size = "7"><br/>
+
+<input type = "submit" value = "button">
+<input type = "reset" value = "reset">
+</form>
+
+</body>
+</html>
+
 5.제일위에 입력버튼 하나를 만든다.
 -버튼을 누르면 200*200 파란색 박스가 하나씩 계속해서 생기는 프로그램을 만드시오.
   
+ ==============================================================output.jsp====================================================================
  
+ 
+ <%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+window.onload = function() {
+    var x = document.getElementById("sum");  
+    var y = document.getElementById("avg");    
+    x.style.color = "red"; 
+    y.style.color = "blue"; 
+}
+
+
+
+</script>
+
+</script>
+
+</head>
+<body>
+<table border = "1">
+<tr>
+<td>과목</td>
+<td>점수</td>
+</tr>
+
+<tr>
+<td>국어</td>
+<td> ${score.kor}</td>
+</tr>
+
+<tr>
+<td>영어</td>
+<td> ${score.eng}</td>
+</tr>
+
+
+<tr>
+<td>수학</td>
+<td> ${score.math}</td>
+</tr>
+
+<tr>
+<td>합계</td>
+<td><div id = "sum" >${score.getSum()}</div></td>
+</tr>
+
+<tr>
+<td>평균</td>
+<td><div id = "avg" >${score.getAvg()}</div></td>
+</tr>
+
+</table>
+
+<form action = "input" method = "post">
+<input type = "submit" value = "돌아가기">
+</form>
+
+
+</body>
+</html>
