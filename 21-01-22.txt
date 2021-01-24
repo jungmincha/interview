@@ -1,14 +1,151 @@
-1.command °´Ã¼¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-2.ModelAndView °´Ã¼¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
-3.¾Æ·¡ÀÇ °ñ¹ğÀÌ¿¡ ´ëÇÏ¿© ¼³¸íÇÏ½Ã¿À.
+1.command ê°ì²´ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+2.ModelAndView ê°ì²´ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
+3.ì•„ë˜ì˜ ê³¨ë±…ì´ì— ëŒ€í•˜ì—¬ ì„¤ëª…í•˜ì‹œì˜¤.
 @Controller
 @RequestParam
 @RequestMapping
-4.¾Æ·¡¸¦ ÇÁ·Î±×·¡¹Ö ½ºÇÁ¸µÀ¸·Î ÇÁ·Î±×·¡¹Ö ÇÏ½Ã¿À.
--±¹¿µ¼ö ÀÔ·Â ÆäÀÌÁö
--±¹¿µ¼öÁ¡¼ö¸¦ ¼­¹ö¿¡¼­ ¹Ş¾Æ¼­,ÃÑÁ¡°ú Æò±ÕÀ» ¸®ÅÏ
--ÇØ´ç ÃÑÁ¡°ú Æò±ÕÀÇ Á¡¼öÀÇ »ö±òÀº °¢°¢ »¡°£»ö°ú ÆÄ¶õ»öÀ¸·Î ¸¸µé°Í(JS·Î).
-5.Á¦ÀÏÀ§¿¡ ÀÔ·Â¹öÆ° ÇÏ³ª¸¦ ¸¸µç´Ù.
--¹öÆ°À» ´©¸£¸é 200*200 ÆÄ¶õ»ö ¹Ú½º°¡ ÇÏ³ª¾¿ °è¼ÓÇØ¼­ »ı±â´Â ÇÁ·Î±×·¥À» ¸¸µå½Ã¿À.
+
+
+ìŠ¤í”„ë§mvcë¥¼ ë°›ì•„ ì‚¬ê°í˜•ì˜ ë„“ì´ë¥¼ êµ¬í•˜ì„¸ìš”
+
+===============================================HomeController.java=================================================================================
+//ì»¨íŠ¸ë¡¤ëŸ¬(ì»¤ë§¨ë“œ ê°ì²´ë¥¼ ì´ìš©í•¨)
+package com.javalec.ex;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.javalec.ex.member.Grade;
+
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+	
+
+	@RequestMapping("/")
+	public String input() {
+		
+		return "member/join";
+	}
+	
+	@RequestMapping("/member/output")
+	public String output(Grade grade) {
+		
+		return "member/output";
+	}
+	
+}
+
+===========================================================Grade.java===========================================================================
+//(getter, setter í˜•íƒœë¡œ ì „ë‹¬ í•  ê°’ì˜ ë¹ˆì„ ë§Œë“¤ì–´ì¤Œ)
+
+package com.javalec.ex.member;
+
+public class Grade {
+private double width;
+
+private double height;
+
+
+public Grade() {
+	
+}
+
+public Grade(double width, double height) {
+	
+	this.width = width;
+	this.height = height;
+}
+
+public double getWidth() {
+	return width;
+}
+
+public void setWidth(double width) {
+	this.width = width;
+}
+
+public double getHeight() {
+	return height;
+}
+
+public void setHeight(double height) {
+	this.height = height;
+}
+
+public double getArea() {
+	return width * height;
+}
+
+}
+
+================================================================views/member/join.jsp=============================================================
+//ì…ë ¥ í˜ì´ì§€
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="member/output">
+		ê°€ë¡œ : <input type="text" name = "width"><br>
+		ì„¸ë¡œ : <input type="text" name = "height"><br>
+		
+		<input type="submit" value="ì…ë ¥">
+	</form>
+
+
+</body>
+</html>
+
+
+================================================================views/member/output.jsp=============================================================
+//ì¶œë ¥ í˜ì´ì§€
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+ê°€ë¡œ:${grade.width}<br/>
+ì„¸ë¡œ:${grade.height}<br/>
+ë„“ì´:${grade.getArea()}
+
+</body>
+</html>
+
+
+
+
+4.ì•„ë˜ë¥¼ í”„ë¡œê·¸ë˜ë° ìŠ¤í”„ë§ìœ¼ë¡œ í”„ë¡œê·¸ë˜ë° í•˜ì‹œì˜¤.
+-êµ­ì˜ìˆ˜ ì…ë ¥ í˜ì´ì§€
+-êµ­ì˜ìˆ˜ì ìˆ˜ë¥¼ ì„œë²„ì—ì„œ ë°›ì•„ì„œ,ì´ì ê³¼ í‰ê· ì„ ë¦¬í„´
+-í•´ë‹¹ ì´ì ê³¼ í‰ê· ì˜ ì ìˆ˜ì˜ ìƒ‰ê¹”ì€ ê°ê° ë¹¨ê°„ìƒ‰ê³¼ íŒŒë€ìƒ‰ìœ¼ë¡œ ë§Œë“¤ê²ƒ(JSë¡œ).
+5.ì œì¼ìœ„ì— ì…ë ¥ë²„íŠ¼ í•˜ë‚˜ë¥¼ ë§Œë“ ë‹¤.
+-ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ 200*200 íŒŒë€ìƒ‰ ë°•ìŠ¤ê°€ í•˜ë‚˜ì”© ê³„ì†í•´ì„œ ìƒê¸°ëŠ” í”„ë¡œê·¸ë¨ì„ ë§Œë“œì‹œì˜¤.
   
  
