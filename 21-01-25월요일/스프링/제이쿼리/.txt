@@ -1,0 +1,98 @@
+resetful - 2000년 로이 필링이 발표한 개념이다. 예전에는 get, post 방식으로 값을 보냈다면 이제는 uri 방식으로 값을 보낸는 것
+
+@RequestMapping("/student/{studentId}")
+	public String getStudent(@PathVariable String studentId , Model model) {
+		
+		model.addAttribute("studentId",studentId);
+		return "student/studentView";
+		
+	}
+  
+  
+  ====================================studentView.jsp============================================================
+  studentId : ${studentId}
+  
+  
+ 롬복이 : getter, setter를 좀 더 쉽게 만들어준는 것이다.
+
+
+제이쿼리 : 자주 사용하는 기능을 함수로 감싸서 쉽게 사용할 수 있도록 한다.
+dom과 관련된 기능을 브라우저에 상관없이 실행하도록 한다.
+풍부한 함수(라이브러리) 제공한다.
+-한마디로 자바스크립트를 캡슐화 시킨것이다(인캡슐레이션)-
+
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>JavaScript</title>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
+      <script>
+         window.onload = function(){
+            
+            jQuery("p").css("color", "red");
+            $("p").css("fontWeight", "bolder");
+            
+            var myJQ = $("p");
+            myJQ.css("textDecoration", "underLine");
+            
+            myJQ.css("width", "300px").css("border", "1px solid #ff0000");
+            
+            $("p").css("fontSize", "2em").css("height", "300px").css("lineHeight", "300px").css("textAlign", "center");
+         };
+      </script>
+   </head>
+   
+   <body>
+      
+      <p> Hello jQuery! </p>
+      
+   </body>
+
+</html>
+
+제이쿼리 예문
+
+//의존성 주입
+	<dependency>
+<groupId>org.hibernate.validator</groupId>
+
+    <artifactId>hibernate-validator</artifactId>
+
+    <version>6.0.8.Final</version>
+
+</dependency>
+
+
+
+		
+		
+		<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>2.0.1.Final</version>
+</dependency>
+		
+
+
+
+
+1.아래 annotation 의 용도는?
+@ModelAttribute
+2. id 와 pw 를 두개를 만든후 아래와 같이 유효성 검사를 하시오.
+
+-클라이언트쪽 체크: id 가 널이거나 없으면 서버로 보내지 않으면서 - 해당 페이지에 다시 입력하세로 라는 문구 출력
+-서버쪽 체크: id에 10자 초과이거나 숫자로만 되어 있어 있으면 다시 입력하는 페이지로 이동하여 다시 입력하세요 라는 문구 출력
+
+-클라이언트쪽 체크: pw 가 널이거나 없으면 서버로 보내지 않으면서 - 해당 페이지에 패스워드 다시 입력하세로 라는 문구 출력
+-서버쪽 체크: pw에 8자 미만이거나, 숫자로만 되어 있어 있거나, 문자로만 되어 잇으면, 다시 입력하는 페이지로 이동하여 패스워드 다시 입력하세요 라는 문구 출력
+
+-성공시 로그인이 되었습니다. 라는 페이지로 이동
+
+
+
+  
+
+3.마이바티스를 활용하여, emp 12개를 뿌리시오.
