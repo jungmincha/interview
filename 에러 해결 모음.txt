@@ -1,3 +1,9 @@
-¿¡·¯ ¸ğÀ½ : Caused by: java.lang.IllegalArgumentException: Áßº¹µÈ ÇÊÅÍ ÀÌ¸§: [encoding]
+ì—ëŸ¬ ëª¨ìŒ : Caused by: java.lang.IllegalArgumentException: ì¤‘ë³µëœ í•„í„° ì´ë¦„: [encoding]
 
-ÇØ°á : web.xml¿¡ ÇÑ±ÛÈ­ ÇÊÅÍ ÇØÁÖ´Â ±¸¹®ÀÌ ¿©·¯°³ ÀÖ¾ú´Ù. ÇÑ°³·Î ÁÙ¿©ÁÖ´Ï ÇØ°áÀÌµÇ¾î Á¤»óÀûÀ¸·Î ÇÁ·Î±×·¥ÀÌ ÀÛµ¿µÇ¾ú´Ù.
+í•´ê²° : web.xmlì— í•œê¸€í™” í•„í„° í•´ì£¼ëŠ” êµ¬ë¬¸ì´ ì—¬ëŸ¬ê°œ ìˆì—ˆë‹¤. í•œê°œë¡œ ì¤„ì—¬ì£¼ë‹ˆ í•´ê²°ì´ë˜ì–´ ì •ìƒì ìœ¼ë¡œ í”„ë¡œê·¸ë¨ì´ ì‘ë™ë˜ì—ˆë‹¤.
+
+
+
+WARN : org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/ex/write_form] in DispatcherServlet with name 'appServlet'
+
+
