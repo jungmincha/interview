@@ -1,19 +1,81 @@
 1.아래의 xml 에 대하여 설명하시오.
+
 -pom.xml
+POM은 프로젝트의 구조와 내용의 틀을 잡아주는 파일이다.
+ 버전 및 설정 관리, 빌드 환경, 라이브러리 저장소 및 의존성(dependancy) 주입을 한다.
+Repository에 있는 라이브러리가 내 컴퓨터로 다운되어 프로젝트에 해당 라이브러리를 쉽게 사용할 수 있도록 하는 역할을 한다.
+
+
 -web.xml
+
+Servlet의 정보를 설정해준다. 브라우저가 Servlet에 접근하기 위해서는 WAS(tomcat)에 필요한 정보를 알려줘야 해당하는 Servlet을 호출할 수 있다.
+
+
+
+
 -*-context.xml
 
-
+servlet-context : 웹 관련(핸들러, 뷰 ,컨트롤러)
+            request와 관련된 객체 처리를 처리한다.
+	
+      root-context : 웹 관련외 나머지
+            view와 관련없는 객체를 정의한다. (Service, Repository(DAO), DB)
 
 
 
 2.스프링에서 게시판 사용을 위한 설계도를 그리시오.
+
+
 3.스프링에서 한글처리는 어떻게 하는가?
+
+web.xml 파일에
+
+  <filter>
+      <filter-name>encoding</filter-name>
+      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+      <init-param>
+         <param-name>encoding</param-name>
+         <param-value>UTF-8</param-value>
+      </init-param>
+   </filter>
+   
+   을 추가한다.
+
 4.마이바티스에 대하여 설명하시오.
 
+객체지향 언어인 자바의 관계형 데이터 베이스 프로그래밍을 좀더 쉽게 할수 있게 도와주는 개발 프레임워크이다.
+
+자바는 jdbc api 를 제공해주지만, 이런 JDBC를 이용하면 1개 클래스에 반복된 코드가 존재, 한 파일에 java언어와 sql언어가 있어서 재사용성 등이 안좋아지는 단점이 있다.
+
+Mybatis는 jdbc의 이러한 단점들을 개선했으며, 개발자가 작성한 SQL 명령어와 자바 객체를 매핑해주는 기능을 제공하며, 기존에 사용하던 SQL 명령어를 재사용한다.
 
 
 
+마이바티스를 쓰는 이유!
+
+1. 가장 큰 이유는 빠른 개발(생산성)이 가능하다.
+
+- DBCP만을 썼을때 Connection, ResultSet, Statement, Transaction 관리도 해야 하고 
+
+- 특히 운영하다 명시적인 Connection, ResultSet, Statement, Transaction을 잘못(닫질 않아) 써서 서버가 죽는경우 허다하다.
+
+- ResultSet의 데이터 매핑도 신경써야 된다.
+
+- 소스 분석 및 관리가 힘들다 (10,000 라인 넘어가는 소스 등.. )
+
+2. 보안적으로 SQL Injection 보안에 신경쓰지 않아도 된다. 
+
+- 물론 DBCP를 쓸 경우 PrepareStatement 쓰면 문제는 없다. 
+
+3. 디버깅이 쉬워진다.
+
+
+
+
+
+5.스프링 mvc에서 데이터가 전달되는 경로
+
+ 클라이언트 > 디스패처 서블릿 > 핸들러맵핑 > 핸들러어댑터> 컨트롤러(Model & view 리턴) > 뷰리절브 >뷰
 
 
 
