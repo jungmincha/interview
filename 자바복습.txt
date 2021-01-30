@@ -158,4 +158,36 @@ public class PracticeJava {
 	
 	
 	*/
+	=====================================================랜덤문===================================================================
 	
+	public class PracticeJava {
+	
+	public static void main(String[] args) {
+	
+			
+		System.out.println("1과 100 사이의 숫자를 입력하세요");
+		int com = (int)(Math.random()*100)+1;
+		while(true) {
+		Scanner sc = new Scanner(System.in);	
+		
+		int user = sc.nextInt();
+		
+
+		
+		if(user > com) {
+			System.out.println("down 입니다");
+		}else if(user < com) {
+			System.out.println("up 입니다");
+		}else {
+			System.out.println("맟췄습니다");
+			System.out.println("유저 : " + user);
+			System.out.println("컴퓨터 : " + com);
+		}
+		
+		
+		
+		
+		
+}
+}
+}
