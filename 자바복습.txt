@@ -1,1 +1,161 @@
-dfdfd
+public class PracticeJava {
+	
+	public static void main(String[] args) {
+		/*
+		List<String> list = new LinkedList<>();
+		
+		list.add("cha");
+		list.add("jung");
+		list.add("min");
+		
+		for(int i = 0 ; i < list.size(); i++) {
+			
+		}
+		System.out.println(list);
+		
+		
+		for(String s : list) {
+			System.out.println(s + '\t');
+		}
+		
+	}LinkedList 를 이용한 배열
+
+	
+		
+		List<String>list = Arrays.asList("toy" , "box" , "robot" , "box");
+		
+		list = new ArrayList<>(list);
+		
+		ListIterator<String>litr = list.listIterator(); //양방향 반복자 성능 흭득했다. 
+		
+		String str;
+		
+		//왼쪽에서 오른쪽으로 이동하기 위한 반복문
+		
+		while(litr.hasNext()) {
+			
+			str = litr.next();
+			
+			System.out.println(str + '\t');
+			
+			if(str.equals("toy")) {
+				litr.add("toy2");
+			}
+			
+			
+			System.out.println();
+			
+		}
+		
+		*/
+		Scanner sc = new Scanner(System.in);
+		
+		//정수(-1이 입력될 때까지)>> 10 6 22 6 88 77 
+		//-1을 누르면 -1 제외하고 최소값이 나오게 하세요.
+		System.out.println("숫자를 눌러봅시다");
+
+		ArrayList<Integer>list = new ArrayList<>();
+		
+		int num = 0;
+		int min = 0;
+		while(num != -1) {
+			
+			num = sc.nextInt();
+			
+			
+			list.add(num);
+		}
+		
+				
+		for(int i = 0 ; i < list.size(); i++) {
+			
+			list.remove((Integer)(-1));		
+		}
+		
+		System.out.println(Collections.min(list));
+				
+				/*
+		for(int i = 0 ; i < list.size(); i++) {
+			if(list.get(i)<min) {
+				min = list.get(i);
+			}
+		}
+		*/
+		
+		
+	}
+
+	}
+
+
+		
+		
+	/*
+		 ArrayList<Integer> list2 = new ArrayList();
+		 
+		  
+		  list2.add(0);
+		  list2.add(1);
+		  list2.add(3);
+		  list2.add(5);
+		  list2.add(7);
+		  
+		  
+		  for(int i : list)System.out.print(i + " ");
+		  System.out.println();
+		  
+		  list.remove(3); //idx번호에 해당하는 값이remove
+		  
+		  for(int i : list)System.out.print(i + " ");
+		  System.out.println();
+		  
+		 }
+
+	}
+		
+	
+	==========================Collections=======================	 * 
+	//가장 간단한 방법
+	List<Integer> list = new LinkedList<>();
+	
+	int num =0;
+	
+	while(num != -1) {
+		num = sc.nextInt();
+		list.add(num);
+	}
+	
+	sc.close();
+	
+	System.out.println("입력 한 숫자 : " + list);
+	System.out.println("가장 큰 수는 : " + Collections.max(list));
+	System.out.println("가장 작은 수는 : " + Collections.min(list));
+	
+	}
+	==============================for 강화문=======================
+	//가장 큰 수 구하기
+	List<Integer> list = new LinkedList<>();
+	
+	int num =0;
+	
+	while(num != -1) {
+		num = sc.nextInt();
+		list.add(num);
+	}
+	
+	sc.close();
+	
+
+	
+	for(Integer s : list) {
+			if(list.get(s)>num) {
+				max = list.get(s);
+			}
+		}
+		
+		
+			System.out.println("가장 큰 수는 : " + max);
+	
+	
+	*/
+	
