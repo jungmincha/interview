@@ -1,1 +1,35 @@
-dfdfd
+j unit = 검사
+
+
+package edu.bit.ex.calculator;
+
+public class Calculator {
+
+	public int sum(int num1, int num2) {
+		
+		return num1 + num2;
+		
+	}
+	
+}
+
+
+===================================src/test/java================================
+
+
+package edu.bit.ex.calculator;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CalculatorTest {
+
+	@Test
+	public void testsum() {
+	Calculator cal = new Calculator();
+	int result = cal.sum(10, 30);
+	assertEquals(30, result , 10);
+	}
+
+}
