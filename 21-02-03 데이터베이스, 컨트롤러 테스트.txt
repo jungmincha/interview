@@ -103,4 +103,4 @@ public class BoardControllerTest {
 		  
 		  4. db 설계를 하시오
 		  
-		  ![데이터베이스 설계도](https://user-images.githubusercontent.com/74960637/106723692-4b830e00-6657-11eb-9681-9b8398e52715.png)
+		  
