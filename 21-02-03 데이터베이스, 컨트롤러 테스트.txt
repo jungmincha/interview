@@ -1,0 +1,101 @@
+1.DB 설계의 순서는?
+
+데이터베이스 설계란 ? 
+
+-현실세계의 업무적인 데이터 항목들과 프로세스를 추상화한 것을 실제적으로 구현
+
+-물리적으로 데이터베이스화 시키는 일련의 과정
+
+
+
+폭포수 모델 : 계획-> 분석-> 설계-> 구현-> 시험-> 유지보수
+
+주먹구구 : 머릿속에서만 하는 것
+
+프로세스 : 문서화 시킨 것
+
+
+2.개념적 설계의 순서에 대하여 설명하시오.
+
+
+-요구 사항 분석을 실시한다(조사 결과는 문서화 해주는 것이 좋다 ex.k대학교 
+데이터베이스 요구사항 - 1.학생관리, 2.과목관리, 3.교수관리, 4.학과관리, 5.수강신청 들에 관한 요구사항 조사)
+
+-엔티티를 추출한다. 엔티티 : 실체가 존재하는 것(테이블 , 칼럼 추출)
+
+-명사 그룹짓는다.
+
+-관계 설정한다.
+
+-애트리뷰트관계를 정의한다.
+
+-그에따른 산출물로 ER다이어그램을 작성한다
+
+-큰 틀부터 세부적인 애트리뷰트까지를 분류하는 하향식 방법을 사용한다.
+
+
+
+3.list 및 content_view함수의 mock 테스트를 하시오.
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
+"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
+@Log4j
+
+public class BoardControllerTest {
+	
+	   @Setter(onMethod_ = { @Autowired })
+	   private WebApplicationContext ctx;//ioc컨테이너
+
+	   private MockMvc mockMvc;
+	   /*
+	   MockMvc란?
+	   실제 객체와 비슷하지만 테스트에 필요한 기능만 가지는 가짜 객체를 만들어서
+	   애플리케이션 서버에 배포하지 않고도 스프링 MVC 동작을 재현할 수 있는 클래스를 의미.
+	   즉 컨트롤러를 테스트할 수있게 만든 가짜 객체(톰캣이 아닌 가상환경을 만들어서 테스트 진행)
+	   */
+	   @Before
+	   public void setup() {
+	      this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();//ioc컨테이너를 테스트
+	   }
+	   
+	   //컨트롤 + shift + f 어노테이션 빨간줄 없애주기
+	   @Test
+	   public void testList() throws Exception {
+		      mockMvc.perform(get("/list"))
+		      .andExpect(status().isOk())
+		      .andDo(print())
+		      .andExpect(forwardedUrl("/WEB-INF/views/list.jsp"));  
+		    
+		   }
+	   
+	   
+	   @Test
+	   public void testreply_view() throws Exception {
+		      mockMvc.perform(get("/reply_view"))
+		      .andExpect(status().isOk())
+		      .andDo(print())
+		      .andExpect(forwardedUrl("/WEB-INF/views/reply_view.jsp"));  
+		      
+		   }
+	   
+	   
+	   @Test
+	   public void testcontent_view() throws Exception {
+		      mockMvc.perform(get("/content_view"))
+		      .andExpect(status().isOk())
+		      .andDo(print())
+		      .andExpect(forwardedUrl("/WEB-INF/views/content_view.jsp"));  
+		      
+		   }
+	   
+	   
+	   @Test
+	   public void testwrite_view() throws Exception {
+		      mockMvc.perform(get("/write_view"))
+		      .andExpect(status().isOk())
+		      .andDo(print())
+		      .andExpect(forwardedUrl("/WEB-INF/views/write_view.jsp")); 
+
+		   }
