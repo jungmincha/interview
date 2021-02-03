@@ -100,4 +100,7 @@ public class BoardControllerTest {
 
 		   }
 		   
-		   4. db 설계를 하시오
+		  
+		  4. db 설계를 하시오
+		  
+		  
