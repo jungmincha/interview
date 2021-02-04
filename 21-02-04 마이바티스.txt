@@ -1,0 +1,212 @@
+1.마이바티스 사용 4가지 방법에 대하여 설명하시오.
+
+거의 쓰이지 않는다.
+
+-첫번째 방법-
+
+-------------------BController1.java----------------------------------
+
+@Controller
+public class BController1 {
+
+	@Inject
+	BService1 bservice;
+	
+	@RequestMapping("/list1")
+	public String list(Model model) throws Exception{
+		System.out.println("list1()");	
+		
+		model.addAttribute("list", bservice.selectBoardList());			
+		return "list";		
+	}
+
+
+
+
+-------------------BService.java----------------------------------
+
+@Service
+public class BService1 {
+	
+	@Inject
+	SqlSession sqlSession;
+	
+    public List<BoardVO> selectBoardList()throws Exception {
+    	IBDao dao = sqlSession.getMapper(IBDao.class);
+		return dao.listDao();
+    }
+
+}
+
+-------------------BService.java----------------------------------
+public interface IBDao {
+	
+	public List<BoardVO> listDao();
+
+}
+
+
+
+
+-두번째 방법-
+
+아직도 실무에서는 이방법으로 쓰는 곳도 있다.
+
+개발자가 맵퍼의 namespace를 임의대로 정할 수 있다.
+
+
+
+-------------------BController2.java----------------------------------
+
+@Controller
+public class BController2 {
+
+	@Inject
+	BoardService2 boardService2;
+	
+	@RequestMapping("/board/list")
+	public String list(Model model) throws Exception{
+		System.out.println("list()");	
+		
+		model.addAttribute("list",  boardService2.selectBoardList());	
+		return "board/list";		
+	}
+
+}
+
+
+-------------------BoardService2.java----------------------------------
+
+@Service
+public class BoardService2 {
+	
+	@Inject
+	SqlSession sqlSession;
+	
+    public List<BoardVO> selectBoardList()throws Exception {
+		return sqlSession.selectList("board.selectBoardList"); 	//개발자가 정한다 이름
+    }
+}
+
+-----------------BoardMapper2.xml-------------------------------------
+
+<mapper namespace="board">
+	<select id="selectBoardList" resultType="edu.bit.ex.vo.BoardVO">
+		select * from emp 
+	</select>
+	
+</mapper>
+
+
+
+-세번째 방법-
+
+상속해주는 맵퍼 인터페이스를 만들어주고 자식(boardMapper.xml)이 구현한다.
+
+가장 많이 쓰이는 마이바티스 이용 방법이다.
+
+
+===============BoardMapper.java======================================
+ 
+public interface BoardMapper {
+
+
+
+	
+	public List<BoardVO> bringList();
+
+}
+
+
+===============BoardMapper.xml======================================
+
+<mapper namespace="edu.bit.ex.mapper.BoardMapper">
+
+ <!--개발자가 임의대로 정해주는 것이 아닌 부모 인터페이스가 위치해 있는 곳을 적어준다-->
+   
+  <select id="bringList" resultType="edu.bit.ex.vo.BoardVO">
+   <![CDATA[
+       select * from emp e 
+   ]]>
+   </select>
+
+
+-4번째 방법-
+
+3번째 방법에서는 BoardMapper.xml에서 쿼리문을 통해 데이터베이스에 접근했다. 하지만 4번째 방법은 xml 파일을 따로 만들어주지 않고
+
+BoardMapper.java에서 직접 쿼리문을 써서 구현한다. 간단한 쿼리문은 써도 상관없지만 쿼리문이 길어지면 표현하기 힘들기 때문에 잘 쓰이지 않는다)
+
+=============LoginMapper.java=======================================
+
+
+public interface LogInMapper {
+
+	@Select("select * from users where username = #{username} and password = #{password}")
+	public UserVO logInUser(@Param("username") String username,@Param("password") String password);
+	
+}
+
+
+
+=================================================================
+
+
+
+2.ajax+json으로 list를 뿌리시오.
+
+ajax
+
+
+ajax는 JavaScript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이다.
+
+비동기 방식이란 ?
+
+비동기 방식은 웹페이지를 리로드하지 않고 데이터를 불러오는 방식이다. 
+
+비동기식 방식을 이용할 경우 불필요한 리소스 낭비 없이 필요한 부분만 불러와 사용할 수 있으므로 매우 큰 장점이 있다.
+
+
+Ajax의 장점
+
+1. 웹페이지의 속도향상
+
+2. 서버의 처리가 완료 될때까지 기다리지 않고 처리 가능하다.
+
+3. 서버에서 Data만 전송해면 되므로 전체적인 코딩의 양이 줄어든다
+
+
+
+Ajax의 단점
+
+1. 히스토리 관리가 안 된다. (보안에 좀 더 신경을 써야한다.)
+
+2. 연속으로 데이터를 요청하면 서버 부하가 증가할 수 있다.
+
+
+json
+
+JavaScript Object Notation의 약자이다.
+
+1) JSON는 javascript 객체를 만드는 방법이다
+
+  2) key : value 형식의 데이터 저장 방식이다
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
