@@ -1,81 +1,218 @@
-xml, json + ajax -> RESTful -> �Խ���
-
-xml ���Ἲ�̶�?
-
-��ǥ���� xml : html 
-
-�ᱹ�� �����͸� �ְ� �ޱ� �����̴�.
-
-�����͸� �ְ� ���� ���� ������ ���Ѿ� �Ѵ�.
-
--html ����-
-
-xml�� ���� �� Ȱ���ϴ� ���� html�̴�.
+1.비동기 통신과 동기통신의 차이점은?
 
 
-html�� �����͸� �ְ� ������ ������ 1����Ʈ�� ���� �Ű��� ������ �Ͼ��.
+동기는 친구다 - 친구는 기다리는 것이다(a를 보내면 b를 처리하려면 반드시 기다려야 b를 처리 가능하다)
 
-�׷��� ������� �����Ѱ��� json�̴�.
+비동기는 친구가 아니다 - 친구를 기다리지 않는다.(a를 보냈지만 응답이 오든말든 b를 처리하는 것이다.) 
 
-xml -> json�� �Ǿ���.
+그래서 비동기가 속도가 더 빠르다.
 
-json�� �ڹٽ�ũ��Ʈ�� Ȯ���Ͽ� ���������.
-
-�ڹٽ�ũ��Ʈ�� ��ü ǥ����� ������.
-
-var arrs = ["sds" , "ddd"] �ڹٽ�ũ��Ʈ�� ��ü�� �迭�̴�. 
-
-json�� ���α׷��� ���� �ü���� �������̴�.
-
-php�� �ڹپ� ���� ���Ѵ�. �׷��� xml , json���� ��ȯ�ؾ� �Ѵ�. �׷��� �ü����
-
-�������̿��� php���� ���� �����ϴ�.
-
-xml�� xmlDOM�� �̿��Ͽ� �ش� ������ �����Ѵ�.
-
-json�� ���ڿ��� ���۹��� �Ŀ� �ش� ���ڿ��� �ٷ� �Ľ�,
-xml���� ���� ���� ó�� �ӵ��� �����ش�.
-
-json�� ����ڰ� ���� ���Ἲ�� ����Ͽ� ���� �����ؾ� �Ѵ�.
-
-���� ������ ������ �ʿ��� ���� ������ xml�� ����Ѵ�.
+비동기는 다시 데이터를 안받아도 된다. (표면적으로는 화면이 깜박이지 않는다)
 
 
-ajax�� �޶�ϱ� ���������̴�. �Լ��̴�. ��ü�� ���� �Ѱ��ִ� ������ �Ѵ�.
-
-ajax�� �񵿱� ����̴�. Ŭ���̾�Ʈ�� ������ �����͸� �ְ��޴� ����̴�.
-
-����� ģ���� - ģ���� ��ٸ��� ���̴�(a�� ������ b�� ó���Ϸ��� �ݵ�� ��ٷ��� b�� ó�� �����ϴ�)
-
-�񵿱�� ģ���� �ƴϴ� - ģ���� ��ٸ��� �ʴ´�.(a�� �������� ������ ���縻�� b�� ó���ϴ� ���̴�.) 
-
-�׷��� �񵿱Ⱑ �ӵ��� �� ������.
-
-�񵿱�� �ٽ� �����͸� �ȹ޾Ƶ� �ȴ�. (ǥ�������δ� ȭ���� �������� �ʴ´�)
+2.xml 과 json 에 대하여 설명하시오.
 
 
+xml 무결성이란?
 
- ���䱸������ 
+대표적인 xml : html 
+
+결국엔 데이터를 주고 받기 위함이다.
+
+데이터를 주고 받을 때는 통일을 시켜야 한다.
+
+-html 등장-
+
+xml을 가장 잘 활용하는 것이 html이다.
+
+
+html로 데이터를 주고 받으면 데이터 1바이트당 값이 매겨져 과금이 일어난다.
+
+그래서 대안으로 등장한것이 json이다.
+
+xml -> json이 되었다.
+
+json은 자바스크립트를 확장하여 만들어졌다.
+
+자바스크립트의 객체 표기법을 따른다.
+
+var arrs = ["sds" , "ddd"] 자바스크립트의 객체는 배열이다. 
+
+json은 프로그래밍 언어와 운영체제에 독립적이다.
+
+php는 자바언어를 읽지 못한다. 그래서 xml , json으로 변환해야 한다. 그래서 운영체제에
+
+독립적이여서 php에도 적용 가능하다.
+
+xml은 xmlDOM을 이용하여 해당 문서에 접근한다.
+
+json은 문자열을 전송받은 후에 해당 문자열을 바로 파싱,
+xml보다 더욱 빠른 처리 속도를 보여준다.
+
+json은 사용자가 직접 무결성을 사용하여 직접 검증해야 한다.
+
+따라서 데이터 검증이 필요한 곳은 아직도 xml을 사용한다.
+
+
+ajax는 달라니깐 제이쿼리이다. 함수이다. 객체를 만들어서 넘겨주는 역할을 한다.
+
+ajax는 비동기 통신이다. 클라이언트와 서버간 데이터를 주고받는 기술이다.
 
 
 
-MJ �����Ҵ� self �����ҷ� ������ ���� ������ �ϴ� �ý����̴�. 
 
-������ ���ϴ� �������� �����⿡�� ������ �� �� �ִ�.
+3.list를 ajax로 json으로 뽑아 내고
+===================================================================
+//이렇게 컨트롤러를 주면 xml파일로 뽑아낸다. 그리고 주소에 .json을 붙히면 json으로 출력된다.
+@Log4j
+@AllArgsConstructor
+@Controller
+public class RestBoardSpring4BeforeController {
+   
+   private BoardService boardService;
+  
+   @ResponseBody
+   @GetMapping("/rest/before")
+   public List<BoardVO> before(Model model) {
+      log.info("befiore");
+      //model.addAttribute("list", boardService.getList());
+      
+      return boardService.getList();
+   }
+     
+}
+===================================================================
+//ajax로 list를 뿌려주는 컨트롤러이다.
 
- ������ ������ �� �� ��¥�� ������ �ð�, ���� ����, ���� ����� ��ϵȴ�. ������ ȸ�� ������ �� �� �ִ�. 
+* @RequestMapping("/rest/list")
+   public String restlist(Model model) {
+      log.info("list");
+     return "ajaxList";
+   }
 
-ȸ�� ���� �� �̸�, ����ó�� �Է��ϸ� ȸ�� ������ �� �� �ִ�. ������ȣ�� �ڵ����� ��� �ȴ�. ���� ȸ���� ������ ȸ����ȣ�� �Է��ϸ� ����Ʈ�� ���� �� �ִ�. 
+===================================================================
+//ajaxList.jsp 파일이다.
 
-����Ʈ�� ���� �ݾ��� 1%�� �����ȴ�. 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+/* 	$.ajax({
+		url : '서비스 주소'
+			, data : '서비스 처리에 필요한 인자값'
+			, type : 'HTTP방식' (POST/GET 등)
+			, dataType : 'return 받을 데이터 타입' (json, text 등)
+			, success : function('결과값'){
+			// 서비스 성공 시 처리 할 내용
+			}, error : function('결과값'){
+			// 서비스 실패 시 처리 할 내용
+			}
+		}); */
 
-����Ʈ�� ���� ��ǰ�� ���� �� �� �ִ�. 100p�� Ƽ���� 2000p�� ���� ���� 10000p�� 3�� ��¥�� ����Ƽ���� �ش�. ��ǰ�� �������� ��� ����Ʈ�� ���� �ȴ�.
+		function getList() {
+			var url = "${pageContext.request.contextPath}/rest/after.json";
 
-MJ �������� ������ �����ڵ��� ���� �⸧�� ���� ���� �� �ֵ���, �� �ܸ����� ������ ����� �����ؾ� �Ѵ�.
+			$.ajax({
+	            type: 'GET',
+	            url: url,
+	            cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐
+	            dataType: 'json',// 데이터 타입을 제이슨 꼭해야함, 다른방법도 2가지있음
+		        success: function(result) {
 
- ���޾��ڴ� �����ȣ�� �ĺ��ϰ�, ������, �̸�, ����ó, ������ȣ, ���޷�, ���Ⱓ�� ������.
+					var htmls="";
+					
+		        	$("#list-table").html("");	
 
-MJ �������� ������ �����ڵ��� �������� �Ƚ��ϰ� �ŷ� �� �� �ֵ��� �ڽ��� �̸��� ����ó�� ����� ���ƾ� �Ѵ�.
+					$("<tr>" , {
+						html : "<td>" + "번호" + "</td>"+  // 컬럼명들
+								"<td>" + "이름" + "</td>"+
+								"<td>" + "제목" + "</td>"+
+								"<td>" + "날짜" + "</td>"+				
+								"<td>" + "히트" + "</td>"
+					}).appendTo("#list-table") // 이것을 테이블에붙임
+
+					if(result.length < 1){
+						htmls.push("등록된 댓글이 없습니다.");
+					} else {
+
+		                    $(result).each(function(){			                    			                    
+			                    htmls += '<tr>';
+			                    htmls += '<td>'+ this.bId + '</td>';
+			                    htmls += '<td>'+ this.bName + '</td>';
+			                    htmls += '<td>'
+			         			for(var i=0; i < this.bIndent; i++) { //for 문은 시작하는 숫자와 종료되는 숫자를 적고 증가되는 값을 적어요. i++ 은 1씩 증가 i+2 는 2씩 증가^^
+			         				htmls += '-'	
+			        			}
+			                    htmls += '<a href="${pageContext.request.contextPath}/content_view?bId=' + this.bId + '">' + this.bTitle + '</a></td>';
+ 			                    htmls += '<td>'+ this.bDate + '</td>'; 
+			                    htmls += '<td>'+ this.bHit + '</td>';	
+			                    htmls += '</tr>';			                    		                   
+		                	});	//each end
+
+		                	htmls+='<tr>';
+		                	htmls+='<td colspan="5"> <a href="${pageContext.request.contextPath}/write_view">글작성</a> </td>';		                	
+		                	htmls+='</tr>';
+		                	
+					}
+
+					$("#list-table").append(htmls);
+					
+		        }
+
+			});	// Ajax end
+		
+		}//end	getList()	
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			getList();
+		});
+	</script>
+
+</head>
+<body>
+	<table id="list-table" width="500" cellpadding="0" cellspacing="0" border="1">
+	</table>
+</body>
+</html>
+
+
+
+
+
+ content_view 의 삭제또한 ajax를 사용하여 삭제해 보도록 하세요.
+
+
+
+
+
+ ♣요구명세서 
+
+
+
+MJ 주유소는 self 주유소로 고객이 직접 주유를 하는 시스템이다. 
+
+고객은 원하는 정유사의 주유기에서 주유를 할 수 있다.
+
+ 고객이 주유를 할 때 날짜와 주유한 시간, 주유 가격, 결제 방법이 등록된다. 고객은 회원 가입을 할 수 있다. 
+
+회원 가입 시 이름, 연락처만 입력하면 회원 가입을 할 수 있다. 고객번호는 자동으로 등록 된다. 만약 회원인 고객은 회원번호를 입력하면 포인트를 모을 수 있다. 
+
+포인트는 주유 금액의 1%가 적립된다. 
+
+포인트에 따라 상품을 수령 할 수 있다. 100p는 티슈를 2000p는 세차 권을 10000p는 3만 원짜리 주유티켓을 준다. 상품을 수령했을 경우 포인트는 차감 된다.
+
+MJ 주유소의 주유기 소유자들은 좋은 기름을 공급 받을 수 있도록, 각 단말기의 공급자 목록을 관리해야 한다.
+
+ 공급업자는 사원번호로 식별하고, 정유사, 이름, 연락처, 차량번호, 공급량, 계약기간을 가진다.
+
+MJ 주유소의 주유기 소유자들은 고객들이 안심하고 거래 할 수 있도록 자신의 이름과 연락처를 기록해 놓아야 한다.
 
 
 
