@@ -9,29 +9,29 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script>
-IMP.init('imp04415629');
+IMP.init('imp04415629'); //ê°€ë§¹ì  ì‹ë³„ì½”ë“œ(ì•„ì„í¬íŠ¸ ê°€ì…í›„ ì‹œìŠ¤í…œ ì„¤ì •->ë‚´ì •ë³´)
 
 IMP.request_pay({
-    pg : 'inicis', // version 1.1.0ºÎÅÍ Áö¿ø.
+    pg : 'inicis', // version 1.1.0ë¶€í„° ì§€ì›.
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
-    name : 'ÁÖ¹®¸í:°áÁ¦Å×½ºÆ®',
-    amount : 14000, //ÆÇ¸Å °¡°İ
+    name : 'ì£¼ë¬¸ëª…:ê²°ì œí…ŒìŠ¤íŠ¸',
+    amount : 14000, //íŒë§¤ ê°€ê²©
     buyer_email : 'iamport@siot.do',
-    buyer_name : '±¸¸ÅÀÚÀÌ¸§',
+    buyer_name : 'êµ¬ë§¤ìì´ë¦„',
     buyer_tel : '010-1234-5678',
-    buyer_addr : '¼­¿ïÆ¯º°½Ã °­³²±¸ »ï¼ºµ¿',
+    buyer_addr : 'ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ì‚¼ì„±ë™',
     buyer_postcode : '123-456'
 }, function(rsp) {
     if ( rsp.success ) {
-        var msg = '°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
-        msg += '°íÀ¯ID : ' + rsp.imp_uid;
-        msg += '»óÁ¡ °Å·¡ID : ' + rsp.merchant_uid;
-        msg += '°áÁ¦ ±İ¾× : ' + rsp.paid_amount;
-        msg += 'Ä«µå ½ÂÀÎ¹øÈ£ : ' + rsp.apply_num;
+        var msg = 'ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
+        msg += 'ê³ ìœ ID : ' + rsp.imp_uid;
+        msg += 'ìƒì  ê±°ë˜ID : ' + rsp.merchant_uid;
+        msg += 'ê²°ì œ ê¸ˆì•¡ : ' + rsp.paid_amount;
+        msg += 'ì¹´ë“œ ìŠ¹ì¸ë²ˆí˜¸ : ' + rsp.apply_num;
     } else {
-        var msg = '°áÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.';
-        msg += '¿¡·¯³»¿ë : ' + rsp.error_msg;
+        var msg = 'ê²°ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.';
+        msg += 'ì—ëŸ¬ë‚´ìš© : ' + rsp.error_msg;
     }
     alert(msg);
 });
