@@ -1,0 +1,62 @@
+1.아래에 대하여 설명하시오.
+
+
+
+-트랜잭션 이란?
+
+
+프로그래밍에 관련된 것이 아니라 db에 관련된 것이다.
+
+은행에서 거래를 할 때 거래가 성공적으로 끝나야 이를 완전한 거래로 승인(commit)하고, 거래 도중 뭔가 오류가 
+
+발생했을 때는 거래를 처음으로 rollback 해주는 것이다.
+
+
+-rollback 과 commit 이란?
+
+commit(작업을 완료 시킴) 
+
+
+Commit이란 하나의 트랜잭션이 성공적으로 끝났고, 데이터베이스가 일관성있는 상태에 있을 때,
+
+하나의 트랜잭션이 끝났다라는 것을 알려주기위해 사용하는 연산이다.
+
+
+rollboack(작업을 취소시킴)
+
+
+2.스프링에서의 트랜잭션 처리 방법은?
+
+@Tracsaction을 붙히는 위치가 컨트롤러가 되서는 안된다.
+
+	public class TransactionTestService {
+
+	private BoardMapper mapper;
+
+
+
+	@Transactional(rollbackFor = Exception.class) 
+	public void transionTest6() throws SQLException {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setbContent("트랜잭션6");
+		boardVO.setbName("트랜잭션6");
+		boardVO.setbTitle("트랜잭션6");
+
+		mapper.insertBoard(boardVO);
+
+		throw new SQLException("SQLException for rollback");
+	}
+	
+	@Transactional(rollbackFor = SQLException.class) 
+	public void transionTest7() throws SQLException {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setbContent("트랜잭션7");
+		boardVO.setbName("트랜잭션7");
+		boardVO.setbTitle("트랜잭션7");
+
+		mapper.insertBoard(boardVO);
+
+		throw new SQLException("SQLException for rollback");
+	}
+
+}
