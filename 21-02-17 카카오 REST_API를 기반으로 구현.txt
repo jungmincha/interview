@@ -13,6 +13,36 @@ KakaoController.java를 작성하고 REST_API를 통해 인증!과 권한! 을 �
 
 kakaoboard.jsp로 return 해주어 게시판에 들어갈 수 있는 권한을 얻게 구현하였다. 
 
+그리고 controller를 제대로 작동시켜주기 위해 pom.xml에 의존성 주입을 한다.
+
+<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+
+
+
+-<dependency>
+
+<groupId>org.apache.httpcomponents</groupId>
+
+<artifactId>httpclient</artifactId>
+
+<version>4.5.13</version>
+
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+
+
+
+-<dependency>
+
+<groupId>com.googlecode.json-simple</groupId>
+
+<artifactId>json-simple</artifactId>
+
+<version>1.1.1</version>
+
+</dependency>
+
 
 
 
